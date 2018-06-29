@@ -1,0 +1,7 @@
+c:\users\cppxaxa_2\documents\visual studio 2013\Projects\ICAN.SIC\ICAN.SIC.BrokerHub.Host\bin\Debug\ICAN.SIC.BrokerHub.Host.exe.config
+C:\Users\cppxaxa_2\Documents\visual studio 2013\Projects\ICAN.SIC\bin\Debug\ICAN.SIC.BrokerHub.Host.exe.config
+C:\Users\cppxaxa_2\Documents\visual studio 2013\Projects\ICAN.SIC\bin\Debug\ICAN.SIC.BrokerHub.Host.exe
+C:\Users\cppxaxa_2\Documents\visual studio 2013\Projects\ICAN.SIC\bin\Debug\ICAN.SIC.BrokerHub.Host.pdb
+C:\Users\cppxaxa_2\Documents\visual studio 2013\Projects\ICAN.SIC\ICAN.SIC.BrokerHub.Host\obj\Debug\ICAN.SIC.BrokerHub.Host.csprojResolveAssemblyReference.cache
+C:\Users\cppxaxa_2\Documents\visual studio 2013\Projects\ICAN.SIC\ICAN.SIC.BrokerHub.Host\obj\Debug\ICAN.SIC.BrokerHub.Host.exe
+C:\Users\cppxaxa_2\Documents\visual studio 2013\Projects\ICAN.SIC\ICAN.SIC.BrokerHub.Host\obj\Debug\ICAN.SIC.BrokerHub.Host.pdb

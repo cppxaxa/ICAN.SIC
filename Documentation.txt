@@ -1,0 +1,8 @@
+GUIDELINES AND ASSUMPTIONS
+
+1. In BrokerHub.cs, we find the PrimaryNamespace by sorting according to "ICAN.SIC" and "ICAN.SIC.Plugin"
+2. We instantiate the plugin whose namespace word after last dot (.) is same as the class name
+3. We plan to design the components with a Utility, Helper and the Plugin itself for adaptability to testing frameworks
+4. Each component can have a "Host" project to instantiate and test it for developer
+5. The "Host" can directly reference the component, for rest it's strict to reference using DLL
+

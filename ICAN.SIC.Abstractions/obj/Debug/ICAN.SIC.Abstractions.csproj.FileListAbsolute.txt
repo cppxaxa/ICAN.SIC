@@ -1,0 +1,5 @@
+c:\users\cppxaxa_2\documents\visual studio 2013\Projects\ICAN.SIC\bin\Debug\ICAN.SIC.Abstractions.dll
+c:\users\cppxaxa_2\documents\visual studio 2013\Projects\ICAN.SIC\bin\Debug\ICAN.SIC.Abstractions.pdb
+c:\users\cppxaxa_2\documents\visual studio 2013\Projects\ICAN.SIC\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.dll
+c:\users\cppxaxa_2\documents\visual studio 2013\Projects\ICAN.SIC\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.pdb
+C:\Users\cppxaxa_2\Documents\visual studio 2013\Projects\ICAN.SIC\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.csprojResolveAssemblyReference.cache

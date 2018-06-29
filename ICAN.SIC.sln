@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICAN.SIC.BrokerHub", "ICAN.SIC.BrokerHub\ICAN.SIC.BrokerHub.csproj", "{C4E1C949-FF38-4BFF-BAF1-6AFD6829B875}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICAN.SIC.Abstractions", "ICAN.SIC.Abstractions\ICAN.SIC.Abstractions.csproj", "{600FE4CB-F34A-4070-B94A-1D9C48F8E20E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICAN.SIC.BrokerHub.Host", "ICAN.SIC.BrokerHub.Host\ICAN.SIC.BrokerHub.Host.csproj", "{E6E199B3-0902-4F76-A8D1-5614224A7AC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3468950C-6EEE-40C4-99E0-50B94E3308B3}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation.txt = Documentation.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICAN.SIC.Plugin.SIMLHub", "ICAN.SIC.Plugin.SIMLHub\ICAN.SIC.Plugin.SIMLHub.csproj", "{374C51F0-4105-46A5-9997-4AD2BCB2B909}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4E1C949-FF38-4BFF-BAF1-6AFD6829B875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4E1C949-FF38-4BFF-BAF1-6AFD6829B875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4E1C949-FF38-4BFF-BAF1-6AFD6829B875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4E1C949-FF38-4BFF-BAF1-6AFD6829B875}.Release|Any CPU.Build.0 = Release|Any CPU
+		{600FE4CB-F34A-4070-B94A-1D9C48F8E20E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{600FE4CB-F34A-4070-B94A-1D9C48F8E20E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{600FE4CB-F34A-4070-B94A-1D9C48F8E20E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{600FE4CB-F34A-4070-B94A-1D9C48F8E20E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6E199B3-0902-4F76-A8D1-5614224A7AC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6E199B3-0902-4F76-A8D1-5614224A7AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6E199B3-0902-4F76-A8D1-5614224A7AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6E199B3-0902-4F76-A8D1-5614224A7AC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{374C51F0-4105-46A5-9997-4AD2BCB2B909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{374C51F0-4105-46A5-9997-4AD2BCB2B909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{374C51F0-4105-46A5-9997-4AD2BCB2B909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{374C51F0-4105-46A5-9997-4AD2BCB2B909}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
