@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractPlugin.cs" />
     <Compile Include="IHub.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="IMessageVariants\IUserResponse.cs" />

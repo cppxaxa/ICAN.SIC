@@ -9,14 +9,10 @@ using System.Threading.Tasks;
 
 namespace ICAN.SIC.Plugin.SIMLHub
 {
-    public class SIMLHub : IPlugin, ISIMLHub
+    public class SIMLHub : AbstractPlugin, ISIMLHub
     {
-        IHub hub = new Hub();
-
-        public IHub Hub
-        {
-            get { return hub; }
-        }
+        SIMLHubHelper helper = new SIMLHubHelper();
+        SIMLHubUtility utility = new SIMLHubUtility();
 
         public SIMLHub()
         {
