@@ -55,21 +55,21 @@ SIMLHub can be extended using it's own plugins that implement "xxxx"
 Index.siml
 IndexAdapter.dll
 
-+Fetch  
-    - Fetch.siml
-    - FetchAdapter.dll
++ Fetch
+	- Fetch.siml
+	- FetchAdapter.dll
 
-+Filter  
-    - Filter.siml
-    - FilterAdapter.dll
++ Filter
+	- Filter.siml
+	- FilterAdapter.dll
 
-+Select  
-    - Select.siml
-    - SelectAdapter.dll
++ Select
+	- Select.siml
+	- SelectAdapter.dll
 
-+Operation  
-    - Operation.siml
-    - OperationAdapter.dll
++ Operation
+	- Operation.siml
+	- OperationAdapter.dll
 
 
 # BrokerHub Initialization
