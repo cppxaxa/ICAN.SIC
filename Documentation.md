@@ -1,4 +1,4 @@
-#SETTINGS FOR RUNNING THE EXE - APP.CONFIG.XML
+# SETTINGS FOR RUNNING THE EXE - APP.CONFIG.XML
 
 1. You can modify the app.config.xml file or the executablename.config.xml file as follows
 
@@ -19,7 +19,7 @@
 
 
 
-#GUIDELINES AND ASSUMPTIONS
+# GUIDELINES AND ASSUMPTIONS
 
 1. In BrokerHub.cs, we find the PrimaryNamespace by sorting according to "ICAN.SIC" and "ICAN.SIC.Plugin"
 2. We instantiate the plugin whose namespace word after last dot (.) is same as the class name
@@ -29,7 +29,7 @@
 
 
 
-#Plugin for BrokerHub or IPlugin or AbstractPlugin
+# Plugin for BrokerHub or IPlugin or AbstractPlugin
 
 Every plugin needs to implement the IPlugin. For convenience, AbstractPlugin contains the nescessary code.
 AbstractPlugin also implements IPlugin. So, it's enough to implement the AbstractPlugin to make plugin.
@@ -37,18 +37,18 @@ An abstract plugin can be casted to IPlugin anytime.
 AbstractPlugin features a protected "hub" to expose Subscribe<> and Publish<> methods inside class.
 
 
-#Some core Plugins
+# Some core Plugins
 
 SIMLHub (work in progress...)
 ChatRESTApi + Self hosted html page (to be constructed...)
 
 
-#SIMLHub Plugins
+# SIMLHub Plugins
 
 SIMLHub can be extended using it's own plugins that implement "xxxx"
 
 
-#SIMLHub Plugin - Directory Structure
+# SIMLHub Plugin - Directory Structure
 
 Index.siml
 IndexAdapter.dll
@@ -70,7 +70,7 @@ IndexAdapter.dll
     OperationAdapter.dll
 
 
-#BrokerHub Initialization
+# BrokerHub Initialization
 
 There needs to be a utility to flatten all the plugins directory to one with random names.
 This will help to run all the plugins.
