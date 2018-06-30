@@ -50,6 +50,15 @@ AbstractPlugin features a protected "hub" to expose Subscribe<> and Publish<> me
 SIMLHub can be extended using it's own plugins that implement "xxxx"
 
 
+# SIML Plugins basic structure
+
++ Index.siml
++ IndexAdapter.dll
+	- ICAN.SIC.Plugin.SIMLHub.Plugin.<plugin name>.xxxAdapter
+	- ICAN.SIC.Plugin.SIMLHub.Plugin.<plugin name>.yyyAdapter
+
+
+
 # SIMLHub Plugin - Directory Structure
 
 Index.siml
