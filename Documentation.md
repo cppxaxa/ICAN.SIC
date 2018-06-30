@@ -12,7 +12,7 @@
 		<assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">  
 			<probing privatePath="DLL;3rdParty"/>  
 		</assemblyBinding>  
-   </runtime>
+	</runtime>
 </configuration>
 ```
 
