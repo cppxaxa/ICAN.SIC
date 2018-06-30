@@ -33,10 +33,10 @@
 
 # Plugin for BrokerHub or IPlugin or AbstractPlugin
 
-Every plugin needs to implement the IPlugin. For convenience, AbstractPlugin contains the nescessary code.
-AbstractPlugin also implements IPlugin. So, it's enough to implement the AbstractPlugin to make plugin.
-An abstract plugin can be casted to IPlugin anytime.
-AbstractPlugin features a protected "hub" to expose Subscribe<> and Publish<> methods inside class.
+Every plugin needs to implement the IPlugin. For convenience, AbstractPlugin contains the nescessary code.  
+AbstractPlugin also implements IPlugin. So, it's enough to implement the AbstractPlugin to make plugin.  
+An abstract plugin can be casted to IPlugin anytime.  
+AbstractPlugin features a protected "hub" to expose Subscribe<> and Publish<> methods inside class.  
 
 
 # Some core Plugins
@@ -55,19 +55,19 @@ SIMLHub can be extended using it's own plugins that implement "xxxx"
 Index.siml
 IndexAdapter.dll
 
-+Fetch
++Fetch  
     * Fetch.siml
     * FetchAdapter.dll
 
-+Filter
++Filter  
     * Filter.siml
     * FilterAdapter.dll
 
-+Select
++Select  
     * Select.siml
     * SelectAdapter.dll
 
-+Operation
++Operation  
     * Operation.siml
     * OperationAdapter.dll
 
