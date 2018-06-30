@@ -80,3 +80,9 @@ We need to keep track of our core dlls because we want to support reload and rei
 During reinitialization, we will delete all the files except core dlls and then
 we will proceed with copy operation again.  
 
+
+
+
+----------------------------------------------
+ICAN -> I can (see, listen, say, any module).
+SIC -> Second In Command.
