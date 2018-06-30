@@ -2,6 +2,7 @@
 
 1. You can modify the app.config.xml file or the executablename.config.xml file as follows
 
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
     <startup> 
@@ -13,6 +14,7 @@
 		</assemblyBinding>  
    </runtime>
 </configuration>
+```
 
 2. The probing tag tells the directory to search for DLLs.
 
