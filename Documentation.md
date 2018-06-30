@@ -84,5 +84,5 @@ we will proceed with copy operation again.
 
 
 ----------------------------------------------
-ICAN -> I can (see, listen, say, any module).  
-SIC -> Second In Command.
+ICAN - I can (see, listen, say, any module).  
+SIC - Second In Command.
