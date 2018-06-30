@@ -53,10 +53,10 @@ SIMLHub can be extended using it's own plugins that implement "xxxx"
 # SIML Plugins basic structure
 
 + Index.siml
-+ IndexAdapter.dll
++ IndexAdapter.dll(Optional)
 	- ICAN.SIC.Plugin.SIMLHub.Plugin.<plugin name>.xxxAdapter
 	- ICAN.SIC.Plugin.SIMLHub.Plugin.<plugin name>.yyyAdapter
-
++ +DLLDependencies(Optional)
 
 
 # SIMLHub Plugin - Directory Structure
