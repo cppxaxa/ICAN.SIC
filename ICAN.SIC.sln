@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICAN.SIC.BrokerHub.Host", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3468950C-6EEE-40C4-99E0-50B94E3308B3}"
 	ProjectSection(SolutionItems) = preProject
-		Documentation.txt = Documentation.txt
+		Documentation.md = Documentation.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICAN.SIC.Plugin.SIMLHub", "ICAN.SIC.Plugin.SIMLHub\ICAN.SIC.Plugin.SIMLHub.csproj", "{374C51F0-4105-46A5-9997-4AD2BCB2B909}"

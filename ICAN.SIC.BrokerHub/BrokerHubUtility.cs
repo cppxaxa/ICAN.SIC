@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.Reflection;
 
 namespace ICAN.SIC.BrokerHub
 {
@@ -38,29 +37,43 @@ namespace ICAN.SIC.BrokerHub
                 return namespaces.First();
             else if (namespaces.Count > 1)
             {
-                namespaces.Sort(delegate(string a, string b)
-                {
-                    int countA = 0, countB = 0;
-
-                    if (a.StartsWith("ICAN.SIC"))
-                        countA += 1;
-                    if (a.StartsWith("ICAN.SIC.Plugin"))
-                        countA += 2;
-
-                    if (b.StartsWith("ICAN.SIC"))
-                        countB += 1;
-                    if (b.StartsWith("ICAN.SIC.Plugin"))
-                        countB += 2;
-
-
-                    return (countA - countB);
-                });
+                namespaces = this.SortForBestNamespace(namespaces);
 
                 return namespaces.First();
             }
 
             // Unrechable code
             return null;
+        }
+
+        public List<string> SortForBestNamespace(List<string> namespaces)
+        {
+            namespaces.Sort(delegate(string a, string b)
+            {
+                int countA = 0, countB = 0;
+
+                if (a.StartsWith("ICAN.SIC"))
+                    countA += 1;
+                if (a.StartsWith("ICAN.SIC.Plugin"))
+                    countA += 2;
+                if (a.Length > "ICAN.SIC.Plugin".Length)
+                    countA += 2;
+                if (a.StartsWith("ICAN.SIC.Plugin") && a.LastIndexOf('.') > "ICAN.SIC.Plugin".Length)
+                    countA -= 4;
+
+                if (b.StartsWith("ICAN.SIC"))
+                    countB += 1;
+                if (b.StartsWith("ICAN.SIC.Plugin"))
+                    countB += 2;
+                if (b.Length > "ICAN.SIC.Plugin".Length)
+                    countB += 2;
+                if (b.StartsWith("ICAN.SIC.Plugin") && b.LastIndexOf('.') > "ICAN.SIC.Plugin".Length)
+                    countB -= 4;
+
+                return (countB - countA);
+            });
+
+            return namespaces;
         }
 
         public string GetGuessedTypeName(Assembly assembly)
@@ -77,6 +90,16 @@ namespace ICAN.SIC.BrokerHub
                 return primaryNamespace + "." + primaryNamespace;
             else
                 return primaryNamespace + "." + primaryNamespace.Substring(lastIndexOfDot + 1);
+        }
+
+        public bool IsBrokerHubSupportedPlugin(string guessedTypeName)
+        {
+            if (guessedTypeName.StartsWith("ICAN.SIC.Plugin") &&
+                guessedTypeName.Length > "ICAN.SIC.Plugin".Length &&
+                guessedTypeName.Substring("ICAN.SIC.Plugin.".Length).LastIndexOf('.') == guessedTypeName.Substring("ICAN.SIC.Plugin.".Length).IndexOf('.')
+                )
+                return true;
+            return false;
         }
     }
 }

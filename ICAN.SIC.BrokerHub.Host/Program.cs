@@ -33,7 +33,27 @@ namespace ICAN.SIC.BrokerHub.Host
             UserResponse response = new UserResponse("Hello bot");
             brokerHub.GlobalPublish<UserResponse>(response);
 
-            Console.Read();
+
+            //BrokerHubUtility utility = new BrokerHubUtility();
+
+            //List<string> names = new List<string>()
+            //{
+            //    "ICAN.SIC.Plugin",
+            //    "ICAN.SIC.Plugin.Broker",
+            //    "ICAN.SIC.Plugin.SIMLHub.Plugin",
+            //    "ICAN.SIC.Plugin.SIMLHub"
+            //};
+
+            //names = utility.SortForBestNamespace(names);
+
+            //foreach (var item in names)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+
+
+            Console.Read();           
         }
     }
 }

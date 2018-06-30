@@ -25,23 +25,20 @@ namespace ICAN.SIC.BrokerHub
             {
                 Assembly assembly = Assembly.LoadFrom(dllFile);
 
-                //Console.WriteLine("FILE: " + Path.GetFileName(dllFile));
-                //Console.WriteLine("Primary Namespace: " + utility.GetPrimaryNamespace(assembly));
-
-
-                // We don't need to iterate through all the types, we will determine the type
-                // from the namespace, refer documentation
                 string guessedTypeName = utility.GetGuessedTypeName(assembly);
 
-                //Console.WriteLine("GuessedTypeName: " + guessedTypeName);
-
-                try
+                if (utility.IsBrokerHubSupportedPlugin(guessedTypeName))
                 {
-                    IPlugin plugin = (IPlugin)assembly.CreateInstance(guessedTypeName);
-                    if (plugin != null)
-                        plugins.Add(plugin);
+                    try
+                    {
+                        IPlugin plugin = (IPlugin)assembly.CreateInstance(guessedTypeName);
+                        if (plugin != null)
+                            plugins.Add(plugin);
+                    }
+                    catch { /*Ignore*/ }
                 }
-                catch { /*Ignore*/ }
+                else
+                    Console.WriteLine("[INFO] Not a BrokerHub supported plugin : " + guessedTypeName + " in " + dllFile);
             }
 
             return plugins;

@@ -1,3 +1,24 @@
+#SETTINGS FOR RUNNING THE EXE - APP.CONFIG.XML
+
+1. You can modify the app.config.xml file or the executablename.config.xml file as follows
+
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
+    </startup>
+	<runtime>  
+		<assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">  
+			<probing privatePath="DLL;3rdParty"/>  
+		</assemblyBinding>  
+   </runtime>
+</configuration>
+
+2. The probing tag tells the directory to search for DLLs.
+
+
+
+
 #GUIDELINES AND ASSUMPTIONS
 
 1. In BrokerHub.cs, we find the PrimaryNamespace by sorting according to "ICAN.SIC" and "ICAN.SIC.Plugin"
