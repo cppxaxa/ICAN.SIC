@@ -56,20 +56,20 @@ Index.siml
 IndexAdapter.dll
 
 +Fetch  
-    * Fetch.siml
-    * FetchAdapter.dll
+    - Fetch.siml
+    - FetchAdapter.dll
 
 +Filter  
-    * Filter.siml
-    * FilterAdapter.dll
+    - Filter.siml
+    - FilterAdapter.dll
 
 +Select  
-    * Select.siml
-    * SelectAdapter.dll
+    - Select.siml
+    - SelectAdapter.dll
 
 +Operation  
-    * Operation.siml
-    * OperationAdapter.dll
+    - Operation.siml
+    - OperationAdapter.dll
 
 
 # BrokerHub Initialization
