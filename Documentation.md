@@ -41,8 +41,8 @@ AbstractPlugin features a protected "hub" to expose Subscribe<> and Publish<> me
 
 # Some core Plugins
 
-SIMLHub (work in progress...)
-ChatRESTApi + Self hosted html page (to be constructed...)
+* SIMLHub (work in progress...)
+* ChatRESTApi + Self hosted html page (to be constructed...)
 
 
 # SIMLHub Plugins
@@ -79,3 +79,4 @@ This will help to run all the plugins.
 We need to keep track of our core dlls because we want to support reload and reinitialization.
 During reinitialization, we will delete all the files except core dlls and then
 we will proceed with copy operation again.
+
