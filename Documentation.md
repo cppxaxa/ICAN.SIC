@@ -56,27 +56,27 @@ Index.siml
 IndexAdapter.dll
 
 +Fetch
-    Fetch.siml
-    FetchAdapter.dll
+    * Fetch.siml
+    * FetchAdapter.dll
 
 +Filter
-    Filter.siml
-    FilterAdapter.dll
+    * Filter.siml
+    * FilterAdapter.dll
 
 +Select
-    Select.siml
-    SelectAdapter.dll
+    * Select.siml
+    * SelectAdapter.dll
 
 +Operation
-    Operation.siml
-    OperationAdapter.dll
+    * Operation.siml
+    * OperationAdapter.dll
 
 
 # BrokerHub Initialization
 
-There needs to be a utility to flatten all the plugins directory to one with random names.
-This will help to run all the plugins.
-We need to keep track of our core dlls because we want to support reload and reinitialization.
+There needs to be a utility to flatten all the plugins directory to one with random names.  
+This will help to run all the plugins.  
+We need to keep track of our core dlls because we want to support reload and reinitialization.  
 During reinitialization, we will delete all the files except core dlls and then
-we will proceed with copy operation again.
+we will proceed with copy operation again.  
 
