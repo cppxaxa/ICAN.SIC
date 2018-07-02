@@ -29,16 +29,25 @@ namespace ICAN.SIC.BrokerHub
 
                 if (utility.IsBrokerHubSupportedPlugin(guessedTypeName))
                 {
-                    try
-                    {
-                        IPlugin plugin = (IPlugin)assembly.CreateInstance(guessedTypeName);
-                        if (plugin != null)
-                            plugins.Add(plugin);
-                    }
-                    catch { /*Ignore*/ }
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("[INFO] (");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("SUCCESS");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(") BrokerHub supported plugin : \n\t" + guessedTypeName + "\n\t in " + dllFile);
+                    Console.ResetColor();
+                    //try
+                    //{
+                    IPlugin plugin = (IPlugin)assembly.CreateInstance(guessedTypeName);
+                    if (plugin != null)
+                        plugins.Add(plugin);
+                    //}
+                    //catch { /*Ignore*/ Console.WriteLine("Plugin Error"); }
                 }
                 else
-                    Console.WriteLine("[INFO] Not a BrokerHub supported plugin : " + guessedTypeName + " in " + dllFile);
+                {
+                    Console.WriteLine("[INFO] (FAILURE) Not a BrokerHub supported plugin : \n\t" + guessedTypeName + "\n\t in " + dllFile);
+                }
             }
 
             return plugins;

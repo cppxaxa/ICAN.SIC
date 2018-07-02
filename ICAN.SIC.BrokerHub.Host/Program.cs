@@ -30,8 +30,10 @@ namespace ICAN.SIC.BrokerHub.Host
 
             brokerHub.Start();
 
-            UserResponse response = new UserResponse("Hello bot");
-            brokerHub.GlobalPublish<UserResponse>(response);
+
+
+            //UserResponse response = new UserResponse("Hello bot");
+            //brokerHub.GlobalPublish<UserResponse>(response);
 
 
             //BrokerHubUtility utility = new BrokerHubUtility();
@@ -52,7 +54,7 @@ namespace ICAN.SIC.BrokerHub.Host
             //}
 
 
-
+            Console.WriteLine("Done");
             Console.Read();           
         }
     }

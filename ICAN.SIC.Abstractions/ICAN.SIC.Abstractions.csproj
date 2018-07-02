@@ -30,6 +30,42 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Jint.2.11.58\lib\net45\Jint.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syn.Bot, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syn.Bot.3.0.1\lib\net45\Syn.Bot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syn.EmotionML, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syn.EmotionML.1.0.6\lib\net45\Syn.EmotionML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syn.Log, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syn.Log.1.1.4\lib\net45\Syn.Log.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syn.Oryzer, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syn.Oryzer.1.0.7\lib\net45\Syn.Oryzer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syn.Utilities, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syn.Utilities.1.1.0\lib\net45\Syn.Utilities.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syn.VA, Version=1.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syn.VA.1.1.5\lib\net45\Syn.VA.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syn.WordNet, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syn.WordNet.1.0.5\lib\net45\Syn.WordNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,6 +78,7 @@
     <Compile Include="AbstractPlugin.cs" />
     <Compile Include="IHub.cs" />
     <Compile Include="IMessage.cs" />
+    <Compile Include="IMessageVariants\IBotResponse.cs" />
     <Compile Include="IMessageVariants\IUserResponse.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="IRunnable.cs" />
@@ -52,7 +89,9 @@
   <ItemGroup>
     <Compile Include="IBrokerHub.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

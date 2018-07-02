@@ -50,6 +50,13 @@ namespace ICAN.SIC.BrokerHub
         {
             namespaces.Sort(delegate(string a, string b)
             {
+                if (a == null && b == null)
+                    return 0;
+                if (a == null)
+                    return 1;
+                if (b == null)
+                    return -1;
+
                 int countA = 0, countB = 0;
 
                 if (a.StartsWith("ICAN.SIC"))

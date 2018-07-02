@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Syn.Bot.Siml;
+using System.Reflection;
+using Syn.Bot.Siml.Interfaces;
 
 namespace ICAN.SIC.Plugin.SIMLHub
 {
@@ -14,13 +17,107 @@ namespace ICAN.SIC.Plugin.SIMLHub
         SIMLHubHelper helper = new SIMLHubHelper();
         SIMLHubUtility utility = new SIMLHubUtility();
 
-        public SIMLHub()
+        SimlBot bot;
+        BotUser currentUser = null;
+
+        // Siml Bot info
+        int adapterCount = 0;
+        Dictionary<string, List<string>> pluginAdapterPathAndTypes = null;
+
+        public int AdapterCount { get { return adapterCount; } }
+        public List<string> LoadedDLLPath
         {
-            hub.Subscribe<IUserResponse>(this.printMessage);
+            get
+            {
+                List<string> loadedDllPath = new List<string>();
+                foreach (var adapterPair in pluginAdapterPathAndTypes)
+                {
+                    loadedDllPath.Add(adapterPair.Key);
+                }
+                return loadedDllPath;
+            }
         }
 
-        private void printMessage(IUserResponse message){
-            Console.WriteLine("PrintMessage: " + message.Text);
+        public SIMLHub()
+        {
+            bot = new SimlBot();
+
+            // Soon it will be substracted
+            this.adapterCount = bot.Adapters.Count;
+
+            // Add all adapters
+            pluginAdapterPathAndTypes = helper.GetAllSIMLHubPluginIndexAdapterPathAndTypes();
+            
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("[SIMLHub] Adapters loading : ");
+            Console.ResetColor();
+
+            foreach (var adapterPair in pluginAdapterPathAndTypes)
+            {
+                Assembly assembly = Assembly.LoadFrom(adapterPair.Key);
+
+                foreach (var typename in adapterPair.Value)
+                {
+                    try
+                    {
+                        IAdapter adapter = (IAdapter)assembly.CreateInstance(typename);
+
+                        // Add to bot in not null
+                        if (adapter != null)
+                        {
+                            bot.Adapters.Add(adapter);
+                        }
+                    }
+                    catch { /*Ignore*/ }
+                }
+            }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("success");
+            Console.ResetColor();
+
+            // Now final value is set
+            this.adapterCount = bot.Adapters.Count - this.adapterCount;
+
+            // Add all index.siml files
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("[SIMLHub] Index siml merge : ");
+            Console.ResetColor();
+
+            string mergedIndexSimlPackage = helper.GetAllIndexSimlPackage();
+            
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("success");
+            Console.ResetColor();
+
+
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("[SIMLHub] Merged index siml : ");
+            Console.ResetColor();
+
+            bot.PackageManager.LoadFromString(mergedIndexSimlPackage);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("success");
+            Console.ResetColor();
+
+            // Subscribe to IUserResponse for input
+            hub.Subscribe<IUserResponse>(this.GetBotReponse);
+        }
+
+        private void GetBotReponse(IUserResponse message)
+        {
+            ChatResult result;
+
+            if (currentUser == null)
+                result = bot.Chat(message.Text);
+            else
+                result = bot.Chat(new ChatRequest(message.Text, currentUser));
+
+            Console.WriteLine("PrintMessage: " + result.BotMessage);
+
+            IBotResponse botResponse = new ICAN.SIC.Plugin.SIMLHub.DataTypes.BotResponse(result);
+
+            hub.Publish<IBotResponse>(botResponse);
         }
     }
 }
