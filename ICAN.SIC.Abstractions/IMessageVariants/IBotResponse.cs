@@ -9,7 +9,7 @@ using Syn.Bot.Siml;
 
 namespace ICAN.SIC.Abstractions.IMessageVariants
 {
-    public interface IBotResponse : IMessage
+    public interface IBotResult : IMessage
     {
         string Text { get; }
         ChatResult ChatResult { get; }

@@ -101,10 +101,11 @@ namespace ICAN.SIC.Plugin.SIMLHub
             Console.ResetColor();
 
             // Subscribe to IUserResponse for input
-            hub.Subscribe<IUserResponse>(this.GetBotReponse);
+            hub.Subscribe<IUserResponse>(this.GenerateAndPublishBotResponse);
+            hub.Subscribe<IBotResult>(this.ShowBotResult);
         }
 
-        private void GetBotReponse(IUserResponse message)
+        private void GenerateAndPublishBotResponse(IUserResponse message)
         {
             ChatResult result;
 
@@ -113,11 +114,16 @@ namespace ICAN.SIC.Plugin.SIMLHub
             else
                 result = bot.Chat(new ChatRequest(message.Text, currentUser));
 
-            Console.WriteLine("PrintMessage: " + result.BotMessage);
 
-            IBotResponse botResponse = new ICAN.SIC.Plugin.SIMLHub.DataTypes.BotResponse(result);
+            IBotResult botResponse = new ICAN.SIC.Plugin.SIMLHub.DataTypes.BotResult(result);
 
-            hub.Publish<IBotResponse>(botResponse);
+            Console.WriteLine("PrintMessage: " + botResponse.Text);
+            hub.Publish<IBotResult>(botResponse);
+        }
+
+        private void ShowBotResult(IBotResult response)
+        {
+            Console.WriteLine("BotResult: " + response.Text);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace ICAN.SIC.BrokerHub
             hub = new Hub();
         }
 
-        private void hookHub(IPlugin plugin)
+        private void HookHub(IPlugin plugin)
         {
             hub.PassThrough(plugin.Hub);
         }
@@ -30,7 +30,7 @@ namespace ICAN.SIC.BrokerHub
         public void AddAndHook(IPlugin plugin)
         {
             this.plugins.Add(plugin);
-            this.hookHub(plugin);
+            this.HookHub(plugin);
         }
 
         public void Start()
@@ -43,7 +43,7 @@ namespace ICAN.SIC.BrokerHub
 
             foreach (var plugin in plugins)
             {
-                this.hookHub(plugin);
+                this.HookHub(plugin);
             }
 
             Console.ForegroundColor = ConsoleColor.Cyan;

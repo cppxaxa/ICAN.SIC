@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ICAN.SIC.Plugin.SIMLHub.DataTypes
 {
-    public class BotResponse : IBotResponse
+    public class BotResult : IBotResult
     {
         ChatResult chatResult;
 
-        public BotResponse(ChatResult result)
+        public BotResult(ChatResult result)
         {
             this.chatResult = result;
         }

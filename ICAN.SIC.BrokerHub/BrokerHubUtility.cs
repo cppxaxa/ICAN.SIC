@@ -29,21 +29,31 @@ namespace ICAN.SIC.BrokerHub
         {
             List<string> namespaces;
 
-            namespaces = assembly.GetTypes().Select(t => t.Namespace).Distinct().ToList();
-
-            if (namespaces.Count == 0)
-                return "";
-            else if (namespaces.Count == 1)
-                return namespaces.First();
-            else if (namespaces.Count > 1)
+            try
             {
-                namespaces = this.SortForBestNamespace(namespaces);
+                namespaces = assembly.GetTypes().Select(t => t.Namespace).Distinct().ToList();
 
-                return namespaces.First();
+                if (namespaces.Count == 0)
+                    return "";
+                else if (namespaces.Count == 1)
+                    return namespaces.First();
+                else if (namespaces.Count > 1)
+                {
+                    namespaces = this.SortForBestNamespace(namespaces);
+
+                    return namespaces.First();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(assembly.ToString());
+                Console.WriteLine(e.Message);
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
 
             // Unrechable code
-            return null;
+            return "";
         }
 
         public List<string> SortForBestNamespace(List<string> namespaces)
