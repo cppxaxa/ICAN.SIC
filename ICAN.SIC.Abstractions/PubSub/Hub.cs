@@ -12,8 +12,17 @@ namespace ICAN.SIC.PubSub
     {
         private readonly ConcurrentDictionary<Type, IList> _subscribers = new ConcurrentDictionary<Type, IList>();
         private readonly ConcurrentBag<IHub> _hubs = new ConcurrentBag<IHub>();
+        private readonly string name;
+        private IHub parentHub;
 
-        public void Publish<T>(T message, TimeSpan? delay = null) where T : IMessage
+        public string Name { get { return name; } }
+
+        public Hub(string Name)
+        {
+            this.name = Name;
+        }
+
+        public void PublishDownwards<T>(T message, TimeSpan? delay = null) where T : IMessage
         {
             Task.Run(() => PublishMessage(message, delay));
         }
@@ -48,7 +57,7 @@ namespace ICAN.SIC.PubSub
 
             foreach (var hub in _hubs)
             {
-                hub.Publish(message);
+                hub.PublishDownwards(message);
             }
         }
 
@@ -80,6 +89,31 @@ namespace ICAN.SIC.PubSub
             }
         }
 
-        public void PassThrough(IHub hub) { _hubs.Add(hub); }
+        public void setMyParent(IHub hub)
+        {
+            this.parentHub = hub;
+        }
+
+        public void PassThrough(IHub hub) { _hubs.Add(hub); hub.setMyParent(this); }
+
+        public List<string> GetAllHubNames()
+        {
+            List<string> result = new List<string>();
+
+            foreach (var hub in _hubs)
+            {
+                result.Add(hub.Name);
+            }
+
+            return result;
+        }
+
+        public void Publish<T>(T message, TimeSpan? delay = null) where T : IMessage
+        {
+            if (this.parentHub == null)
+                this.PublishDownwards<T>(message, delay);
+            else
+                this.parentHub.Publish<T>(message, delay);
+        }
     }
 }

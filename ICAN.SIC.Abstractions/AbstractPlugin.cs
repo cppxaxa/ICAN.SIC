@@ -9,7 +9,12 @@ namespace ICAN.SIC.Abstractions
 {
     public abstract class AbstractPlugin : IPlugin
     {
-        protected IHub hub = new Hub();
+        protected IHub hub;
+
+        public AbstractPlugin(string name)
+        {
+            hub = new Hub(name);
+        }
 
         public IHub Hub
         {

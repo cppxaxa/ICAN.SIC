@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using ICAN.SIC.Abstractions.IMessageVariants;
 
 namespace ICAN.SIC.BrokerHub
 {
@@ -19,11 +20,14 @@ namespace ICAN.SIC.BrokerHub
 
         public BrokerHub()
         {
-            hub = new Hub();
+            hub = new Hub("BrokerHub");
+            // Here is the problem
+            //hub.Subscribe<IBotResult>(this.ShowBotResult);
         }
 
         private void HookHub(IPlugin plugin)
         {
+            // Maybe this may not be working fine
             hub.PassThrough(plugin.Hub);
         }
 
@@ -49,6 +53,8 @@ namespace ICAN.SIC.BrokerHub
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("[INFO] All hubs hooked");
             Console.ResetColor();
+
+            hub.Subscribe<IBotResult>(this.ShowBotResult);
         }
 
         public void Stop()
@@ -56,10 +62,14 @@ namespace ICAN.SIC.BrokerHub
             throw new NotImplementedException();
         }
 
-
         public void GlobalPublish<T>(T message) where T : IMessage
         {
             this.hub.Publish<T>(message);
+        }
+
+        public void ShowBotResult(IBotResult result)
+        {
+            Console.WriteLine("BrokerHub.cs: BotResult : " + result.ToString());
         }
     }
 }
