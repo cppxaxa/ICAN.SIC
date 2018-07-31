@@ -28,10 +28,6 @@ namespace ICAN.SIC.BrokerHub.Host
         {
             BrokerHub brokerHub = new BrokerHub();
             brokerHub.Start();
-
-
-
-            UserResponse response = new UserResponse("Hello bot");
             
 
 
@@ -51,10 +47,6 @@ namespace ICAN.SIC.BrokerHub.Host
             //{
             //    Console.WriteLine(item);
             //}
-
-
-            Console.Read();
-            brokerHub.GlobalPublish<UserResponse>(response);
 
             Console.WriteLine("Done ?");
             Console.ReadKey();

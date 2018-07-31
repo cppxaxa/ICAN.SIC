@@ -156,7 +156,7 @@ function addUIBotMessage(message)
 {
 	var botMessageTemplate = createElementFromHTML('<div class="bubble">\
     <div class="txt">\
-      <p class="name">Bot</p>\
+      <p class="name">Interface</p>\
       <p class="message">' + message + '</p>\
       <span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
     </div>\
@@ -170,7 +170,7 @@ function addUIUserMessage(message)
 {
 	var userMessageTemplate = createElementFromHTML('<div class="bubble alt">\
     <div class="txt">\
-      <p class="name alt">User<span> </span></p>\
+      <p class="name alt">Me<span> </span></p>\
       <p class="message">' + message + '</p>\
       <span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
     </div>\
