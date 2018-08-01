@@ -21,13 +21,10 @@ namespace ICAN.SIC.BrokerHub
         public BrokerHub()
         {
             hub = new Hub("BrokerHub");
-            // Here is the problem
-            //hub.Subscribe<IBotResult>(this.ShowBotResult);
         }
 
         private void HookHub(IPlugin plugin)
         {
-            // Maybe this may not be working fine
             hub.PassThrough(plugin.Hub);
         }
 
