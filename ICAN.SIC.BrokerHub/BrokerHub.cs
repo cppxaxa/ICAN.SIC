@@ -53,8 +53,6 @@ namespace ICAN.SIC.BrokerHub
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("[INFO] All hubs hooked");
             Console.ResetColor();
-
-            hub.Subscribe<IBotResult>(this.ShowBotResult);
         }
 
         public void Stop()
@@ -65,11 +63,6 @@ namespace ICAN.SIC.BrokerHub
         public void GlobalPublish<T>(T message) where T : IMessage
         {
             this.hub.Publish<T>(message);
-        }
-
-        public void ShowBotResult(IBotResult result)
-        {
-            Console.WriteLine("BrokerHub.cs: BotResult : " + result.ToString());
         }
     }
 }

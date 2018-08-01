@@ -36,13 +36,20 @@ namespace ICAN.SIC.BrokerHub
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine(") BrokerHub supported plugin : \n\t" + guessedTypeName + "\n\t in " + dllFile);
                     Console.ResetColor();
-                    //try
-                    //{
-                    IPlugin plugin = (IPlugin)assembly.CreateInstance(guessedTypeName);
-                    if (plugin != null)
-                        plugins.Add(plugin);
-                    //}
-                    //catch { /*Ignore*/ Console.WriteLine("Plugin Error"); }
+                    try
+                    {
+                        IPlugin plugin = (IPlugin)assembly.CreateInstance(guessedTypeName);
+                        if (plugin != null)
+                            plugins.Add(plugin);
+                    }
+                    catch { /*Ignore*/
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Plugin Error");
+                        Console.WriteLine("DLL: {0}", dllFile);
+                        Console.WriteLine("Type Name: {0}", guessedTypeName);
+                        Console.WriteLine();
+                        Console.ResetColor();
+                    }
                 }
                 else
                 {

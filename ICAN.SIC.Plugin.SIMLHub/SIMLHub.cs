@@ -102,7 +102,6 @@ namespace ICAN.SIC.Plugin.SIMLHub
 
             // Subscribe to IUserResponse for input
             hub.Subscribe<IUserResponse>(this.GenerateAndPublishBotResponse);
-            hub.Subscribe<IBotResult>(this.ShowBotResult);
         }
 
         private void GenerateAndPublishBotResponse(IUserResponse message)
@@ -116,14 +115,8 @@ namespace ICAN.SIC.Plugin.SIMLHub
 
 
             IBotResult botResponse = new ICAN.SIC.Plugin.SIMLHub.DataTypes.BotResult(result);
-
-            Console.WriteLine("SIMLPublished: now PrintMessage: " + botResponse.Text);
+            
             hub.Publish<IBotResult>(botResponse);
-        }
-
-        private void ShowBotResult(IBotResult response)
-        {
-            Console.WriteLine("SIMLSubcriber: BotResult: " + response.Text);
         }
     }
 }
