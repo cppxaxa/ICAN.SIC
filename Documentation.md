@@ -100,17 +100,17 @@ SIC - Second In Command.
 
 # Troubleshooting  problems
 
-*If you are not able to access the host out of the network, you need to add exception to Windows Firewall.
+* If you are not able to access the host out of the network, you need to add exception to Windows Firewall.
 
-*If you face problem in plugins, running exe as administrator can help a lot.
+* If you face problem in plugins, running exe as administrator can help a lot.
 
-*If you face problem in plugins, <loadFromRemoteSources enabled="true"/> may help.
+* If you face problem in plugins, <loadFromRemoteSources enabled="true"/> may help.
 
-*If you face problem starting the exe itself regarding version of required DLLs show have version compelling to same value, specify it to ICAN.SIC.BrokerHub.exe.config.
+* If you face problem starting the exe itself regarding version of required DLLs show have version compelling to same value, specify it to ICAN.SIC.BrokerHub.exe.config.
 
-*If you are using ICAN.SIC.BrokerHub.exe, then ICAN.SIC.BrokerHub.exe.config should have the appropriate keys for the plugins to work.
+* If you are using ICAN.SIC.BrokerHub.exe, then ICAN.SIC.BrokerHub.exe.config should have the appropriate keys for the plugins to work.
 
-*Current values are
+* Current values are
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
