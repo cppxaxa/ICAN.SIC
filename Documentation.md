@@ -95,3 +95,49 @@ we will proceed with copy operation again.
 ----------------------------------------------
 ICAN - I can (see, listen, say, any module).  
 SIC - Second In Command.
+
+
+
+# Troubleshooting  problems
+
+*If you are not able to access the host out of the network, you need to add exception to Windows Firewall.
+
+*If you face problem in plugins, running exe as administrator can help a lot.
+
+*If you face problem in plugins, <loadFromRemoteSources enabled="true"/> may help.
+
+*If you face problem starting the exe itself regarding version of required DLLs show have version compelling to same value, specify it to ICAN.SIC.BrokerHub.exe.config.
+
+*If you are using ICAN.SIC.BrokerHub.exe, then ICAN.SIC.BrokerHub.exe.config should have the appropriate keys for the plugins to work.
+
+*Current values are
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
+    </startup>
+  <appSettings>
+    <add key="ChatInterfaceHost" value="localhost" />
+    <add key="ChatInterfacePort" value="20000" />
+  </appSettings>
+  <runtime>
+    <loadFromRemoteSources enabled="true"/>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-2.1.0.0" newVersion="2.1.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin.Security" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-2.1.0.0" newVersion="2.1.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-11.0.0.0" newVersion="11.0.0.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+</configuration>
+```
