@@ -42,12 +42,14 @@ AbstractPlugin features a protected "hub" to expose Subscribe<> and Publish<> me
 # Some core Plugins
 
 * SIMLHub (work in progress...)
-* ChatRESTApi + Self hosted html page (to be constructed...)
+* ChatInterface web interface and ChatApi (completed)
 
 
 # SIMLHub Plugins
 
-SIMLHub can be extended using it's own plugins that implement "xxxx"
+SIMLHub can be extended using it's own plugins that inherits "AbstractPlugin"
+
+It provides "hub" by which we can subscribe and publish objects
 
 
 # SIML Plugins basic structure
@@ -141,3 +143,5 @@ SIC - Second In Command.
   </runtime>
 </configuration>
 ```
+
+
