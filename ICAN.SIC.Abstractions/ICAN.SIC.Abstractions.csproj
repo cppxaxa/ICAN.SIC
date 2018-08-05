@@ -79,7 +79,9 @@
     <Compile Include="IHub.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="IMessageVariants\IBotResponse.cs" />
+    <Compile Include="IMessageVariants\ILog.cs" />
     <Compile Include="IMessageVariants\IUserResponse.cs" />
+    <Compile Include="IMessageVariants\LogType.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="IRunnable.cs" />
     <Compile Include="ISIMLHub.cs" />

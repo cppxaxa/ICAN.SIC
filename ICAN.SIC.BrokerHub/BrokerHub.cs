@@ -21,6 +21,8 @@ namespace ICAN.SIC.BrokerHub
         public BrokerHub()
         {
             hub = new Hub("BrokerHub");
+
+            hub.Subscribe<ILog>(this.LogMessages);
         }
 
         private void HookHub(IPlugin plugin)
@@ -60,6 +62,36 @@ namespace ICAN.SIC.BrokerHub
         public void GlobalPublish<T>(T message) where T : IMessage
         {
             this.hub.Publish<T>(message);
+        }
+
+        private void LogMessages(ILog log)
+        {
+            switch(log.LogType)
+            {
+                case LogType.Debug:
+                    Console.WriteLine("[DEBUG] {0}", log.Message);
+                    break;
+
+                case LogType.Error:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("[ERROR] {0}", log.Message);
+                    Console.ResetColor();
+                    break;
+
+                case LogType.Info:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("[INFO] ");
+                    Console.ResetColor();
+                    Console.WriteLine(log.Message);
+                    break;
+
+                case LogType.Warning:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("[WARNING] ");
+                    Console.ResetColor();
+                    Console.WriteLine(log.Message);
+                    break;
+            }
         }
     }
 }

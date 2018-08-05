@@ -116,6 +116,11 @@ namespace ICAN.SIC.BrokerHub
                 guessedTypeName.Substring("ICAN.SIC.Plugin.".Length).LastIndexOf('.') == guessedTypeName.Substring("ICAN.SIC.Plugin.".Length).IndexOf('.')
                 )
                 return true;
+            if (guessedTypeName.StartsWith("ICAN.SIC.Plugin.Adapter") &&
+                guessedTypeName.Length > "ICAN.SIC.Plugin.Adapter".Length &&
+                guessedTypeName.Substring("ICAN.SIC.Plugin.Adapter.".Length).LastIndexOf('.') == guessedTypeName.Substring("ICAN.SIC.Plugin.Adapter.".Length).IndexOf('.')
+                )
+                return true;
             return false;
         }
     }

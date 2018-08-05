@@ -41,6 +41,15 @@ namespace ICAN.SIC.BrokerHub
                         IPlugin plugin = (IPlugin)assembly.CreateInstance(guessedTypeName);
                         if (plugin != null)
                             plugins.Add(plugin);
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Plugin Instantiation Error");
+                            Console.WriteLine("DLL: {0}", dllFile);
+                            Console.WriteLine("Type Name: {0}", guessedTypeName);
+                            Console.WriteLine();
+                            Console.ResetColor();
+                        }
                     }
                     catch { /*Ignore*/
                         Console.ForegroundColor = ConsoleColor.Red;

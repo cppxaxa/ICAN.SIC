@@ -19,6 +19,9 @@
 			chat.client.addUserMessage = function (message) {
 				addUIUserMessage(message);
 			};
+			chat.client.addUIInfoLogMessage = function(message) {
+				addUIInfoLogMessage(message);
+			};
 			$.connection.hub.start().done(function () {
 				$('#sendmessage').click(function () {
 					chat.server.addBotMessage($('#message').val());
@@ -86,6 +89,9 @@
 		}
 		.speech-wrapper .bubble .txt .name.alt {
 		  color: #2ecc71;
+		}
+		.speech-wrapper .bubble .txt .name.alt2 {
+		  color: #FF6347;
 		}
 		.speech-wrapper .bubble .txt .message {
 		  font-size: 17px;
@@ -218,6 +224,9 @@
 		.speech-wrapper .bubble .txt .name.alt {
 		  color: #2ecc71;
 		}
+		.speech-wrapper .bubble .txt .name.alt2 {
+		  color: #FF6347;
+		}
 		.speech-wrapper .bubble .txt .message {
 		  font-size: 12px;
 		  margin: 0;
@@ -342,6 +351,21 @@
 		updateGUI(window.visualViewport.width);
 	}
 
+	function addUIInfoLogMessage(message)
+	{
+		message = message.replace(/\n/g, '<br\>');
+		var botMessageTemplate = createElementFromHTML('<div class="bubble">\
+		<div class="txt">\
+		  <p class="name alt2">Log</p>\
+		  <p class="message">' + message + '</p>\
+		  <span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
+		</div>\
+		<div class="bubble-arrow"></div>\
+	  </div>');
+		document.getElementById("container").appendChild(botMessageTemplate);
+		updateGUI(window.visualViewport.width);
+	}
+	
 	function addUIUserMessage(message)
 	{
 		var userMessageTemplate = createElementFromHTML('<div class="bubble alt">\

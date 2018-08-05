@@ -22,31 +22,38 @@ namespace ICAN.SIC.BrokerHub.Host
         }
     }
 
+    class Log : ILog
+    {
+        LogType logType;
+        string message;
+
+        public Log(LogType logType, string message)
+        {
+            this.logType = logType;
+            this.message = message;
+        }
+
+        public LogType LogType
+        {
+            get { return logType; }
+        }
+        public string Message
+        {
+            get { return this.message; }
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
             BrokerHub brokerHub = new BrokerHub();
             brokerHub.Start();
-            
 
+            Console.ReadKey();
+            Log log = new Log(LogType.Info, "Hello");
 
-            //BrokerHubUtility utility = new BrokerHubUtility();
-
-            //List<string> names = new List<string>()
-            //{
-            //    "ICAN.SIC.Plugin",
-            //    "ICAN.SIC.Plugin.Broker",
-            //    "ICAN.SIC.Plugin.SIMLHub.Plugin",
-            //    "ICAN.SIC.Plugin.SIMLHub"
-            //};
-
-            //names = utility.SortForBestNamespace(names);
-
-            //foreach (var item in names)
-            //{
-            //    Console.WriteLine(item);
-            //}
+            brokerHub.GlobalPublish<ILog>(log);
 
             Console.WriteLine("Done ?");
             Console.ReadKey();
