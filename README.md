@@ -1,3 +1,5 @@
+Todo [ ] Make add directory separator to make Linux mono friendly
+
 # ICAN.SIC
 
 * SIC -> Second In Command
