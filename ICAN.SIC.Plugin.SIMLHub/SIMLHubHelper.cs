@@ -11,7 +11,7 @@ namespace ICAN.SIC.Plugin.SIMLHub
 {
     public class SIMLHubHelper
     {
-        private string SIMLHubPluginDirectoryName = @"Plugins\SIMLHub\SIMLHubPlugins";
+        private string SIMLHubPluginDirectoryName = @"Plugins" + Path.DirectorySeparatorChar + "SIMLHub" + Path.DirectorySeparatorChar + "SIMLHubPlugins";
         SIMLHubUtility utility = new SIMLHubUtility();
 
         public List<string> GetAllSIMLHubPluginIndexSIMLFiles()

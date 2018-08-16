@@ -76,8 +76,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractPlugin.cs" />
+    <Compile Include="AllPluginsLoaded.cs" />
     <Compile Include="IHub.cs" />
     <Compile Include="IMessage.cs" />
+    <Compile Include="IMessageVariants\IAllPluginsLoaded.cs" />
     <Compile Include="IMessageVariants\IBotResponse.cs" />
     <Compile Include="IMessageVariants\ILog.cs" />
     <Compile Include="IMessageVariants\IUserResponse.cs" />

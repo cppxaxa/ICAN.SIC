@@ -44,14 +44,21 @@ namespace ICAN.SIC.BrokerHub
             Console.WriteLine("[INFO] Instantiated plugins count: " + plugins.Count);
             Console.ResetColor();
 
+            List<string> list = new List<string>();
+
             foreach (var plugin in plugins)
             {
+                list.Add(plugin.ToString());
                 this.HookHub(plugin);
             }
 
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("[INFO] All hubs hooked");
             Console.ResetColor();
+            
+            // Publish all plugins loaded message
+            AllPluginsLoaded message = new AllPluginsLoaded(list);
+            hub.Publish<AllPluginsLoaded>(message);
         }
 
         public void Stop()

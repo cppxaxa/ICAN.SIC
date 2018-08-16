@@ -1,4 +1,4 @@
-Todo [ ] Make add directory separator to make Linux mono friendly
+[Done] Make add directory separator to make Linux mono friendly
 
 # ICAN.SIC
 
