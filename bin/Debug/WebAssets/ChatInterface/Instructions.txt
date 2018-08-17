@@ -1,2 +1,0 @@
-The port and hostname is hardcoded.
-Please unsure the values are correct before loading this particular plugin.

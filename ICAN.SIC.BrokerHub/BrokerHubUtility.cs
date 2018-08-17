@@ -108,8 +108,12 @@ namespace ICAN.SIC.BrokerHub
                         try
                         {
                             string destinationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetFileName(dependencyDll));
-                            File.Copy(dependencyDll, destinationFile, true);
-                            newContentCopiedList.Add(destinationFile);
+
+                            if (!File.Exists(destinationFile))
+                            {
+                                File.Copy(dependencyDll, destinationFile, true);
+                                newContentCopiedList.Add(destinationFile);
+                            }
                         }
                         catch
                         {
