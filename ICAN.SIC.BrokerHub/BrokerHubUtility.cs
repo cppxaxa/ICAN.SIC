@@ -10,6 +10,11 @@ namespace ICAN.SIC.BrokerHub
 {
     public class BrokerHubUtility
     {
+        List<string> permanendDllDependencies = new List<string>
+        {
+            "ICAN.SIC.Abstractions.dll"
+        };
+
         private List<string> DirectoryCopyExceptDLLDependencies(string sourceDirName, string destDirName, bool copySubDirs, bool firstCall = true)
         {
             List<string> directoriesCopied = new List<string>();
@@ -105,6 +110,20 @@ namespace ICAN.SIC.BrokerHub
                 {
                     foreach (var dependencyDll in Directory.GetFiles(pluginDllDependencyDirectoryPath))
                     {
+                        // Check if permanent dll dependency, then don't copy or remove
+                        bool flag = false;
+                        foreach (var permanentDll in permanendDllDependencies)
+                        {
+                            if (Path.GetFileName(dependencyDll) == permanentDll)
+                            {
+                                flag = true;
+                                break;
+                            }
+                        }
+                        if (flag)
+                            continue;
+
+
                         try
                         {
                             string destinationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetFileName(dependencyDll));
@@ -112,8 +131,8 @@ namespace ICAN.SIC.BrokerHub
                             if (!File.Exists(destinationFile))
                             {
                                 File.Copy(dependencyDll, destinationFile, true);
-                                newContentCopiedList.Add(destinationFile);
                             }
+                            newContentCopiedList.Add(destinationFile);
                         }
                         catch
                         {
