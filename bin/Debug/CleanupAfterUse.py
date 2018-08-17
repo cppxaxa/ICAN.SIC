@@ -1,6 +1,10 @@
 import os
 import shutil
 
+os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\ICAN.SIC.Plugin.Adapter.SIMLVLCRemote.dll")
+os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\ICAN.SIC.Plugin.ChatInterfaceWeb.dll")
+os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\ICAN.SIC.Plugin.ChatInterfaceWeb.Host.exe")
+os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\ICAN.SIC.Plugin.ChatInterfaceWeb.Host.exe.config")
 shutil.rmtree("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\WebAssets", True)
 os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\Microsoft.AspNet.SignalR.Core.dll")
 os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\Microsoft.Owin.Cors.dll")
@@ -17,6 +21,7 @@ os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\System.Net.Http.Formatting.
 os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\System.Web.Cors.dll")
 os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\System.Web.Http.dll")
 os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\System.Web.Http.Owin.dll")
+os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\ICAN.SIC.Plugin.SIMLHub.dll")
 shutil.rmtree("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\SIMLHubPlugins", True)
 os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\Jint.dll")
 os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\Syn.Bot.dll")
@@ -26,3 +31,5 @@ os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\Syn.Oryzer.dll")
 os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\Syn.Utilities.dll")
 os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\Syn.VA.dll")
 os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\Syn.WordNet.dll")
+os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\ICAN.SIC.Plugin.VLCRemote.dll")
+os.remove("D:\\Projects\\ICAN\\ICAN.SIC\\bin\\Debug\\ICAN.SIC.Plugin.VLCRemote.Host.exe")

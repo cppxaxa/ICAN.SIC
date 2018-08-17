@@ -99,18 +99,27 @@ namespace ICAN.SIC.BrokerHub
                 List<string> directoriesCopied = DirectoryCopyExceptDLLDependencies(pluginDirectory, AppDomain.CurrentDomain.BaseDirectory, true);
                 newContentCopiedList.AddRange(directoriesCopied);
 
-                foreach (var dependencyDll in Directory.GetFiles(pluginDirectory + Path.DirectorySeparatorChar + "DLLDependencies"))
+                string pluginDllDependencyDirectoryPath = pluginDirectory + Path.DirectorySeparatorChar + "DLLDependencies";
+
+                if (Directory.Exists(pluginDllDependencyDirectoryPath))
                 {
-                    try
+                    foreach (var dependencyDll in Directory.GetFiles(pluginDllDependencyDirectoryPath))
                     {
-                        string destinationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetFileName(dependencyDll));
-                        File.Copy(dependencyDll, destinationFile, true);
-                        newContentCopiedList.Add(destinationFile);
+                        try
+                        {
+                            string destinationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetFileName(dependencyDll));
+                            File.Copy(dependencyDll, destinationFile, true);
+                            newContentCopiedList.Add(destinationFile);
+                        }
+                        catch
+                        {
+                            Console.WriteLine("[INFO] Ignoring file for copy at CopyAllDllsToBaseDirectory() : " + dependencyDll);
+                        }
                     }
-                    catch
-                    {
-                        Console.WriteLine("[INFO] Ignoring file for copy at CopyAllDllsToBaseDirectory() : " + dependencyDll);
-                    }
+                }
+                else
+                {
+                    Directory.CreateDirectory(pluginDllDependencyDirectoryPath);
                 }
             }
 

@@ -1,0 +1,10 @@
+<Siml>
+  <Concept Name="Introduction">
+    
+    <Model>
+      <Pattern>HELLO ADVANCE BOT</Pattern>
+      <Response>Hello User! from advance bot</Response>
+    </Model>
+    
+  </Concept>
+</Siml>
