@@ -43,7 +43,7 @@ namespace ICAN.SIC.BrokerHub
 
                 try
                 {
-                    file.CopyTo(temppath, true);
+                    file.CopyTo(temppath);
 
                     if (firstCall)
                         directoriesCopied.Add(temppath);
