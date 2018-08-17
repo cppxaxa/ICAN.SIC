@@ -38,7 +38,7 @@ namespace ICAN.SIC.BrokerHub
 
         public void Start()
         {
-            plugins = helper.ScanAndInstantiate(AppDomain.CurrentDomain.BaseDirectory);
+            plugins = helper.ScanPrepareAndInstantiate(AppDomain.CurrentDomain.BaseDirectory);
 
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("[INFO] Instantiated plugins count: " + plugins.Count);

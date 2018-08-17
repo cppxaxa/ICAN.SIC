@@ -10,6 +10,64 @@ namespace ICAN.SIC.BrokerHub
 {
     public class BrokerHubUtility
     {
+        private List<string> DirectoryCopyExceptDLLDependencies(string sourceDirName, string destDirName, bool copySubDirs, bool firstCall = true)
+        {
+            List<string> directoriesCopied = new List<string>();
+            // Get the subdirectories for the specified directory.
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException(
+                    "Source directory does not exist or could not be found: "
+                    + sourceDirName);
+            }
+
+            DirectoryInfo[] dirs = dir.GetDirectories();
+            // If the destination directory doesn't exist, create it.
+            if (!Directory.Exists(destDirName))
+            {
+                Directory.CreateDirectory(destDirName);
+            }
+
+            // Get the files in the directory and copy them to the new location.
+            FileInfo[] files = dir.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                string temppath = Path.Combine(destDirName, file.Name);
+
+                try
+                {
+                    file.CopyTo(temppath, true);
+
+                    if (firstCall)
+                        directoriesCopied.Add(temppath);
+                }
+                catch
+                {
+                    Console.WriteLine("[INFO] Ignoring file for copy at DirectoryCopyExceptDLLDependencies() : " + file.Name);
+                }
+            }
+
+            // If copying subdirectories, copy them and their contents to new location.
+            if (copySubDirs)
+            {
+                foreach (DirectoryInfo subdir in dirs)
+                {
+                    string temppath = Path.Combine(destDirName, subdir.Name);
+
+                    if (firstCall && subdir.Name == "DLLDependencies")
+                        continue;
+                    else if (firstCall)
+                        directoriesCopied.Add(temppath);
+                    
+                    DirectoryCopyExceptDLLDependencies(subdir.FullName, temppath, copySubDirs, false);
+                }
+            }
+
+            return directoriesCopied;
+        }
+
         public List<string> GetAllDllFiles(string[] filePaths)
         {
             List<string> result = new List<string>();
@@ -23,6 +81,42 @@ namespace ICAN.SIC.BrokerHub
             }
 
             return result;
+        }
+
+        public List<string> CopyAllDllsToBaseDirectory()
+        {
+            List<string> newContentCopiedList = new List<string>();
+
+            // List the plugins directory
+            foreach (var pluginDirectory in Directory.GetDirectories(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins")))
+            {
+                Console.WriteLine("[INFO] Reading plugin directory : " + pluginDirectory);
+
+                // Find the DLLDependencies and dll
+                // Except the DLLDependencies, copy all of them to BaseDirectory
+                // Finally copy all the contents of DLLDependencies to BaseDirectory
+
+                List<string> directoriesCopied = DirectoryCopyExceptDLLDependencies(pluginDirectory, AppDomain.CurrentDomain.BaseDirectory, true);
+                newContentCopiedList.AddRange(directoriesCopied);
+
+                foreach (var dependencyDll in Directory.GetFiles(pluginDirectory + Path.DirectorySeparatorChar + "DLLDependencies"))
+                {
+                    try
+                    {
+                        string destinationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetFileName(dependencyDll));
+                        File.Copy(dependencyDll, destinationFile, true);
+                        newContentCopiedList.Add(destinationFile);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("[INFO] Ignoring file for copy at CopyAllDllsToBaseDirectory() : " + dependencyDll);
+                    }
+                }
+            }
+
+            //throw new Exception("Testing");
+
+            return newContentCopiedList.Distinct().ToList();
         }
 
         public string GetPrimaryNamespace(Assembly assembly)
@@ -58,7 +152,7 @@ namespace ICAN.SIC.BrokerHub
 
         public List<string> SortForBestNamespace(List<string> namespaces)
         {
-            namespaces.Sort(delegate(string a, string b)
+            namespaces.Sort(delegate (string a, string b)
             {
                 if (a == null && b == null)
                     return 0;
