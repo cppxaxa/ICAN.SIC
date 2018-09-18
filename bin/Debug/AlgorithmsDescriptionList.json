@@ -1,0 +1,12 @@
+﻿[
+    {
+        "Id": "1",
+        "Name": "tiny-yolo-v2",
+        "Uri": "http://localhost:5000/task"
+    },
+    {
+        "Id": "2",
+        "Name": "yolo-v2",
+        "Uri": "http://localhost:5000/task"
+    }
+]

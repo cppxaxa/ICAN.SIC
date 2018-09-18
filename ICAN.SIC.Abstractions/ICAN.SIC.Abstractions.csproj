@@ -82,6 +82,7 @@
     <Compile Include="IMessageVariants\IAllPluginsLoaded.cs" />
     <Compile Include="IMessageVariants\IBotResponse.cs" />
     <Compile Include="IMessageVariants\ILog.cs" />
+    <Compile Include="IMessageVariants\IChatMessage.cs" />
     <Compile Include="IMessageVariants\IUserResponse.cs" />
     <Compile Include="IMessageVariants\LogType.cs" />
     <Compile Include="IPlugin.cs" />

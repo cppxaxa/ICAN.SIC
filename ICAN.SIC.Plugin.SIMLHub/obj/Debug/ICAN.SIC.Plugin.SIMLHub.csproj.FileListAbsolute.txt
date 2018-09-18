@@ -9,3 +9,8 @@ D:\Projects\ICAN\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIML
 D:\Projects\ICAN\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.csproj.CoreCompileInputs.cache
 D:\Projects\ICAN\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.dll
 D:\Projects\ICAN\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.pdb
+J:\Project ICAN\ICAN.SIC\bin\Debug\ICAN.SIC.Plugin.SIMLHub.dll
+J:\Project ICAN\ICAN.SIC\bin\Debug\ICAN.SIC.Plugin.SIMLHub.pdb
+J:\Project ICAN\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.csprojResolveAssemblyReference.cache
+J:\Project ICAN\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.dll
+J:\Project ICAN\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.pdb
