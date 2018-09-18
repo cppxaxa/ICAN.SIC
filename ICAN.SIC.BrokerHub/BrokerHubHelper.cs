@@ -69,12 +69,14 @@ namespace ICAN.SIC.BrokerHub
                             Console.ResetColor();
                         }
                     }
-                    catch
+                    catch(Exception ex)
                     { /*Ignore*/
                         Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("This plugin may not have inherited from AbstractPlugin");
                         Console.WriteLine("Plugin Error");
                         Console.WriteLine("DLL: {0}", dllFile);
                         Console.WriteLine("Type Name: {0}", guessedTypeName);
+                        Console.WriteLine("Exception: {0}", ex.Message);
                         Console.WriteLine();
                         Console.ResetColor();
                     }

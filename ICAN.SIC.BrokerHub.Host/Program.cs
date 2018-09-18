@@ -47,6 +47,9 @@ namespace ICAN.SIC.BrokerHub.Host
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Press any key to load modules ...");
+            Console.ReadKey();
+
             BrokerHub brokerHub = new BrokerHub();
             brokerHub.Start();
 
