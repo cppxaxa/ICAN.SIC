@@ -1,0 +1,5 @@
+Anaconda3 x64 4.2.0 - Python 3.5
+PIP flask_restful
+Visual Studio 2013+, .NET Framework 4.5
+Git
+Postman
