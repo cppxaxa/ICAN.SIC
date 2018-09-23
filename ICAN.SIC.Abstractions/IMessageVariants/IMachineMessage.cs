@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ICAN.SIC.Abstractions
+namespace ICAN.SIC.Abstractions.IMessageVariants
 {
-    public interface ISIMLHub
+    public interface IMachineMessage : IMessage
     {
-
+        string Message { get; }
     }
 }

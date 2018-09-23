@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Syn.Bot.Siml;
 using System.Reflection;
 using Syn.Bot.Siml.Interfaces;
+using ICAN.SIC.Plugin.SIMLHub.DataTypes;
 
 namespace ICAN.SIC.Plugin.SIMLHub
 {
@@ -102,6 +103,25 @@ namespace ICAN.SIC.Plugin.SIMLHub
 
             // Subscribe to IUserResponse for input
             hub.Subscribe<IUserResponse>(this.GenerateAndPublishBotResponse);
+
+            // Subscribe to IMachineMessage for processing machine generated message
+            hub.Subscribe<IMachineMessage>(this.MakeMachineMessageUserFriendly);
+        }
+
+        private void MakeMachineMessageUserFriendly(IMachineMessage message)
+        {
+            IUserFriendlyMachineMessage userFriendlyMessage;
+
+            ChatResult result;
+
+            if (currentUser == null)
+                result = bot.Chat(message.Message);
+            else
+                result = bot.Chat(new ChatRequest(message.Message, currentUser));
+
+            userFriendlyMessage = new UserFriendlyMachineMessage(result.BotMessage);
+
+            hub.Publish<IUserFriendlyMachineMessage>(userFriendlyMessage);
         }
 
         private void GenerateAndPublishBotResponse(IUserResponse message)

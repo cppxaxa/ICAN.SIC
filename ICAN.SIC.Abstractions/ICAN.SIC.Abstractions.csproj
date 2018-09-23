@@ -83,6 +83,9 @@
     <Compile Include="IMessageVariants\IBotResponse.cs" />
     <Compile Include="IMessageVariants\ILog.cs" />
     <Compile Include="IMessageVariants\IChatMessage.cs" />
+    <Compile Include="IMessageVariants\ICANSEE.IControlMessage.cs" />
+    <Compile Include="IMessageVariants\IMachineMessage.cs" />
+    <Compile Include="IMessageVariants\IUserFriendlyMachineMessage.cs" />
     <Compile Include="IMessageVariants\IUserResponse.cs" />
     <Compile Include="IMessageVariants\LogType.cs" />
     <Compile Include="IPlugin.cs" />

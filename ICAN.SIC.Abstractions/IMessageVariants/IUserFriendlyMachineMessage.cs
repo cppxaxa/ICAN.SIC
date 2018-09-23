@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ICAN.SIC.Abstractions.IMessageVariants
 {
-    public interface IUserResponse : IMessage
+    public interface IUserFriendlyMachineMessage : IMessage
     {
-        string Text { get; }
+        string PrettyMessage { get; }
     }
 }
