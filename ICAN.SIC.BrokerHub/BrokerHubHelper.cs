@@ -63,6 +63,7 @@ namespace ICAN.SIC.BrokerHub
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Plugin Instantiation Error");
+                            Console.WriteLine("This guessed type name may be incorrect for the plugin. (If it is so, it's a bug)");
                             Console.WriteLine("DLL: {0}", dllFile);
                             Console.WriteLine("Type Name: {0}", guessedTypeName);
                             Console.WriteLine();

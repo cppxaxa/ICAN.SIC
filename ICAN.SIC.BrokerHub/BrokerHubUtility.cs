@@ -194,6 +194,7 @@ namespace ICAN.SIC.BrokerHub
                     return -1;
 
                 int countA = 0, countB = 0;
+                bool aSeemsValid = true, bSeemsValid = true;
 
                 if (a.StartsWith("ICAN.SIC"))
                     countA += 1;
@@ -202,7 +203,10 @@ namespace ICAN.SIC.BrokerHub
                 if (a.Length > "ICAN.SIC.Plugin".Length)
                     countA += 2;
                 if (a.StartsWith("ICAN.SIC.Plugin") && a.LastIndexOf('.') > "ICAN.SIC.Plugin".Length)
+                {
                     countA -= 4;
+                    aSeemsValid = false;
+                }
 
                 if (b.StartsWith("ICAN.SIC"))
                     countB += 1;
@@ -211,7 +215,18 @@ namespace ICAN.SIC.BrokerHub
                 if (b.Length > "ICAN.SIC.Plugin".Length)
                     countB += 2;
                 if (b.StartsWith("ICAN.SIC.Plugin") && b.LastIndexOf('.') > "ICAN.SIC.Plugin".Length)
+                {
                     countB -= 4;
+                    bSeemsValid = false;
+                }
+
+                if (aSeemsValid && bSeemsValid)
+                {
+                    if (a.Length < b.Length)
+                        countA += 2;
+                    else
+                        countB += 2;
+                }
 
                 return (countB - countA);
             });
