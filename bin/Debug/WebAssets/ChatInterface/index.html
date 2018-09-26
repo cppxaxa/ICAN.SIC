@@ -5,11 +5,11 @@
 
 <script src="Scripts/jquery-1.6.4.min.js"></script>
 <script src="Scripts/jquery.signalR-2.0.3.min.js"></script>
-<script src="http://192.168.43.13:20000/signalr/hubs"></script>
+<script src="http://localhost:20000/signalr/hubs"></script>
 <script type="text/javascript">
     //$(function () {
     //Set the hubs URL for the connection
-    $.connection.hub.url = "http://192.168.43.13:20000/signalr";
+    $.connection.hub.url = "http://localhost:20000/signalr";
 
     var chat = $.connection.chatInterfaceSignalRHub;
     chat.client.addBotMessage = function (message) {
@@ -168,6 +168,36 @@
         bottom: 0px;
         left: 0px;
     }
+	
+	
+	
+@media screen and (max-width: 992px) {
+	
+	#userInputEnter{
+		border-width: 26px 0px 26px 38px;
+	}
+	
+	#userInputBox {
+        height: 60px;
+		font-size: 25px;
+    }
+	
+	.speech-wrapper .bubble .txt .name.alt {
+        font-size: 23px;
+    }
+	
+	.speech-wrapper .bubble .txt .name {
+		font-size: 23px;
+	}
+	
+	.speech-wrapper .bubble .txt .message {
+        font-size: 18px;
+	}
+	
+	.speech-wrapper .bubble .txt .timestamp {
+		font-size: 15px;
+	}
+}
 </style>
 
 <script>
