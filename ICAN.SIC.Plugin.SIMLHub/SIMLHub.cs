@@ -44,7 +44,7 @@ namespace ICAN.SIC.Plugin.SIMLHub
             bot = new SimlBot();
 
             // Soon it will be substracted
-            this.adapterCount = bot.Adapters.Count;
+            this.adapterCount = 0;
 
             // Add all adapters
             pluginAdapterPathAndTypes = helper.GetAllSIMLHubPluginIndexAdapterPathAndTypes();
@@ -53,6 +53,7 @@ namespace ICAN.SIC.Plugin.SIMLHub
             Console.Write("[SIMLHub] Adapters loading : ");
             Console.ResetColor();
 
+            int botAdapterCount = 0;
             foreach (var adapterPair in pluginAdapterPathAndTypes)
             {
                 Assembly assembly = Assembly.LoadFrom(adapterPair.Key);
@@ -67,6 +68,7 @@ namespace ICAN.SIC.Plugin.SIMLHub
                         if (adapter != null)
                         {
                             bot.Adapters.Add(adapter);
+                            botAdapterCount++;
                         }
                     }
                     catch { /*Ignore*/ }
@@ -78,7 +80,7 @@ namespace ICAN.SIC.Plugin.SIMLHub
             Console.ResetColor();
 
             // Now final value is set
-            this.adapterCount = bot.Adapters.Count - this.adapterCount;
+            this.adapterCount = botAdapterCount;
 
             // Add all index.siml files
             Console.ForegroundColor = ConsoleColor.Magenta;
