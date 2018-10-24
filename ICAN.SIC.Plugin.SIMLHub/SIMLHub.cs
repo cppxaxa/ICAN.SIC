@@ -81,6 +81,7 @@ namespace ICAN.SIC.Plugin.SIMLHub
 
             // Now final value is set
             this.adapterCount = botAdapterCount;
+            Console.WriteLine("[SIMLHub] SIMLHub Plugins count: " + this.adapterCount);
 
             // Add all index.siml files
             Console.ForegroundColor = ConsoleColor.Magenta;
