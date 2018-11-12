@@ -9,7 +9,7 @@ namespace ICAN.SIC.Abstractions.IMessageVariants
 {
     public interface IMachineImageMessage : IMessage
     {
-        string FileName { get; }
+        string Filename { get; }
         Image Image { get; }
     }
 }
