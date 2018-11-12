@@ -14,3 +14,9 @@ J:\Project ICAN\ICAN.SIC\bin\Debug\ICAN.SIC.BrokerHub.pdb
 J:\Project ICAN\ICAN.SIC\ICAN.SIC.BrokerHub\obj\Debug\ICAN.SIC.BrokerHub.csprojResolveAssemblyReference.cache
 J:\Project ICAN\ICAN.SIC\ICAN.SIC.BrokerHub\obj\Debug\ICAN.SIC.BrokerHub.dll
 J:\Project ICAN\ICAN.SIC\ICAN.SIC.BrokerHub\obj\Debug\ICAN.SIC.BrokerHub.pdb
+D:\Projects\ICAN\ICAN.SIC - Copy\bin\Debug\ICAN.SIC.BrokerHub.dll
+D:\Projects\ICAN\ICAN.SIC - Copy\bin\Debug\ICAN.SIC.BrokerHub.pdb
+D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.BrokerHub\obj\Debug\ICAN.SIC.BrokerHub.csprojResolveAssemblyReference.cache
+D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.BrokerHub\obj\Debug\ICAN.SIC.BrokerHub.csproj.CoreCompileInputs.cache
+D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.BrokerHub\obj\Debug\ICAN.SIC.BrokerHub.dll
+D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.BrokerHub\obj\Debug\ICAN.SIC.BrokerHub.pdb

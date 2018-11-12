@@ -13,3 +13,9 @@ J:\Project ICAN\ICAN.SIC\bin\Debug\ICAN.SIC.Abstractions.pdb
 J:\Project ICAN\ICAN.SIC\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.csprojResolveAssemblyReference.cache
 J:\Project ICAN\ICAN.SIC\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.dll
 J:\Project ICAN\ICAN.SIC\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.pdb
+D:\Projects\ICAN\ICAN.SIC - Copy\bin\Debug\ICAN.SIC.Abstractions.dll
+D:\Projects\ICAN\ICAN.SIC - Copy\bin\Debug\ICAN.SIC.Abstractions.pdb
+D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.csprojResolveAssemblyReference.cache
+D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.csproj.CoreCompileInputs.cache
+D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.dll
+D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.pdb
