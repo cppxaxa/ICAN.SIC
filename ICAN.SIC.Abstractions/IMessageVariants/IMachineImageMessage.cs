@@ -11,5 +11,7 @@ namespace ICAN.SIC.Abstractions.IMessageVariants
     {
         string Filename { get; }
         Image Image { get; }
+        string NetworkLocalHttpUri { get; }
+        string DeviceLocalFilePath { get; }
     }
 }

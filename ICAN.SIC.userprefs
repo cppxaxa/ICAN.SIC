@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{E6E199B3-0902-4F76-A8D1-5614224A7AC2}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="ICAN.SIC.Abstractions\Properties\AssemblyInfo.cs">
+    <Files>
+      <File FileName="ICAN.SIC.Abstractions\Properties\AssemblyInfo.cs" Line="8" Column="12" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.ICAN.SIC.BrokerHub.Host PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

@@ -19,3 +19,10 @@ D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstra
 D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.csproj.CoreCompileInputs.cache
 D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.dll
 D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.pdb
+F:\Projects\ICAN.SIC\bin\Debug\ICAN.SIC.Abstractions.dll
+F:\Projects\ICAN.SIC\bin\Debug\ICAN.SIC.Abstractions.pdb
+F:\Projects\ICAN.SIC\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.csprojAssemblyReference.cache
+F:\Projects\ICAN.SIC\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.csproj.CoreCompileInputs.cache
+F:\Projects\ICAN.SIC\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.csproj.CopyComplete
+F:\Projects\ICAN.SIC\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.dll
+F:\Projects\ICAN.SIC\ICAN.SIC.Abstractions\obj\Debug\ICAN.SIC.Abstractions.pdb

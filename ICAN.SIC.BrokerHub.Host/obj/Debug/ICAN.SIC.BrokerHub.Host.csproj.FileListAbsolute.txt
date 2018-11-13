@@ -25,3 +25,11 @@ D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.BrokerHub.Host\obj\Debug\ICAN.SIC.Brok
 D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.BrokerHub.Host\obj\Debug\ICAN.SIC.BrokerHub.Host.csproj.CoreCompileInputs.cache
 D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.BrokerHub.Host\obj\Debug\ICAN.SIC.BrokerHub.Host.exe
 D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.BrokerHub.Host\obj\Debug\ICAN.SIC.BrokerHub.Host.pdb
+F:\Projects\ICAN.SIC\bin\Debug\ICAN.SIC.BrokerHub.Host.exe.config
+F:\Projects\ICAN.SIC\bin\Debug\ICAN.SIC.BrokerHub.Host.exe
+F:\Projects\ICAN.SIC\bin\Debug\ICAN.SIC.BrokerHub.Host.pdb
+F:\Projects\ICAN.SIC\ICAN.SIC.BrokerHub.Host\obj\Debug\ICAN.SIC.BrokerHub.Host.csprojAssemblyReference.cache
+F:\Projects\ICAN.SIC\ICAN.SIC.BrokerHub.Host\obj\Debug\ICAN.SIC.BrokerHub.Host.csproj.CoreCompileInputs.cache
+F:\Projects\ICAN.SIC\ICAN.SIC.BrokerHub.Host\obj\Debug\ICAN.SIC.BrokerHub.Host.csproj.CopyComplete
+F:\Projects\ICAN.SIC\ICAN.SIC.BrokerHub.Host\obj\Debug\ICAN.SIC.BrokerHub.Host.exe
+F:\Projects\ICAN.SIC\ICAN.SIC.BrokerHub.Host\obj\Debug\ICAN.SIC.BrokerHub.Host.pdb

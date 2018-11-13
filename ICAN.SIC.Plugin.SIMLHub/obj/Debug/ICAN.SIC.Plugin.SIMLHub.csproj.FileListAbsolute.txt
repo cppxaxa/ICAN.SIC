@@ -20,3 +20,10 @@ D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plug
 D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.csproj.CoreCompileInputs.cache
 D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.dll
 D:\Projects\ICAN\ICAN.SIC - Copy\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.pdb
+F:\Projects\ICAN.SIC\bin\Debug\ICAN.SIC.Plugin.SIMLHub.dll
+F:\Projects\ICAN.SIC\bin\Debug\ICAN.SIC.Plugin.SIMLHub.pdb
+F:\Projects\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.csprojAssemblyReference.cache
+F:\Projects\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.csproj.CoreCompileInputs.cache
+F:\Projects\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.csproj.CopyComplete
+F:\Projects\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.dll
+F:\Projects\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.pdb
