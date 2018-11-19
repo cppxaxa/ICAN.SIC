@@ -2,10 +2,13 @@
     <title>Chat Interface ICAN.SIC</title>
 </head>
 
+<link href="css/RecordingButton.css" rel="stylesheet" />
 
 <script src="Scripts/jquery-1.6.4.min.js"></script>
 <script src="Scripts/jquery.signalR-2.0.3.min.js"></script>
 <script src="http://{host}:{port}/signalr/hubs"></script>
+<script src="js/RecordingButton.js"></script>
+<script src="js/TextToSpeechChrome.js"></script>
 <script type="text/javascript">
     //$(function () {
     //Set the hubs URL for the connection
@@ -27,9 +30,9 @@
             chat.server.addBotMessage($('#message').val());
         });
     });
-    //});
+	
+	
 </script>
-
 
 <style>
     body {
@@ -169,6 +172,13 @@
         left: 0px;
     }
 	
+	#toolbar {
+		height: 60px;
+	}
+	
+	#toolbar-gap {
+		height: 60px;
+	}
 	
 	
 @media screen and (max-width: 992px) {
@@ -197,11 +207,25 @@
 	.speech-wrapper .bubble .txt .timestamp {
 		font-size: 15px;
 	}
+	
+	#toolbar {
+		height: 90px;
+	}
+	
+	#toolbar-gap {
+		height: 90px;
+	}
 }
 </style>
 
 <script>
-
+	
+	var lastFlagForSpeechUsed = false;
+	
+	function setAllFlagsToFalse(){
+		lastFlagForSpeechUsed = false;
+	}
+	
     function updateGUI(width) {
         var bubbleList = document.getElementsByClassName("bubble");
 
@@ -230,6 +254,8 @@
 	  </div>');
         document.getElementById("container").appendChild(botMessageTemplate);
         updateGUI(window.visualViewport.width);
+		
+		botResponseCallback(message);
     }
 
     function addUIUserMessage(message) {
@@ -293,8 +319,95 @@
 
         return div.firstChild;
     }
-
-
+	
+	
+	
+	// Google speech recognition
+	
+	var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+	var recognition = new SpeechRecognition();
+	
+	function initSpeechRecognition(){
+		recognition.lang = 'en-US';
+		recognition.interimResults = false;
+		
+		recognition.addEventListener('result', (e) => {
+			last = e.results.length - 1;
+			text = e.results[last][0].transcript;
+			
+			//confidence = e.results[0][0].confidence;
+			
+			document.getElementById("userInputBox").value = text;
+			userInputEnterPressed(null);
+			document.getElementById("userInputBox").blur();
+			
+			lastFlagForSpeechUsed = true;
+			
+			updateUIEndRecording();
+		});
+		
+		recognition.speechend = function() {
+			updateUIEndRecording();
+		}
+		
+		recognition.onend = function() {
+			updateUIEndRecording();
+		}
+		
+		recognition.onerror = function(e) {
+			updateUIEndRecording();
+		}
+	}
+	
+	function startSpeechRecognition(){
+		recognition.start();
+		updateUIStartRecording();
+	}
+	
+	function botResponseCallback(content){
+		console.log('botResponseCallback, LastFlagForSpeechUsed: ' + lastFlagForSpeechUsed);
+		if (lastFlagForSpeechUsed){
+			lastFlagForSpeechUsed = false;
+			
+			Say(1, content);
+		}
+	}
+	
+	$(document).ready(function(){
+		// Init
+		
+		initSpeechRecognition();
+		VoiceInit();
+	
+		$(document).keydown(function(evt) {
+			var tag = evt.target.tagName.toLowerCase();
+			if (tag != 'input' && tag != 'textarea') {
+				evt = evt || window.event;
+				
+				switch(evt.keyCode){
+					case 83: 
+						startSpeechRecognition();
+						break;
+				}
+			}
+		});
+		
+		
+		console.log("Press 's' to start speech recognition");
+		
+		
+		$('#recButton').addClass("notRec");
+		
+		
+		$('#recButton').click(function(){
+			if (recordingRunning){
+				recordingRunning = false;
+			}
+			else{
+				startSpeechRecognition();
+			}
+		});
+	});
 
 </script>
 
@@ -302,5 +415,29 @@
 
 </div>
 
+<div id="toolbar" style="position: fixed; bottom: 50px;">
+	<button id="recButton"></button>
+</div>
+
+<div id="toolbar-gap"></div>
+
 <input value="" type='text' id="userInputBox" onkeyup="keyPressed(event)" placeholder="User message">
 <input type="button" value="" id="userInputEnter" onclick="userInputEnterPressed(event)" />
+
+<script>
+	var recordingRunning = false;
+	
+	
+	function updateUIStartRecording(){
+		StartRecordingAnimation('#recButton');
+		recordingRunning = true;
+	}
+	
+	function updateUIEndRecording(){
+		EndRecordingAnimation('#recButton');
+		recordingRunning = false;
+	}
+</script>
+
+
+

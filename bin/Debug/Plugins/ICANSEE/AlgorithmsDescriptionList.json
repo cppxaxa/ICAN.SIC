@@ -1,0 +1,24 @@
+﻿[
+    {
+        "Id": "Algo1",
+        "AlgorithmTypeId": "AlgoType1",
+        "SupportedDeviceTypeIdList": [ "NVIDIA_GPU" ],
+        "Name": "tiny-yolo-v2",
+        "Uri": "http://{{host}}:5000/task",
+        "InitCommand": "globals()[\"options\"] = {\"model\": \"cfg/tiny-yolo-voc.cfg\", \"load\": \"bin/tiny-yolo-voc.weights\", \"threshold\": 0.1, \"gpu\":0.7}\nglobals()[\"tfnet\"] = TFNet(options)",
+        "ScalarExecuteCommand": "result = tfnet.return_predict(imageSrc)\\noutput = ResultToJson(str(result))",
+        "UnloadCommand": "globals()[\"options\"] = None\nglobals()[\"tfnet\"] = None",
+        "Description": "Tiny yolo v2 is much faster than full yolo"
+    },
+    {
+        "Id": "Algo2",
+        "AlgorithmTypeId": "AlgoType2",
+        "SupportedDeviceTypeIdList": [ "NVIDIA_GPU" ],
+        "Name": "yolo-v2",
+        "Uri": "http://{{host}}:5000/task",
+        "InitCommand": "globals()[\"options\"] = {\"model\": \"cfg/yolo-voc.cfg\", \"load\": \"bin/yolo.weights\", \"threshold\": 0.1, \"gpu\":0.7}\nglobals()[\"tfnet\"] = TFNet(options)",
+        "ScalarExecuteCommand": "result = tfnet.return_predict(imageSrc)\\noutput = ResultToJson(str(result))",
+        "UnloadCommand": "globals()[\"options\"] = None\nglobals()[\"tfnet\"] = None",
+        "Description": "It features a full yolo v2"
+    }
+]
