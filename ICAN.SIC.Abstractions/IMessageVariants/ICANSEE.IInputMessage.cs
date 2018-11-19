@@ -28,7 +28,5 @@ namespace ICAN.SIC.Abstractions.IMessageVariants.ICANSEE
     {
         ControlFunction ControlFunction { get; }
         List<string> Parameters { get; }
-
-        string Text { get; }
     }
 }
