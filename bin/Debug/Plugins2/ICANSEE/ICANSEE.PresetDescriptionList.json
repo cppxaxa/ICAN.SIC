@@ -1,0 +1,16 @@
+﻿[
+  {
+    "Id": "Preset1",
+    "Name": "Sample Preset 1",
+    "AlgorithmId": "Algo3",
+    "AlgorithmAttributeKey": "ScalarExecuteCommand",
+    "ComputeDeviceId": "Win10Device1",
+    "Port": 5000,
+    "Description": "Sample Present 1",
+    "RunOnce": true,
+    "InfiniteLoop": false,
+    "LoopLimit": 1,
+    "ReturnResult": true,
+    "ResultProcessingStatement": ""
+  }
+]

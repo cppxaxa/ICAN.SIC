@@ -1,0 +1,18 @@
+﻿[
+  {
+	  "ComputeDeviceId": "Win10Device1",
+    "Label": "Dell Precision M3800-YTD Win10",
+  	"PortList": [5000],
+    "IpAddress": "localhost",
+    "DeviceTypeId": "WIN_TIER2",
+    "Description": "Windows 10 Quadcore 12 GB RAM"
+  },
+  {
+	  "ComputeDeviceId": "Ubuntu1604Device1",
+    "Label": "Acer Nitro 5-YTD Linux",
+	  "PortList": [5000],
+    "IpAddress": "localhost",
+    "DeviceTypeId": "NVIDIA_GPU",
+    "Description": "NVIDIA GTX 1050 Ti"
+  }
+]
