@@ -11,6 +11,6 @@
     "InfiniteLoop": false,
     "LoopLimit": 1,
     "ReturnResult": true,
-    "ResultProcessingStatement": "PostResult('{{host}}', str(result), {{port}})"
+    "ResultProcessingStatement": "PostResult('{{host}}', str(result), {{port}})\\nPostImage('screen.jpg', imageSrc, '{{host}}', {{port}})"
   }
 ]
