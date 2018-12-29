@@ -2,10 +2,12 @@
 	<Concept Name="Introduction" xmlns:icansee="http://ican.sic/namespace#icansee">
     	
 		<Model>
-			<Pattern>Execute preset *</Pattern>
+			<Pattern>
+				<Item>(Run|Execute) preset * (with|on|along) (camera|cam) *</Item>
+			</Pattern>
 			<Response>
-				<icansee:Parameter><Match/></icansee:Parameter>
-				Requesting preset execution for <Match/>
+				Requesting preset execution for <Match Index="2"/>, <Match Index="5"/>
+				<icansee:Parameter>ControlFunction.ExecutePreset,<Match Index="2"/>,<Match Index="5"/></icansee:Parameter>
 			</Response>
 		</Model>
 		
