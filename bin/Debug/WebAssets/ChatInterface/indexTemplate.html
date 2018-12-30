@@ -304,13 +304,48 @@
     function sendUserResponseToServer(message) {
         chat.server.processUserMessage(message);
     }
-
+	
+	// If modification is done to initialization below 2 statements
+	// modify both for working code
+	PastUserInput = [""]
+	PastInputIndex = 0
+	
+	function DecreasePastInputIndex() {
+		PastInputIndex--;
+		
+		if (PastInputIndex < 0)
+			PastInputIndex = 0;
+	}
+	
+	function IncreasePastInputIndex() {
+		PastInputIndex++;
+		
+		if (PastUserInput.length == PastInputIndex)
+			PastInputIndex--;
+	}
+	
     function keyPressed(event) {
         if (event.key == "Enter" && document.getElementById("userInputBox").value.trim() != "") {
             sendUserResponseToServer(document.getElementById("userInputBox").value);
+			
+			if (PastInputIndex == PastUserInput.length - 1) {
+				PastUserInput.splice(PastUserInput.length - 1, 0, document.getElementById("userInputBox").value);
+				IncreasePastInputIndex();
+			}
+			
             document.getElementById("userInputBox").value = "";
             document.getElementById("userInputBox").focus();
         }
+		else if (event.key == "ArrowUp") {
+			console.log("Up");
+			DecreasePastInputIndex();
+			document.getElementById("userInputBox").value = PastUserInput[PastInputIndex];
+		}
+		else if (event.key == "ArrowDown") {
+			console.log("Down");
+			IncreasePastInputIndex();
+			document.getElementById("userInputBox").value = PastUserInput[PastInputIndex];
+		}
     }
 
     function userInputEnterPressed(event) {
@@ -320,6 +355,10 @@
             document.getElementById("userInputBox").focus();
         }
     }
+	
+	function userInputKeyUp(event) {
+		console.log(event);
+	}
 
     function createElementFromHTML(htmlString) {
         var div = document.createElement('div');
