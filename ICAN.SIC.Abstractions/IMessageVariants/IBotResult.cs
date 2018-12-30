@@ -13,5 +13,6 @@ namespace ICAN.SIC.Abstractions.IMessageVariants
     {
         string Text { get; }
         ChatResult ChatResult { get; }
+        IUserResponse UserResponse { get; }
     }
 }

@@ -78,7 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTypes\BotResponse.cs" />
+    <Compile Include="DataTypes\BotResult.cs" />
     <Compile Include="DataTypes\UserFriendlyMachineMessage.cs" />
     <Compile Include="SIMLHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -140,7 +140,7 @@ namespace ICAN.SIC.Plugin.SIMLHub
                 result = bot.Chat(new ChatRequest(message.Text, currentUser));
 
 
-            IBotResult botResponse = new ICAN.SIC.Plugin.SIMLHub.DataTypes.BotResult(result);
+            IBotResult botResponse = new ICAN.SIC.Plugin.SIMLHub.DataTypes.BotResult(result, message);
             
             hub.Publish<IBotResult>(botResponse);
         }
