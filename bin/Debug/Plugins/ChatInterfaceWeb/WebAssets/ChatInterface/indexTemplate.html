@@ -224,14 +224,118 @@
 		height: 90px;
 	}
 }
+
+	// Checkbox styling
+	
+	#voiceResponseCheckbox{
+	}
+	
+	[type="checkbox"]:checked,
+	[type="checkbox"]:not(:checked) {
+		position: absolute;
+		-webkit-appearance: none;
+		left: -9999px;
+	}
+	[type="checkbox"]:checked + label,
+	[type="checkbox"]:not(:checked) + label
+	{
+		position: relative;
+		padding-left: 28px;
+		cursor: pointer;
+		line-height: 20px;
+		display: inline-block;
+		color: #ccc;
+		font-style: italic;
+		font-size: 12px;
+		bottom: 9px;
+		border-radius: 20px;
+		
+		background: rgba(0, 0, 0, 0.6);
+		text-align: right;
+		padding-right: 15px;
+		padding-bottom: 7px;
+		padding-top: 7px;
+	}
+	[type="checkbox"]:checked + label:before,
+	[type="checkbox"]:not(:checked) + label:before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 10px;
+		height: 10px;
+		border: 6px solid #fff;
+		border-radius: 20px;
+		background: #000;
+		
+		padding: 7px;
+	}
+	[type="checkbox"]:checked + label:after,
+	[type="checkbox"]:not(:checked) + label:after {
+		content: '';
+		width: 8px;
+		height: 8px;
+		background: #00bb00;
+		border-radius: 20px;
+		position: absolute;
+		top: 5px;
+		left: 5px;
+		padding: 9px;
+		-webkit-transition: all 0.2s ease;
+		transition: all 0.5s ease;
+	}
+	[type="checkbox"]:not(:checked) + label:after {\
+		opacity: 0;
+		-webkit-transform: scale(0);
+		transform: scale(0);
+	}
+	[type="checkbox"]:checked + label:after {
+		opacity: 1;
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
 </style>
 
 <script>
 	
 	var lastFlagForSpeechUsed = false;
+	var informationTypes = ["USER-MACHINE MESSAGE", "MACHINE MESSAGE"];
+	
+	/* Speech output - Speak respons */
+	function updateVoiceResponseCheckboxUI(){
+		if (lastFlagForSpeechUsed && !$('#voiceResponseCheckbox').is(':checked'))
+			$('#voiceResponseCheckbox').prop('checked', true);
+		else if (!lastFlagForSpeechUsed && $('#voiceResponseCheckbox').is(':checked'))
+			$('#voiceResponseCheckbox').prop('checked', false);
+	}
 	
 	function setAllFlagsToFalse(){
 		lastFlagForSpeechUsed = false;
+		updateVoiceResponseCheckboxUI();
+	}
+	
+	function extractTextFromHtmlContent(htmlContent) {
+		var html = htmlContent;
+		var div = document.createElement("div");
+		div.innerHTML = html;
+		var text = div.textContent || div.innerText || "";
+		text = text.trim();
+		
+		return text;
+	}
+	
+	function getInformationTypePrefix(htmlContent) {
+		var text = extractTextFromHtmlContent(htmlContent);
+		
+		if (text == "")
+			return "";
+		
+		for (i in informationTypes) {
+			if (text.startsWith(informationTypes[i]))
+				return informationTypes[i];
+		}
+		
+		return "";
 	}
 	
     function updateGUI(width) {
@@ -249,17 +353,35 @@
     };
 
     function addUIBotMessage(message) {
-        if (message.toString().trim() == "")
-            message = '<i style="color: grey;">[Acknowledged]</i>';
-
+        //if (message.toString().trim() == "")
+            //message = '<i style="color: grey;">[Acknowledged]</i>';
+			
         var botMessageTemplate = createElementFromHTML('<div class="bubble">\
 		<div class="txt">\
 		  <p class="name">Interface</p>\
-		  <p class="message">' + message + '</p>\
+		  <p class="message" style="\
+				background: #cde7ff;\
+				border-radius: 5px;\
+				padding: 5px;\
+			">' + message + '</p>\
 		  <span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
 		</div>\
 		<div class="bubble-arrow"></div>\
-	  </div>');
+		</div>');
+		
+		if (message.toString().trim() == "") {
+            message = '<i style="color: grey;">[Acknowledged]</i>';
+			
+			botMessageTemplate = createElementFromHTML('<div class="bubble">\
+			<div class="txt">\
+			  <p class="name">Interface</p>\
+			  <p class="message">' + message + '</p>\
+			  <span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
+			</div>\
+			<div class="bubble-arrow"></div>\
+			</div>');
+		}
+		
         document.getElementById("container").appendChild(botMessageTemplate);
         updateGUI(window.visualViewport.width);
 		
@@ -270,7 +392,11 @@
         var userMessageTemplate = createElementFromHTML('<div class="bubble alt">\
 		<div class="txt">\
 		  <p class="name alt">Me<span> </span></p>\
-		  <p class="message">' + message + '</p>\
+		  <p class="message" style="\
+				background: #2ecc7147;\
+				border-radius: 5px;\
+				padding: 5px;\
+			">' + message + '</p>\
 		  <span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
 		</div>\
 		<div class="bubble-arrow alt"></div>\
@@ -280,19 +406,62 @@
     }
 
     function addUIChatMessage(htmlContent) {
-        if (htmlContent.toString().trim() == "")
+		
+		infoType = getInformationTypePrefix(htmlContent);
+		message = extractTextFromHtmlContent(htmlContent).substring(infoType.length).trim();
+		
+		console.log('addUIChatMessage: HtmlContent: ' + htmlContent); 
+		
+        botMessageTemplate = createElementFromHTML('<div class="bubble">\
+			<div class="txt">\
+			  <p class="name">Information</p>\
+			  ' + htmlContent + '\
+			  <span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
+			</div>\
+			<div class="bubble-arrow"></div>\
+			</div>');
+        
+		if (message != '' && infoType == "USER-MACHINE MESSAGE") {
+			botMessageTemplate = createElementFromHTML('<div class="bubble">\
+			<div class="txt">\
+			  <p class="name">Information</p>\
+			  <p style="font-size: 12px;">' + infoType + '</p>\
+			  <p class="message" style="\
+				background: #cde7ff;\
+				border-radius: 5px;\
+				padding: 5px;\
+				">' + message + '</p>\
+			  <span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
+			</div>\
+			<div class="bubble-arrow"></div>\
+			</div>');
+		}
+		
+		if (htmlContent.toString().trim() == "") {
             htmlContent = '<i style="color: grey;">[Acknowledged]</i>';
-
-        //<p class="message">' + htmlContent + '</p>\
-
-        var botMessageTemplate = createElementFromHTML('<div class="bubble">\
-		<div class="txt">\
-		  <p class="name">Information</p>\
-		  ' + htmlContent + '\
-		  <span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
-		</div>\
-		<div class="bubble-arrow"></div>\
-	  </div>');
+			
+			botMessageTemplate = createElementFromHTML('<div class="bubble">\
+			<div class="txt">\
+			  <p class="name">Information</p>\
+			  ' + htmlContent + '\
+			  <span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
+			</div>\
+			<div class="bubble-arrow"></div>\
+			</div>');
+		}
+		
+		// Speech response
+		else if (lastFlagForSpeechUsed){
+			console.log('addUIChatMessage, InfoType: "' + infoType + '", LastFlagForSpeechUsed: ' + lastFlagForSpeechUsed);
+			
+			if (infoType == "USER-MACHINE MESSAGE") {
+				console.log('addUIChatMessage, Say()');
+				speechResponseText = extractTextFromHtmlContent(htmlContent).substring(infoType.length);
+				
+				Say(1, speechResponseText);
+			}
+		}
+		
         document.getElementById("container").appendChild(botMessageTemplate);
         updateGUI(window.visualViewport.width);
     }
@@ -389,6 +558,7 @@
 			document.getElementById("userInputBox").blur();
 			
 			lastFlagForSpeechUsed = true;
+			updateVoiceResponseCheckboxUI();
 			
 			updateUIEndRecording();
 		});
@@ -414,17 +584,20 @@
 	function botResponseCallback(content){
 		console.log('botResponseCallback, LastFlagForSpeechUsed: ' + lastFlagForSpeechUsed);
 		if (lastFlagForSpeechUsed){
-			lastFlagForSpeechUsed = false;
-			
 			Say(1, content);
 		}
 	}
+	
+	
 	
 	$(document).ready(function(){
 		// Init
 		
 		initSpeechRecognition();
 		VoiceInit();
+		
+		updateVoiceResponseCheckboxUI();
+	
 	
 		$(document).keydown(function(evt) {
 			var tag = evt.target.tagName.toLowerCase();
@@ -454,6 +627,18 @@
 				startSpeechRecognition();
 			}
 		});
+		
+		
+		// Speech output - Speak response
+		
+		$('#voiceResponseCheckbox').change(function(e) {
+			if($(this).is(':checked')) {
+				lastFlagForSpeechUsed = true;
+			}
+			else{
+				lastFlagForSpeechUsed = false;
+			}
+		});
 	});
 
 </script>
@@ -464,6 +649,10 @@
 
 <div id="toolbar" style="position: fixed; bottom: 50px;">
 	<button id="recButton"></button>
+	
+	<input type="checkbox" id="voiceResponseCheckbox" checked>
+    <label for="voiceResponseCheckbox">&nbsp;&nbsp;&nbsp; Speak response</label>	
+	
 </div>
 
 <div id="toolbar-gap"></div>
@@ -485,6 +674,5 @@
 		recordingRunning = false;
 	}
 </script>
-
 
 

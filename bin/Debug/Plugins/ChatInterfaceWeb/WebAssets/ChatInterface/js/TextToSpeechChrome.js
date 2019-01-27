@@ -13,12 +13,17 @@ function VoiceInfo(){
 
 function Say(voiceIndex, content)
 {
+	msgRate = 1;
+	
+	if (content.length > 85)
+		msgRate = 0.7;
+	
 	var msg = new SpeechSynthesisUtterance();
 	var voices = window.speechSynthesis.getVoices();
 	msg.voice = voices[voiceIndex]; // Note: some voices don't support altering params
 	msg.voiceURI = 'native';
 	msg.volume = 1; // 0 to 1
-	msg.rate = 1; // 0.1 to 10
+	msg.rate = msgRate; // 0.1 to 10
 	msg.pitch = 2; //0 to 2
 	msg.text = content;
 	msg.lang = 'en-US';

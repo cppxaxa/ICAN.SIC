@@ -1,0 +1,213 @@
+<Siml>
+  <Set Name="OBJECTLABEL">
+    <Item>airplane</Item>
+    <Item>apple</Item>
+    <Item>backpack</Item>
+    <Item>banana</Item>
+    <Item>baseball bat</Item>
+    <Item>baseball glove</Item>
+    <Item>bear</Item>
+    <Item>bed</Item>
+    <Item>bench</Item>
+    <Item>bicycle</Item>
+    <Item>bird</Item>
+    <Item>boat</Item>
+    <Item>book</Item>
+    <Item>bottle</Item>
+    <Item>bowl</Item>
+    <Item>broccoli</Item>
+    <Item>bus</Item>
+    <Item>cake</Item>
+    <Item>car</Item>
+    <Item>carrot</Item>
+    <Item>cat</Item>
+    <Item>cell phone</Item>
+    <Item>chair</Item>
+    <Item>clock</Item>
+    <Item>couch</Item>
+    <Item>cow</Item>
+    <Item>cup</Item>
+    <Item>dining table</Item>
+    <Item>dog</Item>
+    <Item>donut</Item>
+    <Item>elephant</Item>
+    <Item>fire hydrant</Item>
+    <Item>fork</Item>
+    <Item>frisbee</Item>
+    <Item>giraffe</Item>
+    <Item>hair drier</Item>
+    <Item>handbag</Item>
+    <Item>horse</Item>
+    <Item>hot dog</Item>
+    <Item>keyboard</Item>
+    <Item>kite</Item>
+    <Item>knife</Item>
+    <Item>laptop</Item>
+    <Item>microwave</Item>
+    <Item>motorcycle</Item>
+    <Item>mouse</Item>
+    <Item>orange</Item>
+    <Item>oven</Item>
+    <Item>parking meter</Item>
+    <Item>person</Item>
+    <Item>pizza</Item>
+    <Item>potted plant</Item>
+    <Item>refrigerator</Item>
+    <Item>remote</Item>
+    <Item>sandwich</Item>
+    <Item>scissors</Item>
+    <Item>sheep</Item>
+    <Item>sink</Item>
+    <Item>skateboard</Item>
+    <Item>skis</Item>
+    <Item>snowboard</Item>
+    <Item>spoon</Item>
+    <Item>sports ball</Item>
+    <Item>stop sign</Item>
+    <Item>suitcase</Item>
+    <Item>surfboard</Item>
+    <Item>teddy bear</Item>
+    <Item>tennis racket</Item>
+    <Item>tie</Item>
+    <Item>toaster</Item>
+    <Item>toilet</Item>
+    <Item>toothbrush</Item>
+    <Item>traffic light</Item>
+    <Item>train</Item>
+    <Item>truck</Item>
+    <Item>tv</Item>
+    <Item>umbrella</Item>
+    <Item>vase</Item>
+    <Item>wine glass</Item>
+    <Item>zebra</Item>
+  </Set>
+  <Set Name="MORELOGICQUERYCONDITION">
+    <Item>get more</Item>
+    <Item>gets more</Item>
+    <Item>is more</Item>
+    <Item>are more</Item>
+    <Item>more</Item>
+    <Item>get greater</Item>
+    <Item>gets greater</Item>
+    <Item>is greater</Item>
+    <Item>are greater</Item>
+    <Item>greater</Item>
+  </Set>
+  <Set Name="LESSLOGICQUERYCONDITION">
+    <Item>get less</Item>
+    <Item>get lesser</Item>
+    <Item>gets less</Item>
+    <Item>gets lesser</Item>
+    <Item>is less</Item>
+    <Item>is lesser</Item>
+    <Item>are less</Item>
+    <Item>are lesser</Item>
+    <Item>less</Item>
+    <Item>lesser</Item>
+  </Set>
+  <Set Name="EQUALLOGICQUERYCONDITION">
+    <Item>get equal</Item>
+    <Item>get equals</Item>
+    <Item>gets equal</Item>
+    <Item>gets equals</Item>
+    <Item>is equal</Item>
+    <Item>is equals</Item>
+    <Item>are equal</Item>
+    <Item>are equals</Item>
+    <Item>equal</Item>
+    <Item>equals</Item>
+  </Set>
+  <Concept Name="ICANReminderV1" xmlns:icansee="http://ican.sic/namespace#icansee">
+    
+    <Model>
+      <Pattern>(UNLOAD|CLOSE|RELEASE|SHUT) (REMINDER|REM) PRESET *</Pattern>
+      <Response>Requesting reminder preset unload for <Match Index="3" /><icansee:Parameter>ControlFunction.UnloadPreset,<Match Index="3" /></icansee:Parameter></Response>
+    </Model>
+    
+    <Model>
+      <Pattern>
+        <Item>(REMIND|ALERT|CALL|TELL) (WHEN|ME WHEN|WHEN NUMBER|ME WHEN NUMBER|WHEN NUMBER OF|ME WHEN NUMBER OF|WHEN COUNT OF|ME WHEN COUNT OF) [OBJECTLABEL] [MORELOGICQUERYCONDITION] THAN *</Item>
+      </Pattern>
+      <Response>
+    		Executing reminder preset for more condition</Response>
+    </Model>
+    
+    <Model>
+      <Pattern>
+        <Item>(REMIND|ALERT|CALL|TELL) (WHEN|ME WHEN|WHEN NUMBER|ME WHEN NUMBER|WHEN NUMBER OF|ME WHEN NUMBER OF|WHEN COUNT OF|ME WHEN COUNT OF) [OBJECTLABEL] [LESSLOGICQUERYCONDITION] THAN *</Item>
+      </Pattern>
+      <Response>
+    		Executing reminder preset for less condition</Response>
+    </Model>
+    
+    <Model>
+      <Pattern>
+        <Item>(REMIND|ALERT|CALL|TELL) (WHEN|ME WHEN|WHEN NUMBER|ME WHEN NUMBER|WHEN NUMBER OF|ME WHEN NUMBER OF|WHEN COUNT OF|ME WHEN COUNT OF) [OBJECTLABEL] [EQUALLOGICQUERYCONDITION] TO *</Item>
+      </Pattern>
+      <Response>
+    		Executing reminder preset for equal condition</Response>
+    </Model>
+    
+    <Model>
+      <Pattern>
+        <Item>(REMIND|ALERT|CALL|TELL) me (something|anything|any thing|somethings|anythings|any things) (change|changes|changed) (with|by|using) preset * (with|on|along) (cam|camera) *</Item>
+        <Item>(REMIND|ALERT|CALL|TELL) when (something|anything|any thing|somethings|anythings|any things) (change|changes|changed) (with|by|using) preset * (with|on|along) (cam|camera) *</Item>
+        <Item>(REMIND|ALERT|CALL|TELL) me when (something|anything|any thing|somethings|anythings|any things) (change|changes|changed) (with|by|using) preset * (with|on|along) (cam|camera) *</Item>
+      </Pattern>
+      <Response>
+    		Executing reminder preset "<Match Index="5"/>" on camera <Match Index="8" /> for any object introduced or removed<icansee:Parameter>ControlFunction.ExecutePreset,<Match Index="5" />,<Match Index="8" /></icansee:Parameter></Response>
+    </Model>
+    
+    
+    <Model>
+      <Pattern>(TELL|LIST|PRINT|SHOW) ME (OBJECT NAMES|OBJECT NAME|OBJECTS|LABEL|LABELS)</Pattern>
+      <Response>List of objects are airplane, apple, backpack, banana, baseball bat, baseball glove, bear, bed, bench, bicycle, bird, boat, book, bottle, bowl, broccoli, bus, cake, car, carrot, cat, cell phone, chair, clock, couch, cow, cup, dining table, dog, donut, elephant, fire hydrant, fork, frisbee, giraffe, hair drier, handbag, horse, hot dog, keyboard, kite, knife, laptop, microwave, motorcycle, mouse, orange, oven, parking meter, person, pizza, potted plant, refrigerator, remote, sandwich, scissors, sheep, sink, skateboard, skis, snowboard, spoon, sports ball, stop sign, suitcase, surfboard, teddy bear, tennis racket, tie, toaster, toilet, toothbrush, traffic light, train, truck, tv, umbrella, vase, wine glass, zebra</Response>
+    </Model>
+    
+    
+    
+    <!--Model>
+    	<Pattern>
+    		<Item>(REMIND|ALERT|CALL) (when|me when|when number|me when number|when number of|me when number of|when count of|me when count of) (AIRPLANE|APPLE|BACKPACK|BANANA|BASEBALL BAT|BASEBALL GLOVE|BEAR|BED|BENCH|BICYCLE|BIRD|BOAT|BOOK|BOTTLE|BOWL|BROCCOLI|BUS|CAKE|CAR|CARROT|CAT|CELL PHONE|CHAIR|CLOCK|COUCH|COW|CUP|DINING TABLE|DOG|DONUT|ELEPHANT|FIRE HYDRANT|FORK|FRISBEE|GIRAFFE|HAIR DRIER|HANDBAG|HORSE|HOT DOG|KEYBOARD|KITE|KNIFE|LAPTOP|MICROWAVE|MOTORCYCLE|MOUSE|ORANGE|OVEN|PARKING METER|PERSON|PIZZA|POTTED PLANT|REFRIGERATOR|REMOTE|SANDWICH|SCISSORS|SHEEP|SINK|SKATEBOARD|SKIS|SNOWBOARD|SPOON|SPORTS BALL|STOP SIGN|SUITCASE|SURFBOARD|TEDDY BEAR|TENNIS RACKET|TIE|TOASTER|TOILET|TOOTHBRUSH|TRAFFIC LIGHT|TRAIN|TRUCK|TV|UMBRELLA|VASE|WINE GLASS|ZEBRA) (get more|gets more|is more|are more|more) than *</Item>
+    	</Pattern>
+    	<Response>
+    		Executing reminder preset</Response>
+    </Model-->
+    <!--Model>
+    	<Pattern>
+    		<Item>(REMIND|ALERT|CALL) when (PERSON|CAR|BASKET BALL) more than *</Item>
+    	    <Item>(REMIND|ALERT|CALL) me when (PERSON|CAR|BASKET BALL) more than *</Item>
+			<Item>(REMIND|ALERT|CALL) when number (PERSON|CAR|BASKET BALL) more than *</Item>
+    	    
+    	    <Item>(REMIND|ALERT|CALL) when (PERSON|CAR|BASKET BALL) (IS|ARE) more than *</Item>
+    	    <Item>(REMIND|ALERT|CALL) me when (PERSON|CAR|BASKET BALL) (IS|ARE) more than *</Item>
+			<Item>(REMIND|ALERT|CALL) when number (PERSON|CAR|BASKET BALL) (IS|ARE) more than *</Item>
+    	    <Item>(REMIND|ALERT|CALL) me when number (PERSON|CAR|BASKET BALL) (IS|ARE) more than *</Item>
+    	    <Item>(REMIND|ALERT|CALL) me when number (PERSON|CAR|BASKET BALL) more than *</Item>
+    	    <Item>(REMIND|ALERT|CALL) when number of (PERSON|CAR|BASKET BALL) more than *</Item>
+    	    <Item>(REMIND|ALERT|CALL) me when number of (PERSON|CAR|BASKET BALL) more than /Item>
+    	    <Item>(REMIND|ALERT|CALL) when number of (PERSON|CAR|BASKET BALL) (IS|ARE) more than *</Item>
+    	    <Item>(REMIND|ALERT|CALL) me when number of (PERSON|CAR|BASKET BALL) (IS|ARE) more than *</Item>
+		</Pattern>
+    	<Response>
+    		Executing reminder preset</Response>
+    </Model-->
+    <!--Model>
+    	<Pattern>
+    	    <Item>(REMIND|ALERT|CALL) *</Item>
+    	    <Item>(REMIND|ALERT|CALL) me *</Item>
+    	</Pattern>
+    	<Response>
+    	    <Js>
+    	       	function CreatePythonCodeQuery(input){
+					return "Hello";
+				}
+				function Blank(){
+					return "";
+				}
+				Blank();
+			</Js>Executing reminder preset <Match Index="2"/>, coded as <Js>CreatePythonCodeQuery(<Match Index="2"/>);</Js><icansee:Parameter>ControlFunction.ExecuteReminderPreset,<Js>CreatePythonCodeQuery(<Match Index="2"/>);</Js></icansee:Parameter></Response>
+    </Model-->
+    
+  </Concept>
+</Siml>
