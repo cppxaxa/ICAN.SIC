@@ -1,4 +1,4 @@
-<Siml>
+﻿<Siml>
   <Set Name="OBJECTLABEL">
     <Item>airplane</Item>
     <Item>apple</Item>
@@ -126,46 +126,42 @@
     
     <Model>
       <Pattern>
-        <Item>(REMIND|ALERT|CALL|TELL) (WHEN|ME WHEN|WHEN NUMBER|ME WHEN NUMBER|WHEN NUMBER OF|ME WHEN NUMBER OF|WHEN COUNT OF|ME WHEN COUNT OF) [OBJECTLABEL] [MORELOGICQUERYCONDITION] THAN *</Item>
+        <Item>(REMIND|ALERT|CALL|TELL) (WHEN|ME WHEN|WHEN NUMBER|ME WHEN NUMBER|WHEN NUMBER OF|ME WHEN NUMBER OF|WHEN COUNT OF|ME WHEN COUNT OF) [OBJECTLABEL] [MORELOGICQUERYCONDITION] THAN * (IN|ON|ACROSS|OVER) (CAM|CAMERA) *</Item>
       </Pattern>
       <Response>
-    		Executing reminder preset for more condition</Response>
+    		Executing reminder preset for more condition<icansee:Parameter>ControlFunction.ExecutePresetExtended,ReminderV1,<Match Index="8" />,[Python]if '<Match Index="3" />' in countMap and countMap['<Match Index="3" />'] &gt; <Match Index="5" />: PostResult('{{host}}', 'Alert: <Match Index="1" /> <Match Index="2" /> <Match Index="3" /> <Match Index="4" /> THAN <Match Index="5" /> <Match Index="6" /> <Match Index="7" /> <Match Index="8" />', {{port}}); time.sleep(1)</icansee:Parameter></Response>
     </Model>
     
     <Model>
       <Pattern>
-        <Item>(REMIND|ALERT|CALL|TELL) (WHEN|ME WHEN|WHEN NUMBER|ME WHEN NUMBER|WHEN NUMBER OF|ME WHEN NUMBER OF|WHEN COUNT OF|ME WHEN COUNT OF) [OBJECTLABEL] [LESSLOGICQUERYCONDITION] THAN *</Item>
+        <Item>(REMIND|ALERT|CALL|TELL) (WHEN|ME WHEN|WHEN NUMBER|ME WHEN NUMBER|WHEN NUMBER OF|ME WHEN NUMBER OF|WHEN COUNT OF|ME WHEN COUNT OF) [OBJECTLABEL] [LESSLOGICQUERYCONDITION] THAN * (IN|ON|ACROSS|OVER) (CAM|CAMERA) *</Item>
       </Pattern>
       <Response>
-    		Executing reminder preset for less condition</Response>
+    		Executing reminder preset for more condition<icansee:Parameter>ControlFunction.ExecutePresetExtended,ReminderV1,<Match Index="8" />,[Python]if '<Match Index="3" />' in countMap and countMap['<Match Index="3" />'] &lt; <Match Index="5" />: PostResult('{{host}}', 'Alert: <Match Index="1" /> <Match Index="2" /> <Match Index="3" /> <Match Index="4" /> THAN <Match Index="5" /> <Match Index="6" /> <Match Index="7" /> <Match Index="8" />', {{port}}); time.sleep(1)</icansee:Parameter></Response>
     </Model>
     
     <Model>
       <Pattern>
-        <Item>(REMIND|ALERT|CALL|TELL) (WHEN|ME WHEN|WHEN NUMBER|ME WHEN NUMBER|WHEN NUMBER OF|ME WHEN NUMBER OF|WHEN COUNT OF|ME WHEN COUNT OF) [OBJECTLABEL] [EQUALLOGICQUERYCONDITION] TO *</Item>
+        <Item>(REMIND|ALERT|CALL|TELL) (WHEN|ME WHEN|WHEN NUMBER|ME WHEN NUMBER|WHEN NUMBER OF|ME WHEN NUMBER OF|WHEN COUNT OF|ME WHEN COUNT OF) [OBJECTLABEL] [EQUALLOGICQUERYCONDITION] TO * (IN|ON|ACROSS|OVER) (CAM|CAMERA) *</Item>
       </Pattern>
       <Response>
-    		Executing reminder preset for equal condition</Response>
+    		Executing reminder preset for more condition<icansee:Parameter>ControlFunction.ExecutePresetExtended,ReminderV1,<Match Index="8" />,[Python]if '<Match Index="3" />' in countMap and countMap['<Match Index="3" />'] == <Match Index="5" />: PostResult('{{host}}', 'Alert: <Match Index="1" /> <Match Index="2" /> <Match Index="3" /> <Match Index="4" /> THAN <Match Index="5" /> <Match Index="6" /> <Match Index="7" /> <Match Index="8" />', {{port}}); time.sleep(1)</icansee:Parameter></Response>
     </Model>
     
     <Model>
       <Pattern>
-        <Item>(REMIND|ALERT|CALL|TELL) me (something|anything|any thing|somethings|anythings|any things) (change|changes|changed) (with|by|using) preset * (with|on|along) (cam|camera) *</Item>
-        <Item>(REMIND|ALERT|CALL|TELL) when (something|anything|any thing|somethings|anythings|any things) (change|changes|changed) (with|by|using) preset * (with|on|along) (cam|camera) *</Item>
-        <Item>(REMIND|ALERT|CALL|TELL) me when (something|anything|any thing|somethings|anythings|any things) (change|changes|changed) (with|by|using) preset * (with|on|along) (cam|camera) *</Item>
+        <Item>(REMIND|ALERT|CALL|TELL) ME (SOMETHING|ANYTHING|ANY THING|SOMETHINGS|ANYTHINGS|ANY THINGS) (CHANGE|CHANGES|CHANGED) (WITH|BY|USING) PRESET * (WITH|ON|ALONG) (CAM|CAMERA) *</Item>
+        <Item>(REMIND|ALERT|CALL|TELL) WHEN (SOMETHING|ANYTHING|ANY THING|SOMETHINGS|ANYTHINGS|ANY THINGS) (CHANGE|CHANGES|CHANGED) (WITH|BY|USING) PRESET * (WITH|ON|ALONG) (CAM|CAMERA) *</Item>
+        <Item>(REMIND|ALERT|CALL|TELL) ME WHEN (SOMETHING|ANYTHING|ANY THING|SOMETHINGS|ANYTHINGS|ANY THINGS) (CHANGE|CHANGES|CHANGED) (WITH|BY|USING) PRESET * (WITH|ON|ALONG) (CAM|CAMERA) *</Item>
       </Pattern>
       <Response>
-    		Executing reminder preset "<Match Index="5"/>" on camera <Match Index="8" /> for any object introduced or removed<icansee:Parameter>ControlFunction.ExecutePreset,<Match Index="5" />,<Match Index="8" /></icansee:Parameter></Response>
+    		Executing reminder preset "<Match Index="5" />" on camera <Match Index="8" /> for any object introduced or removed<icansee:Parameter>ControlFunction.ExecutePreset,<Match Index="5" />,<Match Index="8" /></icansee:Parameter></Response>
     </Model>
-    
     
     <Model>
       <Pattern>(TELL|LIST|PRINT|SHOW) ME (OBJECT NAMES|OBJECT NAME|OBJECTS|LABEL|LABELS)</Pattern>
       <Response>List of objects are airplane, apple, backpack, banana, baseball bat, baseball glove, bear, bed, bench, bicycle, bird, boat, book, bottle, bowl, broccoli, bus, cake, car, carrot, cat, cell phone, chair, clock, couch, cow, cup, dining table, dog, donut, elephant, fire hydrant, fork, frisbee, giraffe, hair drier, handbag, horse, hot dog, keyboard, kite, knife, laptop, microwave, motorcycle, mouse, orange, oven, parking meter, person, pizza, potted plant, refrigerator, remote, sandwich, scissors, sheep, sink, skateboard, skis, snowboard, spoon, sports ball, stop sign, suitcase, surfboard, teddy bear, tennis racket, tie, toaster, toilet, toothbrush, traffic light, train, truck, tv, umbrella, vase, wine glass, zebra</Response>
     </Model>
-    
-    
-    
     <!--Model>
     	<Pattern>
     		<Item>(REMIND|ALERT|CALL) (when|me when|when number|me when number|when number of|me when number of|when count of|me when count of) (AIRPLANE|APPLE|BACKPACK|BANANA|BASEBALL BAT|BASEBALL GLOVE|BEAR|BED|BENCH|BICYCLE|BIRD|BOAT|BOOK|BOTTLE|BOWL|BROCCOLI|BUS|CAKE|CAR|CARROT|CAT|CELL PHONE|CHAIR|CLOCK|COUCH|COW|CUP|DINING TABLE|DOG|DONUT|ELEPHANT|FIRE HYDRANT|FORK|FRISBEE|GIRAFFE|HAIR DRIER|HANDBAG|HORSE|HOT DOG|KEYBOARD|KITE|KNIFE|LAPTOP|MICROWAVE|MOTORCYCLE|MOUSE|ORANGE|OVEN|PARKING METER|PERSON|PIZZA|POTTED PLANT|REFRIGERATOR|REMOTE|SANDWICH|SCISSORS|SHEEP|SINK|SKATEBOARD|SKIS|SNOWBOARD|SPOON|SPORTS BALL|STOP SIGN|SUITCASE|SURFBOARD|TEDDY BEAR|TENNIS RACKET|TIE|TOASTER|TOILET|TOOTHBRUSH|TRAFFIC LIGHT|TRAIN|TRUCK|TV|UMBRELLA|VASE|WINE GLASS|ZEBRA) (get more|gets more|is more|are more|more) than *</Item>

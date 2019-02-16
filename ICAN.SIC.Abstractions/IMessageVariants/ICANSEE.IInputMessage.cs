@@ -9,6 +9,7 @@ namespace ICAN.SIC.Abstractions.IMessageVariants.ICANSEE
     public enum ControlFunction
     {
         ExecutePreset,
+        ExecutePresetExtended,
         ListAllCameraConfigurations,
         ListAllComputeDevices,
         QueryComputeDevice,

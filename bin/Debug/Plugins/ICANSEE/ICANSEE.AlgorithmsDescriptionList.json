@@ -53,5 +53,16 @@
     "ScalarExecuteCommand": "image_data = cv2.imencode('.jpg', imageSrc)[1].tostring()\\nresult = globals()[\"model\"].predict(image_data)\\noutput = result",
     "UnloadCommand": "globals()[\"model\"] = None",
     "Description": "Generate image caption"
-  }
+  },
+  {
+    "Id": "Algo6",
+    "AlgorithmTypeId": "AlgoType3",
+    "SupportedDeviceTypeIdList": [ "WIN_TIER2" ],
+    "Name": "tf-ssd-90class",
+    "Uri": "http://{{host}}:{{port}}/task",
+    "InitCommand": "globals()[\"tfssd\"] = MinimalObjectDetector()\nglobals()[\"tfssd\"].Initialize()",
+    "ScalarExecuteCommand": "result = globals()[\"tfssd\"].Process(imageSrc)\\noutput = ResultToJson(str(result))\\nprint(result)\\ncountMap = {}\\nfor unit in result:\\n\\tif unit['label'].strip() in countMap: countMap[unit['label']] += 1\\n\\telse: countMap[unit['label']] = 1\\nprint('Object count ', countMap)",
+    "UnloadCommand": "globals()[\"tfssd\"] = None",
+    "Description": "It features a tensorflow object detection api"
+  },
 ]
