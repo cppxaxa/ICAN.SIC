@@ -120,16 +120,11 @@
   <Concept Name="ICANReminderV1" xmlns:icansee="http://ican.sic/namespace#icansee">
     
     <Model>
-      <Pattern>(UNLOAD|CLOSE|RELEASE|SHUT) (REMINDER|REM) PRESET *</Pattern>
-      <Response>Requesting reminder preset unload for <Match Index="3" /><icansee:Parameter>ControlFunction.UnloadPreset,<Match Index="3" /></icansee:Parameter></Response>
-    </Model>
-    
-    <Model>
       <Pattern>
         <Item>(REMIND|ALERT|CALL|TELL) (WHEN|ME WHEN|WHEN NUMBER|ME WHEN NUMBER|WHEN NUMBER OF|ME WHEN NUMBER OF|WHEN COUNT OF|ME WHEN COUNT OF) [OBJECTLABEL] [MORELOGICQUERYCONDITION] THAN * (IN|ON|ACROSS|OVER) (CAM|CAMERA) *</Item>
       </Pattern>
       <Response>
-    		Executing reminder preset for more condition<icansee:Parameter>ControlFunction.ExecutePresetExtended,ReminderV1,<Match Index="8" />,[Python]if '<Match Index="3" />' in countMap and countMap['<Match Index="3" />'] &gt; <Match Index="5" />: PostResult('{{host}}', 'Alert: <Match Index="1" /> <Match Index="2" /> <Match Index="3" /> <Match Index="4" /> THAN <Match Index="5" /> <Match Index="6" /> <Match Index="7" /> <Match Index="8" />', {{port}}); time.sleep(1)</icansee:Parameter></Response>
+    		Executing reminder preset for more condition<icansee:Parameter>ControlFunction.ExecutePresetExtended,watchdog,<Match Index="8" />,[Python]if '<Match Index="3" />' in countMap and countMap['<Match Index="3" />'] &gt; <Match Index="5" />: PostResult('{{host}}', 'Alert: <Match Index="3" /> MORE THAN <Match Index="5" /> IN CAMERA <Match Index="8" />', {{port}}); time.sleep(1)</icansee:Parameter></Response>
     </Model>
     
     <Model>
@@ -137,7 +132,7 @@
         <Item>(REMIND|ALERT|CALL|TELL) (WHEN|ME WHEN|WHEN NUMBER|ME WHEN NUMBER|WHEN NUMBER OF|ME WHEN NUMBER OF|WHEN COUNT OF|ME WHEN COUNT OF) [OBJECTLABEL] [LESSLOGICQUERYCONDITION] THAN * (IN|ON|ACROSS|OVER) (CAM|CAMERA) *</Item>
       </Pattern>
       <Response>
-    		Executing reminder preset for more condition<icansee:Parameter>ControlFunction.ExecutePresetExtended,ReminderV1,<Match Index="8" />,[Python]if '<Match Index="3" />' in countMap and countMap['<Match Index="3" />'] &lt; <Match Index="5" />: PostResult('{{host}}', 'Alert: <Match Index="1" /> <Match Index="2" /> <Match Index="3" /> <Match Index="4" /> THAN <Match Index="5" /> <Match Index="6" /> <Match Index="7" /> <Match Index="8" />', {{port}}); time.sleep(1)</icansee:Parameter></Response>
+    		Executing reminder preset for more condition<icansee:Parameter>ControlFunction.ExecutePresetExtended,watchdog,<Match Index="8" />,[Python]if '<Match Index="3" />' in countMap and countMap['<Match Index="3" />'] &lt; <Match Index="5" />: PostResult('{{host}}', 'Alert: <Match Index="3" /> LESS THAN <Match Index="5" /> IN CAMERA <Match Index="8" />', {{port}}); time.sleep(1)</icansee:Parameter></Response>
     </Model>
     
     <Model>
@@ -145,7 +140,7 @@
         <Item>(REMIND|ALERT|CALL|TELL) (WHEN|ME WHEN|WHEN NUMBER|ME WHEN NUMBER|WHEN NUMBER OF|ME WHEN NUMBER OF|WHEN COUNT OF|ME WHEN COUNT OF) [OBJECTLABEL] [EQUALLOGICQUERYCONDITION] TO * (IN|ON|ACROSS|OVER) (CAM|CAMERA) *</Item>
       </Pattern>
       <Response>
-    		Executing reminder preset for more condition<icansee:Parameter>ControlFunction.ExecutePresetExtended,ReminderV1,<Match Index="8" />,[Python]if '<Match Index="3" />' in countMap and countMap['<Match Index="3" />'] == <Match Index="5" />: PostResult('{{host}}', 'Alert: <Match Index="1" /> <Match Index="2" /> <Match Index="3" /> <Match Index="4" /> THAN <Match Index="5" /> <Match Index="6" /> <Match Index="7" /> <Match Index="8" />', {{port}}); time.sleep(1)</icansee:Parameter></Response>
+    		Executing reminder preset for more condition<icansee:Parameter>ControlFunction.ExecutePresetExtended,watchdog,<Match Index="8" />,[Python]if '<Match Index="3" />' in countMap and countMap['<Match Index="3" />'] == <Match Index="5" />: PostResult('{{host}}', 'Alert: <Match Index="3" /> EQUAL TO <Match Index="5" /> IN CAMERA <Match Index="8" />', {{port}}); time.sleep(1)</icansee:Parameter></Response>
     </Model>
     
     <Model>

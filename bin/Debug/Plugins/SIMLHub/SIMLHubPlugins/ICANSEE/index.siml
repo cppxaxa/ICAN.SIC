@@ -1,25 +1,41 @@
-<Siml>
-	<Concept Name="Introduction" xmlns:icansee="http://ican.sic/namespace#icansee">
-    	
-		<Model>
-			<Pattern>
-				<Item>(Run|Execute) preset * (with|on|along) (camera|cam) *</Item>
-			</Pattern>
-			<Response>
-				Requesting preset execution for <Match Index="2"/>, <Match Index="5"/>
-				<icansee:Parameter>ControlFunction.ExecutePreset,<Match Index="2"/>,<Match Index="5"/></icansee:Parameter>
-			</Response>
-		</Model>
-
-		<Model>
-			<Pattern>
-				<Item>(Unload|Close|Release|Shut) (camera|cam) * (used|executed|ran) (with|on|along) preset *</Item>
-			</Pattern>
-			<Response>
-				Requesting camera unload for <Match Index="3"/>, <Match Index="6"/>
-				<icansee:Parameter>ControlFunction.UnloadCamera,<Match Index="3"/>,<Match Index="6"/></icansee:Parameter>
-			</Response>
-		</Model>
-		
-	</Concept>
+﻿<Siml>
+  <Concept Name="Introduction" xmlns:icansee="http://ican.sic/namespace#icansee">
+    
+    <Model>
+      <Pattern>(UNLOAD|CLOSE|RELEASE|SHUT) (REMINDER|REM) PRESET *</Pattern>
+      <Response>Requesting reminder preset unload for <Match Index="3" /><icansee:Parameter>ControlFunction.UnloadPreset,<Match Index="3" /></icansee:Parameter></Response>
+    </Model>
+    
+    <Model>
+      <Pattern>(COMPLETE|COMPLETELY|COMPLETLY) (UNLOAD|CLOSE|RELEASE|SHUT) PRESET *</Pattern>
+      <Response>Requesting reminder preset unload for <Match Index="3" /><icansee:Parameter>ControlFunction.UnloadPresetAndCamera,<Match Index="3" /></icansee:Parameter></Response>
+    </Model>
+    
+    <Model>
+      <Pattern>(UNLOAD|CLOSE|RELEASE|SHUT) (COMPLETE|COMPLETELY|COMPLETLY) PRESET *</Pattern>
+      <Response>Requesting reminder preset unload for <Match Index="3" /><icansee:Parameter>ControlFunction.UnloadPresetAndCamera,<Match Index="3" /></icansee:Parameter></Response>
+    </Model>
+    
+    <Model>
+      <Pattern>(UNLOAD|CLOSE|RELEASE|SHUT) PRESET (COMPLETE|COMPLETELY|COMPLETLY) *</Pattern>
+      <Response>Requesting reminder preset unload for <Match Index="3" /><icansee:Parameter>ControlFunction.UnloadPresetAndCamera,<Match Index="3" /></icansee:Parameter></Response>
+    </Model>
+    
+    <Model>
+      <Pattern>
+        <Item>(RUN|EXECUTE) PRESET * (WITH|ON|ALONG) (CAMERA|CAM) *</Item>
+      </Pattern>
+      <Response>
+				Requesting preset execution for <Match Index="2" />, <Match Index="5" /><icansee:Parameter>ControlFunction.ExecutePreset,<Match Index="2" />,<Match Index="5" /></icansee:Parameter></Response>
+    </Model>
+    
+    <Model>
+      <Pattern>
+        <Item>(UNLOAD|CLOSE|RELEASE|SHUT) (CAMERA|CAM) * (USED|EXECUTED|RAN) (WITH|ON|ALONG) PRESET *</Item>
+      </Pattern>
+      <Response>
+				Requesting camera unload for <Match Index="3" />, <Match Index="6" /><icansee:Parameter>ControlFunction.UnloadCamera,<Match Index="3" />,<Match Index="6" /></icansee:Parameter></Response>
+    </Model>
+    
+  </Concept>
 </Siml>

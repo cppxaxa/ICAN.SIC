@@ -10,6 +10,7 @@ namespace ICAN.SIC.Abstractions.IMessageVariants.ICANSEE
     {
         ExecutePreset,
         ExecutePresetExtended,
+        UnloadPresetAndCamera,
         ListAllCameraConfigurations,
         ListAllComputeDevices,
         QueryComputeDevice,

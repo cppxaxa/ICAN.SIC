@@ -56,13 +56,13 @@
   },
   {
     "Id": "Algo6",
-    "AlgorithmTypeId": "AlgoType3",
+    "AlgorithmTypeId": "AlgoType6",
     "SupportedDeviceTypeIdList": [ "WIN_TIER2" ],
     "Name": "tf-ssd-90class",
     "Uri": "http://{{host}}:{{port}}/task",
-    "InitCommand": "globals()[\"tfssd\"] = MinimalObjectDetector()\nglobals()[\"tfssd\"].Initialize()",
-    "ScalarExecuteCommand": "result = globals()[\"tfssd\"].Process(imageSrc)\\noutput = ResultToJson(str(result))\\nprint(result)\\ncountMap = {}\\nfor unit in result:\\n\\tif unit['label'].strip() in countMap: countMap[unit['label']] += 1\\n\\telse: countMap[unit['label']] = 1\\nprint('Object count ', countMap)",
-    "UnloadCommand": "globals()[\"tfssd\"] = None",
+    "InitCommand": "globals()[\"tfssd\"] = MinimalObjectDetector()\nglobals()[\"tfssd\"].Initialize()\nglobals()['c'] = 0",
+    "ScalarExecuteCommand": "LoadCameraData()\\nresult = globals()[\"tfssd\"].Process(imageSrc)\\noutput = ResultToJson(str(result))\\nprint(result)\\ncountMap = {}\\nfor unit in result:\\n\\tif unit['label'].strip() in countMap: countMap[unit['label']] += 1\\n\\telse: countMap[unit['label']] = 1\\nprint('Object count ', countMap)\\nglobals()['c'] += 1\\n",
+    "UnloadCommand": "globals()[\"tfssd\"] = None\\nglobals()['c'] = 0",
     "Description": "It features a tensorflow object detection api"
   },
 ]
