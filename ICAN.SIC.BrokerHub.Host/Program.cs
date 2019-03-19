@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ICAN.SIC.BrokerHub.Host
@@ -47,8 +48,11 @@ namespace ICAN.SIC.BrokerHub.Host
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Press any key to load modules ...");
-            Console.ReadKey();
+            for (int i = 5; i > 0; i--)
+            {
+                Console.WriteLine("Pause before loading " + i);
+                Thread.Sleep(1000);
+            }
 
             BrokerHub brokerHub = new BrokerHub();
             brokerHub.Start();

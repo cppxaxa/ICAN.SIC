@@ -23,7 +23,8 @@ namespace ICAN.SIC.Abstractions.IMessageVariants.ICANSEE
         LoadAlgorithm,
         LoadDeviceLocalImage,
         DisplayImageInServerGUI,
-        RequestImageMessage
+        RequestImageMessage,
+        RunningTasks
     }
 
     public interface IInputMessage : IMessage
