@@ -1,0 +1,10 @@
+﻿<Siml>
+  <Concept Name="Introduction" xmlns:icangeolocate="http://ican.sic/namespace#icangeolocate">
+    
+    <Model>
+      <Pattern>WHAT IS MY COORDINATES</Pattern>
+      <Response>Requesting geographical coordinates <Match Index="3" /><icangeolocate:Parameter>GetCurrentCoordinates</icangeolocate:Parameter></Response>
+    </Model>
+    
+  </Concept>
+</Siml>

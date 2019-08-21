@@ -1,0 +1,30 @@
+﻿[
+  {
+    "Id": 1,
+    "Index": 0,
+    "Url": null,
+    "Label": "Default webcam",
+    "Type": "camera"
+  },
+  {
+    "Id": 2,
+    "Index": -1,
+    "Url": "image.jpg",
+    "Label": "Sample static image",
+    "Type": "image"
+  },
+  {
+    "Id": 3,
+    "Index": -1,
+    "Url": "http://192.168.43.1:8080/video?a=a.mjpg",
+    "Label": "Sample mjpeg stream",
+    "Type": "mjpgStream"
+  },
+  {
+    "Id": 4,
+    "Index": -1,
+    "Url": "http://192.168.43.1:8080/shot.jpg",
+    "Label": "Sample realtime image",
+    "Type": "imageShot"
+  }
+]

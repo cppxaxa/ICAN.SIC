@@ -39,7 +39,7 @@
     "InfiniteLoop": false,
     "LoopLimit": 1,
     "ReturnResult": true,
-    "ResultProcessingStatement": "if result is not None:\\n\\tsimlinput = str(len(result)) + \": ImageCaptioning gives out \"\\n\\tif len(result) <= 0:\\n\\t\\tsimlinput = \"ImageCaptioning cannot tell anything\"\\n\\tfor i in range(len(result)):\\n\\t\\tif i != 0:\\n\\t\\t\\tsimlinput += ' or in other words '\\n\\t\\tsimlinput += result[i][1].replace('.',' ')\\n\\tsimlinput = simlinput.replace('  ',' ')   \\n\\tPostResult('{{host}}', simlinput, {{port}})\\n\\tPostImage('screen.jpg', imageSrc, '{{host}}', {{port}})\\nsimlinput = None\\nPostResult('{{host}}', 'complete unload preset captioning', {{port}})"
+    "ResultProcessingStatement": "if result is not None:\\n\\tsimlinput = str(len(result)) + \": ImageCaptioning gives out \"\\n\\tif len(result) <= 0:\\n\\t\\tsimlinput = \"ImageCaptioning cannot tell anything\"\\n\\tfor i in range(len(result)):\\n\\t\\tif i != 0:\\n\\t\\t\\tsimlinput += ' or in other words '\\n\\t\\tsimlinput += result[i][1].replace('.',' ')\\n\\tsimlinput = simlinput.replace('  ',' ')   \\n\\tPostResult('{{host}}', simlinput, {{port}})\\n\\tPostImage('screen.jpg', imageSrc, '{{host}}', {{port}})\\nsimlinput = None\\ntime.sleep(5)\\nPostResult('{{host}}', 'complete unload preset captioning', {{port}})"
   },
   {
     "Id": "watchdog",

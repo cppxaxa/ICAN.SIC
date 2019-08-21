@@ -12,10 +12,17 @@ namespace ICAN.SIC.Plugin.SIMLHub.DataTypes
     {
         ChatResult chatResult;
         IUserResponse userResponse;
+        string auxiliaryText = string.Empty;
 
         public BotResult(ChatResult result, IUserResponse userResponse)
         {
             this.chatResult = result;
+            this.userResponse = userResponse;
+        }
+
+        public BotResult(string text, IUserResponse userResponse = null)
+        {
+            this.auxiliaryText = text;
             this.userResponse = userResponse;
         }
 
@@ -26,7 +33,12 @@ namespace ICAN.SIC.Plugin.SIMLHub.DataTypes
 
         public string Text
         {
-            get { return chatResult.BotMessage; }
+            get {
+                if (chatResult != null)
+                    return chatResult.BotMessage;
+                else
+                    return auxiliaryText;
+            }
         }
 
         public IUserResponse UserResponse

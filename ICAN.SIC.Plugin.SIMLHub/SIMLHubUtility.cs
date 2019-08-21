@@ -42,11 +42,15 @@ namespace ICAN.SIC.Plugin.SIMLHub
             // Traverse each plugin's own directory for IndexAdapter.dll files
             foreach (var directoryName in Directory.GetDirectories(SIMLHubPluginDirectoryName))
             {
-                // Check if index.siml file exists
-                string indexSimlFilePath = Path.Combine(directoryName, "IndexAdapter.dll");
-                if (File.Exists(indexSimlFilePath))
+                foreach (var dllFile in Directory.GetFiles(directoryName))
                 {
-                    result.Add(Path.GetFullPath(indexSimlFilePath));
+                    if (Path.GetExtension(dllFile) == ".dll")
+                    {
+                        if (File.Exists(dllFile))
+                        {
+                            result.Add(Path.GetFullPath(dllFile));
+                        }
+                    }
                 }
             }
 

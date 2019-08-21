@@ -2,6 +2,11 @@
   <Concept Name="Introduction" xmlns:icansee="http://ican.sic/namespace#icansee">
     
     <Model>
+        <Pattern>(SHOW|LIST) running vision (TASK|TASKS)</Pattern>
+        <Response>Requesting to list running task<icansee:Parameter>ControlFunction.RunningTasks</icansee:Parameter></Response>
+    </Model>
+    
+    <Model>
       <Pattern>(UNLOAD|CLOSE|RELEASE|SHUT) (REMINDER|REM) PRESET *</Pattern>
       <Response>Requesting reminder preset unload for <Match Index="3" /><icansee:Parameter>ControlFunction.UnloadPreset,<Match Index="3" /></icansee:Parameter></Response>
     </Model>

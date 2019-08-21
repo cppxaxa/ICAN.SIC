@@ -1,0 +1,17 @@
+<Siml>
+  <Concept Name="Calculate">
+    
+    <Model>
+      <Pattern>Calculate *</Pattern>
+      <Response>
+        <Random>
+          <Item>The answer is <Math><Match /></Math></Item>
+          <Item>The result is <Math><Match /></Math></Item>
+          <Item>The calculated value is <Math><Match /></Math></Item>
+          <Item>The calculated result is <Math><Match /></Math></Item>
+        </Random>
+      </Response>
+    </Model>
+    
+  </Concept>
+</Siml>

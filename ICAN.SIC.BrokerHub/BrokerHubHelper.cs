@@ -78,6 +78,7 @@ namespace ICAN.SIC.BrokerHub
                         Console.WriteLine("DLL: {0}", dllFile);
                         Console.WriteLine("Type Name: {0}", guessedTypeName);
                         Console.WriteLine("Exception: {0}", ex.Message);
+                        Console.WriteLine("InnerException: {0}", ex.InnerException?.Message);
                         Console.WriteLine();
                         Console.ResetColor();
                     }

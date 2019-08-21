@@ -78,11 +78,14 @@
   <ItemGroup>
     <Compile Include="AbstractPlugin.cs" />
     <Compile Include="AllPluginsLoaded.cs" />
+    <Compile Include="ConcreteClasses\MachineMessage.cs" />
+    <Compile Include="ConcreteClasses\UserResponse.cs" />
     <Compile Include="IHub.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="IMessageVariants\IAllPluginsLoaded.cs" />
     <Compile Include="IMessageVariants\IBotResult.cs" />
     <Compile Include="IMessageVariants\ICANSEE.IInformationMessage.cs" />
+    <Compile Include="IMessageVariants\IGeoLocationRequest.cs" />
     <Compile Include="IMessageVariants\ILog.cs" />
     <Compile Include="IMessageVariants\IChatMessage.cs" />
     <Compile Include="IMessageVariants\ICANSEE.IInputMessage.cs" />

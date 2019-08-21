@@ -109,9 +109,21 @@ namespace ICAN.SIC.Plugin.SIMLHub
 
             // Subscribe to IUserResponse for input
             hub.Subscribe<IUserResponse>(this.GenerateAndPublishBotResponse);
+            hub.Subscribe<AllPluginsLoaded>(this.AllPluginsLoadedCallback);
 
             // Subscribe to IMachineMessage for processing machine generated message
             hub.Subscribe<IMachineMessage>(this.MakeMachineMessageUserFriendly);
+        }
+
+        private void AllPluginsLoadedCallback(AllPluginsLoaded message)
+        {
+            foreach (var item in bot.Examples)
+            {
+                Console.WriteLine(item.ToString());
+                IBotResult result = new BotResult(item.ToString());
+
+                hub.Publish(result);
+            }
         }
 
         private void MakeMachineMessageUserFriendly(IMachineMessage message)

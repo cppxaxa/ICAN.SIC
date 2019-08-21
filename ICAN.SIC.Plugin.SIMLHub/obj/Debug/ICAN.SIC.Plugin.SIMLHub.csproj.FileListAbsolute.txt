@@ -5,7 +5,6 @@ c:\users\cppxaxa_2\documents\visual studio 2013\Projects\ICAN.SIC\ICAN.SIC.Plugi
 c:\users\cppxaxa_2\documents\visual studio 2013\Projects\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.csprojResolveAssemblyReference.cache
 D:\Projects\ICAN\ICAN.SIC\bin\Debug\ICAN.SIC.Plugin.SIMLHub.dll
 D:\Projects\ICAN\ICAN.SIC\bin\Debug\ICAN.SIC.Plugin.SIMLHub.pdb
-D:\Projects\ICAN\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.csprojResolveAssemblyReference.cache
 D:\Projects\ICAN\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.csproj.CoreCompileInputs.cache
 D:\Projects\ICAN\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.dll
 D:\Projects\ICAN\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.pdb
@@ -27,3 +26,5 @@ F:\Projects\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.c
 F:\Projects\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.csproj.CopyComplete
 F:\Projects\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.dll
 F:\Projects\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.pdb
+D:\Projects\ICAN\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.csprojAssemblyReference.cache
+D:\Projects\ICAN\ICAN.SIC\ICAN.SIC.Plugin.SIMLHub\obj\Debug\ICAN.SIC.Plugin.SIMLHub.csproj.CopyComplete
