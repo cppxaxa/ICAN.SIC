@@ -1,0 +1,10 @@
+﻿[
+  {
+    "ToReplace": "\\>",
+    "ReplaceWith": ">"
+  },
+  {
+    "ToReplace": "\\<",
+    "ReplaceWith": "<"
+  }
+]

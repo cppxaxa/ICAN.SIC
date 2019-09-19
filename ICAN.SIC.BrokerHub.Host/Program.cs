@@ -32,6 +32,21 @@ namespace ICAN.SIC.BrokerHub.Host
 
     class Program
     {
+        static BrokerHub brokerHub = null;
+
+        static void InitBrokerHub(IMachineMessage msg)
+        {
+            if (msg.Message == "Start_ICAN.SIC")
+            {
+                brokerHub?.UnsubscribeAll();
+                brokerHub?.Stop();
+
+                brokerHub = new BrokerHub();
+                brokerHub.Hub.Subscribe<IMachineMessage>(InitBrokerHub);
+                brokerHub.Start();
+            }
+        }
+
         static void Main(string[] args)
         {
             Dictionary<string, string> cmdParams = ExtractParams(args);
@@ -47,9 +62,10 @@ namespace ICAN.SIC.BrokerHub.Host
                 Thread.Sleep(1000);
             }
 
-            BrokerHub brokerHub = new BrokerHub();
-            brokerHub.Start();
+            //BrokerHub brokerHub = new BrokerHub();
+            //brokerHub.Start();
 
+            InitBrokerHub(new MachineMessage("Start_ICAN.SIC"));
             Console.ReadKey();
 
             brokerHub.GlobalPublish<IUserResponse>(new UserResponse("what is my coordinates"));

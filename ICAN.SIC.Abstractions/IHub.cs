@@ -20,5 +20,9 @@ namespace ICAN.SIC.Abstractions
         void Unsubscribe<T>(Action<T> messageAction) where T : IMessage;
 
         void PassThrough(IHub hub);
+
+        void UnsubscribeAll();
+
+        void UnsubscribeAllDownwards();
     }
 }

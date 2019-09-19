@@ -24,6 +24,7 @@ namespace ICAN.SIC.Plugin.SIMLHub
         // Siml Bot info
         int adapterCount = 0;
         Dictionary<string, List<string>> pluginAdapterPathAndTypes = null;
+        List<AbstractPlugin> simlPlugins = null;
 
         public int AdapterCount { get { return adapterCount; } }
         public List<string> LoadedDLLPath
@@ -53,6 +54,8 @@ namespace ICAN.SIC.Plugin.SIMLHub
             Console.Write("[SIMLHub] Adapters loading : ");
             Console.ResetColor();
 
+            simlPlugins = new List<AbstractPlugin>();
+
             int botAdapterCount = 0;
             foreach (var adapterPair in pluginAdapterPathAndTypes)
             {
@@ -65,6 +68,8 @@ namespace ICAN.SIC.Plugin.SIMLHub
                         IAdapter adapter = (IAdapter)assembly.CreateInstance(typename);
 
                         AbstractPlugin simlHubPlugin = (AbstractPlugin)adapter;
+                        simlPlugins.Add(simlHubPlugin);
+
                         this.Hub.PassThrough(simlHubPlugin.Hub);
 
                         // Add to bot in not null
@@ -155,6 +160,21 @@ namespace ICAN.SIC.Plugin.SIMLHub
             IBotResult botResponse = new ICAN.SIC.Plugin.SIMLHub.DataTypes.BotResult(result, message);
             
             hub.Publish<IBotResult>(botResponse);
+        }
+
+        public override void Dispose()
+        {
+            foreach (var plugin in simlPlugins)
+            {
+                plugin.Dispose();
+            }
+
+            helper = null;
+            utility = null;
+            bot = null;
+            currentUser = null;
+            pluginAdapterPathAndTypes?.Clear();
+            pluginAdapterPathAndTypes = null;
         }
     }
 }

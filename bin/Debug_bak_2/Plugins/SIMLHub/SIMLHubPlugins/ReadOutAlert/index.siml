@@ -1,0 +1,15 @@
+﻿<Siml>
+  <Concept Name="Introduction">
+    
+    <Model>
+      <Pattern>Alert: *</Pattern>
+      <Response>
+      	<Random>
+      		<Item>Alerting you. <Match Index="1" /></Item>
+      		<Item>Alert for you. <Match Index="1" /></Item>
+      	</Random>
+      </Response>
+    </Model>
+    
+  </Concept>
+</Siml>

@@ -8,5 +8,6 @@ namespace ICAN.SIC.Abstractions
     public interface IPlugin
     {
         IHub Hub { get; }
+        void Dispose();
     }
 }

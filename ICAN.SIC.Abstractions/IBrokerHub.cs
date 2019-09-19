@@ -10,5 +10,7 @@ namespace ICAN.SIC.Abstractions
     {
         void AddAndHook(IPlugin plugin);
         void GlobalPublish<T>(T message) where T : IMessage;
+        void UnsubscribeAll();
+        void Dispose();
     }
 }

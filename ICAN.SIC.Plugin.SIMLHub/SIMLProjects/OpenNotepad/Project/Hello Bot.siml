@@ -1,0 +1,19 @@
+﻿<Siml>
+  <Map Name="CommonApplicationName">
+    <MapItem Content="notepad" Value="notepad.exe" />
+  </Map>
+  <Concept Name="Introduction" xmlns:example="http://example.com/namespace#example">
+    
+    <Model>
+      <Pattern>OPEN *</Pattern>
+      <Response>
+        <example:Custom>
+          <Map Get="CommonApplicationName">
+            <Match />
+          </Map>
+        </example:Custom>
+				Launch <Map Get="CommonApplicationName"><Match /></Map></Response>
+    </Model>
+    
+  </Concept>
+</Siml>

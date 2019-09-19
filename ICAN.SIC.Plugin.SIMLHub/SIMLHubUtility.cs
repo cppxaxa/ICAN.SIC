@@ -20,11 +20,11 @@ namespace ICAN.SIC.Plugin.SIMLHub
             // Traverse each plugin's own directory for index.siml files
             foreach (var directoryName in Directory.GetDirectories(SIMLHubPluginDirectoryName))
             {
-                // Check if index.siml file exists
-                string indexSimlFilePath = Path.Combine(directoryName, "index.siml");
-                if (File.Exists(indexSimlFilePath))
+                // Check if index.siml file exists or any siml
+                foreach (var filename in Directory.EnumerateFiles(directoryName))
                 {
-                    result.Add(Path.GetFullPath(indexSimlFilePath));
+                    if (Path.GetExtension(filename) == ".siml")
+                        result.Add(Path.GetFullPath(filename));
                 }
             }
 
@@ -39,7 +39,7 @@ namespace ICAN.SIC.Plugin.SIMLHub
             if (!Directory.Exists(SIMLHubPluginDirectoryName))
                 return result;
 
-            // Traverse each plugin's own directory for IndexAdapter.dll files
+            // Traverse each plugin's own directory for IndexAdapter.dll files or any *Adapter.dll
             foreach (var directoryName in Directory.GetDirectories(SIMLHubPluginDirectoryName))
             {
                 foreach (var dllFile in Directory.GetFiles(directoryName))

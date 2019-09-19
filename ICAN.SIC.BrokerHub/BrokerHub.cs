@@ -25,6 +25,8 @@ namespace ICAN.SIC.BrokerHub
             hub.Subscribe<ILog>(this.LogMessages);
         }
 
+        public IHub Hub { get => hub; }
+
         private void HookHub(IPlugin plugin)
         {
             hub.PassThrough(plugin.Hub);
@@ -66,6 +68,15 @@ namespace ICAN.SIC.BrokerHub
             throw new NotImplementedException();
         }
 
+        public void Dispose()
+        {
+            foreach (var plugin in plugins)
+            {
+                plugin.Dispose();
+            }
+            plugins.Clear();
+        }
+
         public void GlobalPublish<T>(T message) where T : IMessage
         {
             this.hub.Publish<T>(message);
@@ -99,6 +110,11 @@ namespace ICAN.SIC.BrokerHub
                     Console.WriteLine(log.Message);
                     break;
             }
+        }
+
+        public void UnsubscribeAll()
+        {
+            hub.UnsubscribeAll();
         }
     }
 }

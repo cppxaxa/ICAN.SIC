@@ -80,6 +80,24 @@ namespace ICAN.SIC.PubSub
                 });
         }
 
+        public void UnsubscribeAll()
+        {
+            if (this.parentHub == null)
+                this.UnsubscribeAllDownwards();
+            else
+                this.parentHub.UnsubscribeAll();
+        }
+
+        public void UnsubscribeAllDownwards()
+        {
+            _subscribers.Clear();
+
+            foreach (var childHubs in _hubs)
+            {
+                childHubs.UnsubscribeAllDownwards();
+            }
+        }
+
         public void Unsubscribe<T>(Action<T> messageAction) where T : IMessage
         {
             IList messageActions;

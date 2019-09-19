@@ -20,5 +20,7 @@ namespace ICAN.SIC.Abstractions
         {
             get { return hub; }
         }
+
+        public abstract void Dispose();
     }
 }

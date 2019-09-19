@@ -1,0 +1,13 @@
+﻿<Siml>
+  <Concept Name="DateTime">
+    
+    <Model>
+      <Pattern>WHAT IS THE TIME NOW</Pattern>
+      <Pattern>WHAT'S THE TIME NOW</Pattern>
+      <Pattern>WHAT TIME IS IT NOW</Pattern>
+      <Pattern>WHAT TIME IS IT</Pattern>
+      <Response>The current time is <Date Get="hour" /> hours <Date Get="minute" /> minutes <Date Get="second" /> seconds</Response>
+    </Model>
+    
+  </Concept>
+</Siml>

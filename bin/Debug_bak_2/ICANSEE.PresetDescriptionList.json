@@ -1,0 +1,58 @@
+﻿[
+  {
+    "Id": "Preset1",
+    "Name": "Sample Preset 1",
+    "AlgorithmId": "Algo3",
+    "AlgorithmAttributeKey": "ScalarExecuteCommand",
+    "ComputeDeviceId": "Win10Device1",
+    "Port": 5000,
+    "Description": "Sample Present 1",
+    "RunOnce": true,
+    "InfiniteLoop": false,
+    "LoopLimit": 1,
+    "ReturnResult": true,
+    "ResultProcessingStatement": "PostResult('{{host}}', str(result), {{port}})\\nPostImage('screen.jpg', imageSrc, '{{host}}', {{port}})"
+  },
+  {
+    "Id": "Preset2",
+    "Name": "Sample Preset 2",
+    "AlgorithmId": "Algo4",
+    "AlgorithmAttributeKey": "ScalarExecuteCommand",
+    "ComputeDeviceId": "Win10Device1",
+    "Port": 5000,
+    "Description": "Sample Preset 2",
+    "RunOnce": false,
+    "InfiniteLoop": false,
+    "LoopLimit": 60,
+    "ReturnResult": false,
+    "ResultProcessingStatement": "if result is not None and (result % 2 == 0 or result % 3 == 0):\\n\\tPostResult('{{host}}', str(result), {{port}})\\nif result is not None and result == 49:\\n\\tPostResult('{{host}}', 'unload rem preset Preset2', {{port}})"
+  },
+  {
+    "Id": "captioning",
+    "Name": "Sample Preset 3",
+    "AlgorithmId": "Algo5",
+    "AlgorithmAttributeKey": "ScalarExecuteCommand",
+    "ComputeDeviceId": "Win10Device1",
+    "Port": 5000,
+    "Description": "Sample Preset 3",
+    "RunOnce": true,
+    "InfiniteLoop": false,
+    "LoopLimit": 1,
+    "ReturnResult": true,
+    "ResultProcessingStatement": "if result is not None:\\n\\tsimlinput = str(len(result)) + \": ImageCaptioning gives out \"\\n\\tif len(result) <= 0:\\n\\t\\tsimlinput = \"ImageCaptioning cannot tell anything\"\\n\\tfor i in range(len(result)):\\n\\t\\tif i != 0:\\n\\t\\t\\tsimlinput += ' or in other words '\\n\\t\\tsimlinput += result[i][1].replace('.',' ')\\n\\tsimlinput = simlinput.replace('  ',' ')   \\n\\tPostResult('{{host}}', simlinput, {{port}})\\n\\tPostImage('screen.jpg', imageSrc, '{{host}}', {{port}})\\nsimlinput = None\\nPostResult('{{host}}', 'complete unload preset captioning', {{port}})"
+  },
+  {
+    "Id": "watchdog",
+    "Name": "Sample Preset 4",
+    "AlgorithmId": "Algo6",
+    "AlgorithmAttributeKey": "ReminderExecuteCommand",
+    "ComputeDeviceId": "Win10Device1",
+    "Port": 5000,
+    "Description": "Sample Reminder Preset 1",
+    "RunOnce": false,
+    "InfiniteLoop": false,
+    "LoopLimit": 5000,
+    "ReturnResult": false,
+    "ResultProcessingStatement": ""
+  }
+]
