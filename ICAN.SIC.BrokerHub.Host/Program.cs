@@ -33,18 +33,39 @@ namespace ICAN.SIC.BrokerHub.Host
     class Program
     {
         static BrokerHub brokerHub = null;
+        static bool InitIncomplete = false;
 
         static void InitBrokerHub(IMachineMessage msg)
         {
+            if (InitIncomplete)
+                return;
+
+            InitIncomplete = true;
             if (msg.Message == "Start_ICAN.SIC")
             {
-                brokerHub?.UnsubscribeAll();
-                brokerHub?.Stop();
+                var vitalPlugins = brokerHub?.GetVitalPlugins();
 
-                brokerHub = new BrokerHub();
+                brokerHub?.Hub.Unsubscribe<IMachineMessage>(InitBrokerHub);
+                brokerHub?.Stop();
+                brokerHub?.Dispose();
+
+                bool firstInstanceInEcosystem = brokerHub == null;
+
+                brokerHub = new BrokerHub(new List<string> { "ChatInterface" }, firstInstanceInEcosystem);
                 brokerHub.Hub.Subscribe<IMachineMessage>(InitBrokerHub);
                 brokerHub.Start();
+
+                // AddAndHook vital plugins from past brokerHub
+
+                if (vitalPlugins != null)
+                {
+                    foreach (var plugin in vitalPlugins)
+                    {
+                        brokerHub.AddAndHook(plugin);
+                    }
+                }
             }
+            InitIncomplete = false;
         }
 
         static void Main(string[] args)

@@ -14,13 +14,20 @@ namespace ICAN.SIC.BrokerHub
     public class BrokerHub : IBrokerHub
     {
         private readonly IHub hub;
-        private readonly BrokerHubHelper helper = new BrokerHubHelper();
-
+        private readonly BrokerHubUtility utility = new BrokerHubUtility();
+        private readonly BrokerHubHelper helper = null;
+        private readonly HashSet<string> vitalPluginDllNames;
         private List<IPlugin> plugins;
 
-        public BrokerHub()
+        private readonly bool firstStart = true;
+
+        public BrokerHub(List<string> vitalPluginDllNames, bool firstStart)
         {
+            this.helper = new BrokerHubHelper(utility);
+
             hub = new Hub("BrokerHub");
+            this.firstStart = firstStart;
+            this.vitalPluginDllNames = new HashSet<string>(vitalPluginDllNames);
 
             hub.Subscribe<ILog>(this.LogMessages);
         }
@@ -38,9 +45,36 @@ namespace ICAN.SIC.BrokerHub
             this.HookHub(plugin);
         }
 
+        public List<IPlugin> GetVitalPlugins()
+        {
+            List<IPlugin> result = new List<IPlugin>();
+
+            foreach (var plugin in plugins)
+            {
+                bool vitalPluginDllNamesContains = false;
+                if (vitalPluginDllNames != null)
+                {
+                    foreach (var keyword in vitalPluginDllNames)
+                    {
+                        string guessedTypeName = utility.GetGuessedTypeName(plugin.GetType().Assembly);
+                        if (guessedTypeName.IndexOf(keyword) >= 0)
+                            vitalPluginDllNamesContains = true;
+                    }
+                }
+
+                if (vitalPluginDllNamesContains)
+                    result.Add(plugin);
+            }
+
+            return result;
+        }
+
         public void Start()
         {
-            plugins = helper.ScanPrepareAndInstantiate(AppDomain.CurrentDomain.BaseDirectory);
+            if (!firstStart)
+                plugins = helper.ScanPrepareAndInstantiate(AppDomain.CurrentDomain.BaseDirectory, vitalPluginDllNames);
+            else
+                plugins = helper.ScanPrepareAndInstantiate(AppDomain.CurrentDomain.BaseDirectory);
 
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("[INFO] Instantiated plugins count: " + plugins.Count);
@@ -65,14 +99,28 @@ namespace ICAN.SIC.BrokerHub
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Dispose()
         {
+            hub.Unsubscribe<ILog>(this.LogMessages);
+
             foreach (var plugin in plugins)
             {
-                plugin.Dispose();
+                bool vitalPluginDllNamesContains = false;
+                if (vitalPluginDllNames != null)
+                {
+                    foreach (var keyword in vitalPluginDllNames)
+                    {
+                        string guessedTypeName = utility.GetGuessedTypeName(plugin.GetType().Assembly);
+                        if (guessedTypeName.IndexOf(keyword) >= 0)
+                            vitalPluginDllNamesContains = true;
+                    }
+                }
+
+                if (!vitalPluginDllNamesContains)
+                    plugin.Dispose();
             }
             plugins.Clear();
         }
@@ -112,6 +160,7 @@ namespace ICAN.SIC.BrokerHub
             }
         }
 
+        // Use cautiously
         public void UnsubscribeAll()
         {
             hub.UnsubscribeAll();

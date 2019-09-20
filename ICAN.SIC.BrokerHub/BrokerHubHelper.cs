@@ -11,26 +11,34 @@ namespace ICAN.SIC.BrokerHub
 {
     public class BrokerHubHelper
     {
-        private readonly BrokerHubUtility utility = new BrokerHubUtility();
+        private readonly BrokerHubUtility utility = null;
 
-        public List<IPlugin> ScanPrepareAndInstantiate(string baseDirectory)
+        public BrokerHubHelper(BrokerHubUtility utility)
         {
-            // Preparation & generate a CleanupAfterUse.py
-            List<string> newContentsCreated = utility.CopyAllDllsToBaseDirectory();
+            this.utility = utility;
+        }
 
-            string cleanupCommands = "import os\nimport shutil\n\n";
-            foreach (var contentPath in newContentsCreated)
+        public List<IPlugin> ScanPrepareAndInstantiate(string baseDirectory, HashSet<string> vitalPluginDllNames = null)
+        {
+            // Fresh start
+            if (vitalPluginDllNames == null)
             {
-                Console.WriteLine("[Removal after execution] " + contentPath);
+                // Preparation & generate a CleanupAfterUse.py
+                List<string> newContentsCreated = utility.CopyAllDllsToBaseDirectory();
 
-                if (File.Exists(contentPath))
-                    cleanupCommands += "os.remove(\"" + contentPath.Replace("\\", "\\\\") + "\")" + "\n";
+                string cleanupCommands = "import os\nimport shutil\n\n";
+                foreach (var contentPath in newContentsCreated)
+                {
+                    Console.WriteLine("[Removal after execution] " + contentPath);
 
-                if (Directory.Exists(contentPath))
-                    cleanupCommands += "shutil.rmtree(\"" + contentPath.Replace("\\", "\\\\") + "\", True)" + "\n";
+                    if (File.Exists(contentPath))
+                        cleanupCommands += "os.remove(\"" + contentPath.Replace("\\", "\\\\") + "\")" + "\n";
+
+                    if (Directory.Exists(contentPath))
+                        cleanupCommands += "shutil.rmtree(\"" + contentPath.Replace("\\", "\\\\") + "\", True)" + "\n";
+                }
+                File.WriteAllText("CleanupAfterUse.py", cleanupCommands);
             }
-            File.WriteAllText("CleanupAfterUse.py", cleanupCommands);
-
 
             // Scan and Instantiation process
             List<IPlugin> plugins = new List<IPlugin>();
@@ -56,18 +64,42 @@ namespace ICAN.SIC.BrokerHub
                     Console.ResetColor();
                     try
                     {
-                        IPlugin plugin = (IPlugin)assembly.CreateInstance(guessedTypeName);
-                        if (plugin != null)
-                            plugins.Add(plugin);
-                        else
+                        bool vitalPluginDllNamesContains = false;
+                        if (vitalPluginDllNames != null)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Plugin Instantiation Error");
-                            Console.WriteLine("This guessed type name may be incorrect for the plugin. (If it is so, it's a bug)");
-                            Console.WriteLine("DLL: {0}", dllFile);
-                            Console.WriteLine("Type Name: {0}", guessedTypeName);
+                            foreach (var keyword in vitalPluginDllNames)
+                            {
+                                if (guessedTypeName.IndexOf(keyword) >= 0)
+                                    vitalPluginDllNamesContains = true;
+                            }
+                        }
+
+                        if (vitalPluginDllNamesContains)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine("[INFO] Vital plugin found, will not be instantiated and old instance will stay in ecosystem");
+                            Console.WriteLine("\tDLL: {0}", dllFile);
+                            Console.WriteLine("\t\tType Name: {0}", guessedTypeName);
                             Console.WriteLine();
                             Console.ResetColor();
+                        }
+                        else
+                        {
+                            IPlugin plugin = (IPlugin)assembly.CreateInstance(guessedTypeName);
+                            if (plugin != null)
+                            {
+                                plugins.Add(plugin);
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Plugin Instantiation Error");
+                                Console.WriteLine("This guessed type name may be incorrect for the plugin. (If it is so, it's a bug)");
+                                Console.WriteLine("DLL: {0}", dllFile);
+                                Console.WriteLine("Type Name: {0}", guessedTypeName);
+                                Console.WriteLine();
+                                Console.ResetColor();
+                            }
                         }
                     }
                     catch(Exception ex)

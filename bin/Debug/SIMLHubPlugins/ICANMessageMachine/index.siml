@@ -1,0 +1,28 @@
+﻿<Siml>
+  <Concept Name="Introduction" xmlns:icanmessagemachinev1="http://ican.sic/namespace#icanmessagemachinev1">
+    
+    <Model>
+      <Pattern>
+        <Item>REINIT</Item>
+        <Item>RE INIT</Item>
+        <Item>RE INITIALIZE</Item>
+        <Item>INITIALIZE AGAIN</Item>
+        <Item>RESTART</Item>
+        <Item>SOFT RESTART</Item>
+      </Pattern>
+      <Response>Executing soft restart <icanmessagemachinev1:Parameter>Start_ICAN.SIC</icanmessagemachinev1:Parameter></Response>
+    </Model>
+    
+    <Model>
+      <Pattern>
+        <Item>LISTEN</Item>
+        <Item>START (LISTEN|LISTENING|HEAR|HEARING)</Item>
+        <Item>LISTEN (ME|UP)</Item>
+        <Item>WAKE UP *</Item>
+        <Item>AWAKE *</Item>
+      </Pattern>
+      <Response>Requesting speech recognition service <icanmessagemachinev1:Parameter>ICAN.SIC.START_SPEECHRECOGNITION</icanmessagemachinev1:Parameter></Response>
+    </Model>
+    
+  </Concept>
+</Siml>

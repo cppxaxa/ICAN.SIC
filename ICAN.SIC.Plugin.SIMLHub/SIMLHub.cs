@@ -45,11 +45,11 @@ namespace ICAN.SIC.Plugin.SIMLHub
             bot = new SimlBot();
 
             // Soon it will be substracted
-            this.adapterCount = 0;
+            adapterCount = 0;
 
             // Add all adapters
             pluginAdapterPathAndTypes = helper.GetAllSIMLHubPluginIndexAdapterPathAndTypes();
-            
+
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write("[SIMLHub] Adapters loading : ");
             Console.ResetColor();
@@ -70,7 +70,7 @@ namespace ICAN.SIC.Plugin.SIMLHub
                         AbstractPlugin simlHubPlugin = (AbstractPlugin)adapter;
                         simlPlugins.Add(simlHubPlugin);
 
-                        this.Hub.PassThrough(simlHubPlugin.Hub);
+                        Hub.PassThrough(simlHubPlugin.Hub);
 
                         // Add to bot in not null
                         if (adapter != null)
@@ -88,8 +88,8 @@ namespace ICAN.SIC.Plugin.SIMLHub
             Console.ResetColor();
 
             // Now final value is set
-            this.adapterCount = botAdapterCount;
-            Console.WriteLine("[SIMLHub] SIMLHub Plugins count: " + this.adapterCount);
+            adapterCount = botAdapterCount;
+            Console.WriteLine("[SIMLHub] SIMLHub Plugins count: " + adapterCount);
 
             // Add all index.siml files
             Console.ForegroundColor = ConsoleColor.Magenta;
@@ -97,7 +97,7 @@ namespace ICAN.SIC.Plugin.SIMLHub
             Console.ResetColor();
 
             string mergedIndexSimlPackage = helper.GetAllIndexSimlPackage();
-            
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("success");
             Console.ResetColor();
@@ -113,11 +113,11 @@ namespace ICAN.SIC.Plugin.SIMLHub
             Console.ResetColor();
 
             // Subscribe to IUserResponse for input
-            hub.Subscribe<IUserResponse>(this.GenerateAndPublishBotResponse);
-            hub.Subscribe<AllPluginsLoaded>(this.AllPluginsLoadedCallback);
+            hub.Subscribe<IUserResponse>(GenerateAndPublishBotResponse);
+            hub.Subscribe<AllPluginsLoaded>(AllPluginsLoadedCallback);
 
             // Subscribe to IMachineMessage for processing machine generated message
-            hub.Subscribe<IMachineMessage>(this.MakeMachineMessageUserFriendly);
+            hub.Subscribe<IMachineMessage>(MakeMachineMessageUserFriendly);
         }
 
         private void AllPluginsLoadedCallback(AllPluginsLoaded message)
@@ -135,16 +135,18 @@ namespace ICAN.SIC.Plugin.SIMLHub
         {
             IUserFriendlyMachineMessage userFriendlyMessage;
 
-            ChatResult result;
+            ChatResult result = null;
 
             if (currentUser == null)
-                result = bot.Chat(message.Message);
+                result = bot?.Chat(message.Message);
             else
-                result = bot.Chat(new ChatRequest(message.Message, currentUser));
+                result = bot?.Chat(new ChatRequest(message.Message, currentUser));
 
-            userFriendlyMessage = new UserFriendlyMachineMessage(result.BotMessage);
-
-            hub.Publish<IUserFriendlyMachineMessage>(userFriendlyMessage);
+            if (result != null)
+            {
+                userFriendlyMessage = new UserFriendlyMachineMessage(result.BotMessage);
+                hub.Publish<IUserFriendlyMachineMessage>(userFriendlyMessage);
+            }
         }
 
         private void GenerateAndPublishBotResponse(IUserResponse message)
@@ -158,7 +160,7 @@ namespace ICAN.SIC.Plugin.SIMLHub
 
 
             IBotResult botResponse = new ICAN.SIC.Plugin.SIMLHub.DataTypes.BotResult(result, message);
-            
+
             hub.Publish<IBotResult>(botResponse);
         }
 

@@ -1,0 +1,22 @@
+<Siml>
+  <Concept Name="Introduction">
+    
+    <Model>
+      <Pattern>HELLO BOT</Pattern>
+      <Pattern>HELLO</Pattern>
+      <Pattern>Hi</Pattern>
+      <Response>Hello User!</Response>
+    </Model>
+    
+	<Model>
+      <Pattern>HELLO</Pattern>
+      <Response>Hello User!</Response>
+    </Model>
+	
+	<Model>
+      <Pattern>Hi</Pattern>
+      <Response>Hello User!</Response>
+    </Model>
+	
+  </Concept>
+</Siml>
