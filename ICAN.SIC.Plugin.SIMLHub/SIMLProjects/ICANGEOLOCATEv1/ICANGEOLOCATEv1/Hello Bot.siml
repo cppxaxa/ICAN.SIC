@@ -27,7 +27,7 @@
         <Item>SAVE MY CURRENT LOCATION WITH THE NAME *</Item>
         <Item>SAVE MY CURRENT LOCATION WITH NAME *</Item>
       </Pattern>
-      <Response>Requesting geolocate for save_<Match Index="1" /><icangeolocate:Parameter>AddCurrentLocalPlace,<Match Index="1" /></icangeolocate:Parameter></Response>
+      <Response>Requesting geolocate for params,<Match Index="1" /><icangeolocate:Parameter>AddCurrentLocalPlace</icangeolocate:Parameter></Response>
     </Model>
     
   </Concept>
