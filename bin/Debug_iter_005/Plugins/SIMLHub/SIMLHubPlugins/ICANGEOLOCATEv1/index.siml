@@ -1,0 +1,34 @@
+﻿<Siml>
+  <Concept Name="Introduction" xmlns:icangeolocate="http://ican.sic/namespace#icangeolocate">
+    
+    <Model>
+      <Pattern>WHAT IS MY COORDINATES</Pattern>
+      <Pattern>WHAT'S MY COORDINATES</Pattern>
+      <Pattern>WHAT IS MY COORDINATE</Pattern>
+      <Pattern>WHAT'S MY COORDINATE</Pattern>
+      <Response>Requesting geographical coordinates<icangeolocate:Parameter>GetCurrentCoordinates</icangeolocate:Parameter></Response>
+    </Model>
+    
+    <Model>
+      <Pattern>
+        <Item>WHAT IS MY LOCATION</Item>
+        <Item>WHAT IS MY CURRENT LOCATION</Item>
+      </Pattern>
+      <Response>Requesting geographical location<icangeolocate:Parameter>GetPlaceName</icangeolocate:Parameter></Response>
+    </Model>
+    
+    <Model>
+      <Pattern>
+        <Item>SAVE THIS LOCATION AS *</Item>
+        <Item>SAVE THIS LOCATION WITH THE NAME *</Item>
+        <Item>SAVE THIS LOCATION WITH NAME *</Item>
+        <Item>SAVE MY LOCATION AS *</Item>
+        <Item>SAVE MY CURRENT LOCATION AS *</Item>
+        <Item>SAVE MY CURRENT LOCATION WITH THE NAME *</Item>
+        <Item>SAVE MY CURRENT LOCATION WITH NAME *</Item>
+      </Pattern>
+      <Response>Requesting geolocate for params,<Match Index="1" /><icangeolocate:Parameter>AddCurrentLocalPlace</icangeolocate:Parameter></Response>
+    </Model>
+    
+  </Concept>
+</Siml>

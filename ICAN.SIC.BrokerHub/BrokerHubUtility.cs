@@ -10,7 +10,7 @@ namespace ICAN.SIC.BrokerHub
 {
     public class BrokerHubUtility
     {
-        List<string> permanendDllDependencies = new List<string>
+        List<string> permanentDllDependencies = new List<string>
         {
             "ICAN.SIC.Abstractions.dll"
         };
@@ -112,7 +112,7 @@ namespace ICAN.SIC.BrokerHub
                     {
                         // Check if permanent dll dependency, then don't copy or remove
                         bool flag = false;
-                        foreach (var permanentDll in permanendDllDependencies)
+                        foreach (var permanentDll in permanentDllDependencies)
                         {
                             if (Path.GetFileName(dependencyDll) == permanentDll)
                             {
@@ -131,8 +131,8 @@ namespace ICAN.SIC.BrokerHub
                             if (!File.Exists(destinationFile))
                             {
                                 File.Copy(dependencyDll, destinationFile, true);
+                                newContentCopiedList.Add(destinationFile);
                             }
-                            newContentCopiedList.Add(destinationFile);
                         }
                         catch
                         {

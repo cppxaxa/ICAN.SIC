@@ -1,0 +1,88 @@
+<Siml>
+  <Concept Name="Introduction" xmlns:icansee="http://ican.sic/namespace#icansee">
+    <!--Model>
+      <Pattern>HELLO BOT</Pattern>
+      <Response>Hello User!</Response>
+    </Model-->
+    
+    <Model>
+      <Pattern>3: IMAGECAPTIONING GIVES OUT * OR IN OTHER WORDS * OR IN OTHER WORDS *</Pattern>
+      <Response>
+        <Random>
+          <Item>I can see <Match Index="1" />. Intrestingly it can be <Match Index="2" /> or <Match Index="3" /></Item>
+          <Item>I can tell either <Match Index="1" /> or <Match Index="2" /> or <Match Index="3" /></Item>
+          <Item>I can see <Match Index="1" /> or possibly <Match Index="2" /> or <Match Index="3" /></Item>
+          <Item>I can understand <Match Index="1" />. Moreover it can be <Match Index="2" /> or maybe <Match Index="3" /></Item>
+          <Item>I can understand <Match Index="1" />. Although it can be <Match Index="2" /> or <Match Index="3" /></Item>
+          <Item>I can see <Match Index="1" />. Although it can be <Match Index="2" /> or maybe <Match Index="3" /></Item>
+          <Item>I can explain it as <Match Index="1" /> possibly <Match Index="2" /> or <Match Index="3" /></Item>
+        </Random>
+      </Response>
+    </Model>
+    
+    <Model>
+      <Pattern>2: IMAGECAPTIONING GIVES OUT * OR IN OTHER WORDS *</Pattern>
+      <Response>
+        <Match Index="1" />, <Match Index="2" /></Response>
+      <Response>
+        <Random>
+          <Item>I can see <Match Index="1" />. Intrestingly it can be <Match Index="2" /></Item>
+          <Item>I can tell either <Match Index="1" /> or <Match Index="2" /></Item>
+          <Item>I can see <Match Index="1" /> or possibly <Match Index="2" /></Item>
+          <Item>I can understand <Match Index="1" />. Moreover it can be <Match Index="2" /></Item>
+          <Item>I can understand <Match Index="1" />. Although it can be <Match Index="2" /></Item>
+          <Item>I can see <Match Index="1" />. Although it can be <Match Index="2" /></Item>
+          <Item>I can explain it as <Match Index="1" /> possibly <Match Index="2" /></Item>
+        </Random>
+      </Response>
+    </Model>
+    
+    <Model>
+      <Pattern>1: IMAGECAPTIONING GIVES OUT *</Pattern>
+      <Response>
+        <Random>
+          <Item>I can see <Match Index="1" /></Item>
+          <Item>I can understand <Match Index="1" /></Item>
+          <Item>I can explain it as <Match Index="1" /></Item>
+        </Random>
+      </Response>
+    </Model>
+    
+    <Model>
+      <Pattern>0: IMAGECAPTIONING CANNOT TELL ANYTHING</Pattern>
+      <Response>
+        <Random>
+          <Item>I cannot tell anything about picture</Item>
+          <Item>I got no results</Item>
+          <Item>I can't figure out anything</Item>
+        </Random>
+      </Response>
+    </Model>
+    
+    <Model>
+      <Pattern>
+        <Item>(EXPLAIN|TELL|SAY) ME WHAT YOU SEE (IN|WITH|ON|ALONG) (CAMERA|CAM) *</Item>
+        <Item>(EXPLAIN|TELL|SAY) WHAT YOU SEE (IN|WITH|ON|ALONG) (CAMERA|CAM) *</Item>
+        <Item>(EXPLAIN|TELL|SAY) ME WHAT IS (IN|WITH|ON|ALONG) (CAMERA|CAM) *</Item>
+        <Item>(EXPLAIN|TELL|SAY) ME WHAT'S (IN|WITH|ON|ALONG) (CAMERA|CAM) *</Item>
+        <Item>(EXPLAIN|TELL|SAY) WHAT IS (IN|WITH|ON|ALONG) (CAMERA|CAM) *</Item>
+
+		<Item>(EXPLAIN|TELL|SAY) ME WHAT IS GOING (IN|WITH|ON|ALONG) (CAMERA|CAM) *</Item>
+        <Item>(EXPLAIN|TELL|SAY) ME WHAT'S GOING (IN|WITH|ON|ALONG) (CAMERA|CAM) *</Item>
+        <Item>(EXPLAIN|TELL|SAY) WHAT IS GOING (IN|WITH|ON|ALONG) (CAMERA|CAM) *</Item>
+        <Item>(EXPLAIN|TELL|SAY) WHAT'S GOING (IN|WITH|ON|ALONG) (CAMERA|CAM) *</Item>		
+		
+		<Item>(EXPLAIN|TELL|SAY) WHAT'S (IN|WITH|ON|ALONG) (CAMERA|CAM) *</Item>
+        
+        <Item>WHAT'S (GOING|HAPPENNING|HAPPENING) (IN|WITH|ON|ALONG) (CAMERA|CAM) *</Item>
+        <Item>WHAT IS (GOING|HAPPENNING|HAPPENING) (IN|WITH|ON|ALONG) (CAMERA|CAM) *</Item>
+        
+        <Item>WHAT'S (GOING|HAPPENNING|HAPPENING) ON (IN|WITH|ON|ALONG) (CAMERA|CAM) *</Item>
+        <Item>WHAT IS (GOING|HAPPENNING|HAPPENING) ON (IN|WITH|ON|ALONG) (CAMERA|CAM) *</Item>
+      </Pattern>
+      <Response>
+				Requesting captioning preset execution in camera <Match Index="4" /><icansee:Parameter>ControlFunction.ExecutePreset,captioning,<Match Index="4" /></icansee:Parameter></Response>
+    </Model>
+    
+  </Concept>
+</Siml>

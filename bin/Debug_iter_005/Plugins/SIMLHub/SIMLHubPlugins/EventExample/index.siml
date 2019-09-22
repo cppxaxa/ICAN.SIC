@@ -1,0 +1,20 @@
+﻿<Siml>
+  <Concept Name="Introduction">
+    
+    <Model>
+	  <Pattern>CLOSE GARAGE DOOR</Pattern>
+	  <Response>
+	  	Hi
+	    <Raise>GARAGE-DOOR-CLOSED</Raise>
+	  </Response>
+	</Model>
+	
+	<Event>
+	  <Pattern>GARAGE-DOOR-CLOSED</Pattern>
+	  <Response>
+	    Garage door closed
+	  </Response>
+	</Event>
+    
+  </Concept>
+</Siml>
