@@ -125,9 +125,8 @@ namespace ICAN.SIC.Plugin.SIMLHub
             foreach (var item in bot.Examples)
             {
                 Console.WriteLine(item.ToString());
-                IBotResult result = new BotResult(item.ToString());
-
-                hub.Publish(result);
+                //IBotResult result = new BotResult(item.ToString());
+                //hub.Publish(result);
             }
         }
 
@@ -137,10 +136,13 @@ namespace ICAN.SIC.Plugin.SIMLHub
 
             ChatResult result = null;
 
-            if (currentUser == null)
-                result = bot?.Chat(message.Message);
-            else
-                result = bot?.Chat(new ChatRequest(message.Message, currentUser));
+            if (message.Message != null)
+            {
+                if (currentUser == null)
+                    result = bot?.Chat(message.Message);
+                else
+                    result = bot?.Chat(new ChatRequest(message.Message, currentUser));
+            }
 
             if (result != null)
             {

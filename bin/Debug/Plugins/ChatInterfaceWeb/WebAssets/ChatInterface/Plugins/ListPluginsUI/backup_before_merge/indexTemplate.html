@@ -4,29 +4,18 @@
 
 <link href="css/RecordingButton.css" rel="stylesheet" />
 
-<!-- ListPluginsUI imports -->
-<link rel="stylesheet" href="Plugins/ListPluginsUI/css/icon.css">
-<link rel="stylesheet" href="Plugins/ListPluginsUI/css/material.indigo-pink.min.css">
-
-
 <script src="Scripts/jquery-1.6.4.min.js"></script>
 <script src="Scripts/jquery.signalR-2.0.3.min.js"></script>
-<script src="http://localhost:20000/signalr/hubs"></script>
+<script src="http://{host}:{port}/signalr/hubs"></script>
 <script src="js/RecordingButton.js"></script>
 <script src="js/TextToSpeechChrome.js"></script>
-
-<!-- ListPluginsUI imports -->
-<script defer src="Plugins/ListPluginsUI/js/material.min.js"></script>
-<script src="Plugins/ListPluginsUI/js/ListPluginUI_plugin.js"></script>
-
-
 <script type="text/javascript">
     //$(function () {
     //Set the hubs URL for the connection
-    $.connection.hub.url = "http://localhost:20000/signalr";
+    $.connection.hub.url = "http://{host}:{port}/signalr";
 	
-	host = "localhost";
-	port = "20000";
+	host = "{host}";
+	port = "{port}";
 
     var chat = $.connection.chatInterfaceSignalRHub;
     chat.client.addBotMessage = function (message) {
@@ -46,25 +35,6 @@
     });
 	
 	
-	function sendMachineMessageThroughApi(content)
-	{
-		api = '/MachineMessageApi';
-		url = prefix + host + ":" + port + api;
-
-		$.ajax({
-			contentType: 'application/json',
-			data: JSON.stringify(content),
-			type: 'POST',
-			url: url,
-			success: function (data, textStatus, jqXHR) {
-				console.log("Success");
-				console.log(data);
-				// alert('Success');
-			}
-		});
-	}
-
-
 </script>
 
 <style>
@@ -263,14 +233,14 @@
 	#voiceResponseCheckbox{
 	}
 	
-	.toolbarSwitch:checked,
-    .toolbarSwitch:not(:checked) {
+	[type="checkbox"]:checked,
+	[type="checkbox"]:not(:checked) {
 		position: absolute;
 		-webkit-appearance: none;
 		left: -9999px;
 	}
-	.toolbarSwitch:checked + label,
-	.toolbarSwitch:not(:checked):not(:checked) + label
+	[type="checkbox"]:checked + label,
+	[type="checkbox"]:not(:checked) + label
 	{
 		position: relative;
 		padding-left: 28px;
@@ -289,8 +259,8 @@
 		padding-bottom: 7px;
 		padding-top: 7px;
 	}
-	.toolbarSwitch:checked + label:before,
-	.toolbarSwitch:not(:checked) + label:before {
+	[type="checkbox"]:checked + label:before,
+	[type="checkbox"]:not(:checked) + label:before {
 		content: '';
 		position: absolute;
 		left: 0;
@@ -303,8 +273,8 @@
 		
 		padding: 7px;
 	}
-	.toolbarSwitch:checked + label:after,
-	.toolbarSwitch:not(:checked) + label:after {
+	[type="checkbox"]:checked + label:after,
+	[type="checkbox"]:not(:checked) + label:after {
 		content: '';
 		width: 8px;
 		height: 8px;
@@ -317,12 +287,12 @@
 		-webkit-transition: all 0.2s ease;
 		transition: all 0.5s ease;
 	}
-	.toolbarSwitch:not(:checked) + label:after {
+	[type="checkbox"]:not(:checked) + label:after {\
 		opacity: 0;
 		-webkit-transform: scale(0);
 		transform: scale(0);
 	}
-	.toolbarSwitch:checked + label:after {
+	[type="checkbox"]:checked + label:after {
 		opacity: 1;
 		-webkit-transform: scale(1);
 		transform: scale(1);
@@ -453,72 +423,8 @@
 			</div>\
 			<div class="bubble-arrow"></div>\
 			</div>');
-		
-		if (message != '' && infoType == "MACHINE MESSAGE") {
-			pluginsListAndStatus = '[ICAN.SIC] [PluginsListAndStatus]';
-
-			if (message.startsWith(pluginsListAndStatus)) {
-				// Specific logic for ListPluginUI
-				arrVal = message.substring(pluginsListAndStatus.length + 1);
-				arrVal = JSON.parse(arrVal);
-
-				dataVal = [];
-				for (var i in arrVal)
-				{
-					item = arrVal[i];
-					dataVal.push({ name: item['Name'], enabled: item['Enabled'] });
-				}
-
-				htmlContent =  '<div id="ListPluginsUI">\
-									<table id="ListPluginsUI_EnabledPluginsList" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">\
-										<thead>\
-											<tr>\
-												<th class="mdl-data-table__cell--non-numeric"></th>\
-												<th class="mdl-data-table__cell--non-numeric">ICAN.SIC Enabled Plugins</th>\
-											</tr>\
-										</thead>\
-										<tbody></tbody>\
-									</table>\
-									<div>\
-										&nbsp;\
-									</div>\
-									<div id="ListPluginsUI_Controls">\
-										<button id="ListPluginsUI_Sync" style="width: auto;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">Sync</button>\
-										<button id="ListPluginsUI_SoftRestart" style="width: auto;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">Soft Restart/ Apply</button>\
-									</div>\
-								</div>';
-
-				botMessageTemplate = createElementFromHTML('<div class="bubble">\
-				<div class="txt">\
-					<p class="name">Information</p>\
-					' + htmlContent + '\
-					<span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
-					</div>\
-					<div class="bubble-arrow"></div>\
-				</div>');
-
-
-				ListPluginsUI_Destroy();
-				ListPluginsUI_Init_delayed(dataVal);
-			}
-			else {
-				botMessageTemplate = createElementFromHTML('<div class="bubble">\
-				<div class="txt">\
-				<p class="name">Information</p>\
-				<p style="font-size: 12px;">' + infoType + '</p>\
-				<p class="message" style="\
-					background: #cde7ff;\
-					border-radius: 5px;\
-					padding: 5px;\
-					">' + message + '</p>\
-				<span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
-				</div>\
-				<div class="bubble-arrow"></div>\
-				</div>');
-			}
-		}
-
-		else if (message != '' && infoType == "USER-MACHINE MESSAGE") {
+        
+		if (message != '' && infoType == "USER-MACHINE MESSAGE") {
 			botMessageTemplate = createElementFromHTML('<div class="bubble">\
 			<div class="txt">\
 			  <p class="name">Information</p>\
@@ -534,7 +440,7 @@
 			</div>');
 		}
 		
-		else if (htmlContent.toString().trim() == "") {
+		if (htmlContent.toString().trim() == "") {
             htmlContent = '<i style="color: grey;">[Acknowledged]</i>';
 			
 			botMessageTemplate = createElementFromHTML('<div class="bubble">\
@@ -568,12 +474,7 @@
     }, true);
 
     function sendUserResponseToServer(message) {
-		if ($("#machineMessageModeCheckbox").attr('checked') == 'checked'){
-			sendMachineMessageThroughApi(message);
-		}
-		else {
-			chat.server.processUserMessage(message);
-		}
+        chat.server.processUserMessage(message);
     }
 	
 	// If modification is done to initialization below 2 statements
@@ -752,11 +653,9 @@
 <div id="toolbar" style="position: fixed; bottom: 50px;">
 	<button id="recButton"></button>
 	
-	<input class="toolbarSwitch" type="checkbox" id="voiceResponseCheckbox" checked>
+	<input type="checkbox" id="voiceResponseCheckbox" checked>
     <label for="voiceResponseCheckbox">&nbsp;&nbsp;&nbsp; Speak response</label>	
 	
-	<input class="toolbarSwitch" type="checkbox" id="machineMessageModeCheckbox">
-    <label for="machineMessageModeCheckbox">&nbsp;&nbsp;&nbsp; Machine Message Mode</label>
 </div>
 
 <div id="toolbar-gap"></div>
