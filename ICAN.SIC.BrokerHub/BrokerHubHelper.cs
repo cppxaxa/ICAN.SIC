@@ -37,6 +37,8 @@ namespace ICAN.SIC.BrokerHub
                     if (Directory.Exists(contentPath))
                         cleanupCommands += "shutil.rmtree(\"" + contentPath.Replace("\\", "\\\\") + "\", True)" + "\n";
                 }
+                cleanupCommands += "os.remove(\"CleanupAfterUse.py\")";
+
                 File.WriteAllText("CleanupAfterUse.py", cleanupCommands);
             }
 
