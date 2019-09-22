@@ -151,6 +151,16 @@ namespace ICAN.SIC.BrokerHub
             return newContentCopiedList.Distinct().ToList();
         }
 
+        public string FindMatchingKey(Dictionary<string, PluginConfiguration> pluginConfiguration, string guessedTypeName)
+        {
+            foreach (var item in pluginConfiguration)
+            {
+                if (item.Key.IndexOf(guessedTypeName) >= 0)
+                    return item.Key;
+            }
+            return null;
+        }
+
         public string GetPrimaryNamespace(Assembly assembly)
         {
             List<string> namespaces;

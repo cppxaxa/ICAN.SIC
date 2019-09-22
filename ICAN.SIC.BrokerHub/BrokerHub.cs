@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using ICAN.SIC.Abstractions.IMessageVariants;
+using ICAN.SIC.BrokerHub.DataTypes;
+using Newtonsoft.Json;
+using ICAN.SIC.Abstractions.ConcreteClasses;
 
 namespace ICAN.SIC.BrokerHub
 {
@@ -23,13 +26,11 @@ namespace ICAN.SIC.BrokerHub
 
         public BrokerHub(List<string> vitalPluginDllNames, bool firstStart)
         {
-            this.helper = new BrokerHubHelper(utility);
+            helper = new BrokerHubHelper(utility);
 
             hub = new Hub("BrokerHub");
             this.firstStart = firstStart;
             this.vitalPluginDllNames = new HashSet<string>(vitalPluginDllNames);
-
-            hub.Subscribe<ILog>(this.LogMessages);
         }
 
         public IHub Hub { get => hub; }
@@ -41,8 +42,8 @@ namespace ICAN.SIC.BrokerHub
 
         public void AddAndHook(IPlugin plugin)
         {
-            this.plugins.Add(plugin);
-            this.HookHub(plugin);
+            plugins.Add(plugin);
+            HookHub(plugin);
         }
 
         public List<IPlugin> GetVitalPlugins()
@@ -71,6 +72,9 @@ namespace ICAN.SIC.BrokerHub
 
         public void Start()
         {
+            hub.Subscribe<ILog>(LogMessages);
+            hub.Subscribe<IMachineMessage>(MachineMessageListener);
+
             if (!firstStart)
                 plugins = helper.ScanPrepareAndInstantiate(AppDomain.CurrentDomain.BaseDirectory, vitalPluginDllNames);
             else
@@ -85,26 +89,85 @@ namespace ICAN.SIC.BrokerHub
             foreach (var plugin in plugins)
             {
                 list.Add(plugin.ToString());
-                this.HookHub(plugin);
+                HookHub(plugin);
             }
 
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("[INFO] All hubs hooked");
             Console.ResetColor();
-            
+
             // Publish all plugins loaded message
             AllPluginsLoaded message = new AllPluginsLoaded(list);
             hub.Publish<AllPluginsLoaded>(message);
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("[INFO] ");
+            Console.ResetColor();
+            Console.WriteLine("Prefix: " + ourMachineMessagePrefix + "\n" +
+                          "\t'ListPlugins' for listing deactivated plugins\n" +
+                          "\t'EnablePlugin <PluginName>' to enable plugin" +
+                          "\t'DisablePlugin <PluginName>' to disable plugin" +
+                          "\t'" + pluginsConfigurationPrefix + "' shows list of plugins and their configurations");
+        }
+
+        private string ourMachineMessagePrefix = "[ICAN.SIC]";
+        private string pluginsConfigurationPrefix = "[PluginsListAndStatus]";
+        private void MachineMessageListener(IMachineMessage message)
+        {
+            string content = message.Message.Trim();
+
+            if (content.StartsWith(ourMachineMessagePrefix))
+            {
+                string commandText = content.Substring(ourMachineMessagePrefix.Length + 1);
+                string commandPrefix = commandText.Split(' ')[0];
+
+                switch (commandPrefix)
+                {
+                    case "ListPlugins":
+                        {
+                            var list = helper.GetPluginConfigurations();
+                            var output = ourMachineMessagePrefix + " " + pluginsConfigurationPrefix + " ";
+                            output += JsonConvert.SerializeObject(list);
+
+                            hub.Publish<IMachineMessage>(new MachineMessage(output));
+                        }
+                        break;
+
+                    case "EnablePlugin":
+                        {
+                            string action = "EnablePlugin";
+
+                            if (commandText.Length > action.Length)
+                            {
+                                var pluginName = commandText.Substring(action.Length + 1);
+                                helper.EnablePlugin(pluginName);
+                            }
+                        }
+                        break;
+
+                    case "DisablePlugin":
+                        {
+                            string action = "DisablePlugin";
+
+                            if (commandText.Length > action.Length)
+                            {
+                                var pluginName = commandText.Substring(action.Length + 1);
+                                helper.DisablePlugin(pluginName);
+                            }
+                        }
+                        break;
+                }
+            }
         }
 
         public void Stop()
         {
-            
+
         }
 
         public void Dispose()
         {
-            hub.Unsubscribe<ILog>(this.LogMessages);
+            hub.Unsubscribe<ILog>(LogMessages);
 
             foreach (var plugin in plugins)
             {
@@ -127,12 +190,12 @@ namespace ICAN.SIC.BrokerHub
 
         public void GlobalPublish<T>(T message) where T : IMessage
         {
-            this.hub.Publish<T>(message);
+            hub.Publish<T>(message);
         }
 
         private void LogMessages(ILog log)
         {
-            switch(log.LogType)
+            switch (log.LogType)
             {
                 case LogType.Debug:
                     Console.WriteLine("[DEBUG] {0}", log.Message);

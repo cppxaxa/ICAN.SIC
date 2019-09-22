@@ -1,4 +1,5 @@
 ﻿using ICAN.SIC.Abstractions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,9 +10,18 @@ using System.Threading.Tasks;
 
 namespace ICAN.SIC.BrokerHub
 {
+    public class PluginConfiguration
+    {
+        public string Name;
+        public bool Enabled;
+    }
+
     public class BrokerHubHelper
     {
+        private readonly string pluginConfigurationFilename = "PluginConfiguration.json";
+
         private readonly BrokerHubUtility utility = null;
+        private Dictionary<string, PluginConfiguration> pluginConfiguration = null;
 
         public BrokerHubHelper(BrokerHubUtility utility)
         {
@@ -20,6 +30,15 @@ namespace ICAN.SIC.BrokerHub
 
         public List<IPlugin> ScanPrepareAndInstantiate(string baseDirectory, HashSet<string> vitalPluginDllNames = null)
         {
+            if (File.Exists(pluginConfigurationFilename))
+            {
+                string content = File.ReadAllText(pluginConfigurationFilename);
+                pluginConfiguration = JsonConvert.DeserializeObject<Dictionary<string, PluginConfiguration>>(content);
+            }
+
+            if (pluginConfiguration == null)
+                pluginConfiguration = new Dictionary<string, PluginConfiguration>();
+
             // Fresh start
             if (vitalPluginDllNames == null)
             {
@@ -90,7 +109,30 @@ namespace ICAN.SIC.BrokerHub
                             IPlugin plugin = (IPlugin)assembly.CreateInstance(guessedTypeName);
                             if (plugin != null)
                             {
-                                plugins.Add(plugin);
+                                bool newPlugin = true;
+                                bool pluginConfigurationSaysDisabledEnabled = true;
+
+                                string key = utility.FindMatchingKey(pluginConfiguration, guessedTypeName);
+                                if (key != null && pluginConfiguration[key].Enabled == false)
+                                {
+                                    pluginConfigurationSaysDisabledEnabled = false;
+
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("[INFO] This plugin is disabled in configuration");
+                                    Console.WriteLine("\tDLL: {0}", dllFile);
+                                    Console.WriteLine("\t\tType Name: {0}", guessedTypeName);
+                                    Console.WriteLine();
+                                    Console.ResetColor();
+                                }
+
+
+                                if (newPlugin || pluginConfigurationSaysDisabledEnabled)
+                                {
+                                    plugins.Add(plugin);
+
+                                    // Build the configuration
+                                    pluginConfiguration[guessedTypeName] = new PluginConfiguration { Name = guessedTypeName, Enabled = true };
+                                }
                             }
                             else
                             {
@@ -123,7 +165,61 @@ namespace ICAN.SIC.BrokerHub
                 }
             }
 
+            File.WriteAllText(pluginConfigurationFilename, JsonConvert.SerializeObject(pluginConfiguration));
+
             return plugins;
+        }
+
+        public void DisablePlugin(string pluginName)
+        {
+            foreach (var item in pluginConfiguration)
+            {
+                if (item.Key.Contains(pluginName))
+                {
+                    item.Value.Enabled = false;
+
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("[INFO] BrokerHubHelper set enable to false for item " + item.Key);
+                    Console.ResetColor();
+
+                    // Save the configuration
+                    File.WriteAllText(pluginConfigurationFilename, JsonConvert.SerializeObject(pluginConfiguration));
+                    return;
+                }
+            }
+
+            Console.WriteLine("[INFO] Unable to find pluginname '" + pluginName + "'");
+        }
+
+        public void EnablePlugin(string pluginName)
+        {
+            foreach (var item in pluginConfiguration)
+            {
+                if (item.Key.Contains(pluginName))
+                {
+                    item.Value.Enabled = true;
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("[INFO] BrokerHubHelper set enable to true for item " + item.Key);
+                    Console.ResetColor();
+
+                    // Save the configuration
+                    File.WriteAllText(pluginConfigurationFilename, JsonConvert.SerializeObject(pluginConfiguration));
+                    return;
+                }
+            }
+
+            Console.WriteLine("[INFO] Unable to find pluginname '" + pluginName + "'");
+        }
+
+        public List<PluginConfiguration> GetPluginConfigurations()
+        {
+            List<PluginConfiguration> result = new List<PluginConfiguration>();
+            foreach (var item in pluginConfiguration)
+            {
+                result.Add(item.Value);
+            }
+            return result;
         }
     }
 }

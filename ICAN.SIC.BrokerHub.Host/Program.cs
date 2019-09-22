@@ -55,6 +55,10 @@ namespace ICAN.SIC.BrokerHub.Host
                 brokerHub.Hub.Subscribe<IMachineMessage>(InitBrokerHub);
                 brokerHub.Start();
 
+
+                brokerHub.Hub.Publish<Log>(new Log(LogType.Info, "'Start_ICAN.SIC' machine message for soft restart"));
+
+
                 // AddAndHook vital plugins from past brokerHub
 
                 if (vitalPlugins != null)
@@ -82,21 +86,18 @@ namespace ICAN.SIC.BrokerHub.Host
                 Console.WriteLine("Pause before loading " + i);
                 Thread.Sleep(1000);
             }
-
-            //BrokerHub brokerHub = new BrokerHub();
-            //brokerHub.Start();
-
+            
             InitBrokerHub(new MachineMessage("Start_ICAN.SIC"));
             Console.ReadKey();
 
-            brokerHub.GlobalPublish<IUserResponse>(new UserResponse("what is my coordinates"));
+            //brokerHub.GlobalPublish<IUserResponse>(new UserResponse("what is my coordinates"));
 
-            Log log = new Log(LogType.Info, "Hello");
+            //Log log = new Log(LogType.Info, "Hello");
 
-            brokerHub.GlobalPublish<ILog>(log);
+            //brokerHub.GlobalPublish<ILog>(log);
 
-            Console.WriteLine("Done ?");
-            Console.ReadKey();
+            //Console.WriteLine("Done ?");
+            //Console.ReadKey();
         }
 
         private static Dictionary<string, string> ExtractParams(string[] args)
