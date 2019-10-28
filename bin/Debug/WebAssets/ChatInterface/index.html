@@ -375,10 +375,16 @@
         var bubbleList = document.getElementsByClassName("bubble");
 
         for (var i = 0; i < bubbleList.length; i++) {
+            bubbleList[i].style.width = "fit-content";
+        }
+		
+		var bubbleList = document.getElementsByClassName("bubble alt");
+
+        for (var i = 0; i < bubbleList.length; i++) {
             bubbleList[i].style.width = (width - 150) + "px";
         }
 
-        window.scrollTo(0, document.body.scrollHeight);
+		setTimeout(function() {window.scrollTo(0, document.body.scrollHeight)}, 800);
     }
 
     window.onresize = function (event) {
@@ -445,17 +451,10 @@
 		
 		console.log('addUIChatMessage: HtmlContent: ' + htmlContent); 
 		
-        botMessageTemplate = createElementFromHTML('<div class="bubble">\
-			<div class="txt">\
-			  <p class="name">Information</p>\
-			  ' + htmlContent + '\
-			  <span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
-			</div>\
-			<div class="bubble-arrow"></div>\
-			</div>');
 		
 		if (message != '' && infoType == "MACHINE MESSAGE") {
 			pluginsListAndStatus = '[ICAN.SIC] [PluginsListAndStatus]';
+			icanseeAlert = '[ICANSEE] Alert';
 
 			if (message.startsWith(pluginsListAndStatus)) {
 				// Specific logic for ListPluginUI
@@ -501,11 +500,25 @@
 				ListPluginsUI_Destroy();
 				ListPluginsUI_Init_delayed(dataVal);
 			}
+			else if (message.startsWith(icanseeAlert))
+			{
+				botMessageTemplate = createElementFromHTML('<div class="bubble">\
+				<div class="txt">\
+				<p class="name">' + infoType + '</p>\
+				<p class="message" style="\
+					background: #ffa4a4;\
+					border-radius: 5px;\
+					padding: 5px;\
+					">' + message + '</p>\
+				<span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
+				</div>\
+				<div class="bubble-arrow"></div>\
+				</div>');
+			}
 			else {
 				botMessageTemplate = createElementFromHTML('<div class="bubble">\
 				<div class="txt">\
-				<p class="name">Information</p>\
-				<p style="font-size: 12px;">' + infoType + '</p>\
+				<p class="name">' + infoType + '</p>\
 				<p class="message" style="\
 					background: #cde7ff;\
 					border-radius: 5px;\
@@ -518,22 +531,31 @@
 			}
 		}
 
-		else if (message != '' && infoType == "USER-MACHINE MESSAGE") {
-			botMessageTemplate = createElementFromHTML('<div class="bubble">\
-			<div class="txt">\
-			  <p class="name">Information</p>\
-			  <p style="font-size: 12px;">' + infoType + '</p>\
-			  <p class="message" style="\
-				background: #cde7ff;\
-				border-radius: 5px;\
-				padding: 5px;\
-				">' + message + '</p>\
-			  <span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
-			</div>\
-			<div class="bubble-arrow"></div>\
-			</div>');
+		else if (infoType == "USER-MACHINE MESSAGE") {
+			if (message == '') {
+				// botMessageTemplate = createElementFromHTML('<div class="bubble">\
+				// <div class="txt">\
+				// <p class="name">' + infoType + '</p>\
+				// <span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
+				// </div>\
+				// <div class="bubble-arrow"></div>\
+				// </div>');
+			}
+			else {
+				botMessageTemplate = createElementFromHTML('<div class="bubble">\
+				<div class="txt">\
+				<p class="name">' + infoType + '</p>\
+				<p class="message" style="\
+					background: #cde7ff;\
+					border-radius: 5px;\
+					padding: 5px;\
+					">' + message + '</p>\
+				<span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
+				</div>\
+				<div class="bubble-arrow"></div>\
+				</div>');
+			}
 		}
-		
 		else if (htmlContent.toString().trim() == "") {
             htmlContent = '<i style="color: grey;">[Acknowledged]</i>';
 			
@@ -546,9 +568,20 @@
 			<div class="bubble-arrow"></div>\
 			</div>');
 		}
-		
+		else {
+		    botMessageTemplate = createElementFromHTML('<div class="bubble">\
+				<div class="txt">\
+				  <p class="name">Information</p>\
+				  ' + htmlContent + '\
+				  <span class="timestamp">' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '</span>\
+				</div>\
+				<div class="bubble-arrow"></div>\
+				</div>');
+		}
+
+
 		// Speech response
-		else if (lastFlagForSpeechUsed){
+		if (lastFlagForSpeechUsed){
 			console.log('addUIChatMessage, InfoType: "' + infoType + '", LastFlagForSpeechUsed: ' + lastFlagForSpeechUsed);
 			
 			if (infoType == "USER-MACHINE MESSAGE") {

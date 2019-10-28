@@ -56,7 +56,7 @@ namespace ICAN.SIC.BrokerHub.Host
                 brokerHub.Start();
 
 
-                brokerHub.Hub.Publish<Log>(new Log(LogType.Info, "'Start_ICAN.SIC' machine message for soft restart"));
+                brokerHub.Hub.Publish<Log>(new Log(LogType.Info, "'Start_ICAN.SIC' machine message for bootstrap"));
 
 
                 // AddAndHook vital plugins from past brokerHub
