@@ -1,4 +1,5 @@
 [Done] Make add directory separator to make Linux mono friendly
+[Done] Support for extending the application with python plugins
 
 # ICAN.SIC
 
