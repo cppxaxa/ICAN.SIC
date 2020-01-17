@@ -99,6 +99,17 @@ ICAN - I can (see, listen, say, any module).
 SIC - Second In Command.
 
 
+# Develop CSharp based plugins
+
+* Please refer the video guide here [https://github.com/cppxaxa/ICANDevelopmentContents
+* Or one can preview the material at [https://www.youtube.com/user/cppxaxa/videos?view=0&sort=dd&shelf_id=0]
+
+
+# Develop Python based plugins
+
+* For the time being, one can refer to a completely functional barebone script to start with here [https://github.com/cppxaxa/PyTestMachineMessageSubscriber]
+* [ ] Development is experimental, we support responding UserResponse with python based chat capability with NLP without touching C# SIML
+
 
 # Troubleshooting  problems
 
